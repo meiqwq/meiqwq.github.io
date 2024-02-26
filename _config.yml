@@ -8,7 +8,7 @@ subtitle: ''
 description: A blog correlated with CS
 keywords:
 author: Meiqwq
-language: Chinese
+language: en
 timezone: ''
 
 # URL
@@ -96,7 +96,7 @@ ignore:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: landscape
+theme: next
 
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
