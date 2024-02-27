@@ -1,0 +1,5 @@
+git add .
+git commit -m "fst"
+git branch -M main
+git remote add origin git@github.com:meiqwq/meiqwq.github.io.git
+git push -u origin main
