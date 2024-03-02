@@ -2,6 +2,7 @@
 title: fair division
 date: 2024-02-28 17:59:11
 tags: [计算理论,组合数学,unsolved]
+mathjax: true
 ---
 尝试了一个寒假的open problem，先放一段时间再想吧。。
 
