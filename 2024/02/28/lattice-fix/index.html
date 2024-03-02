@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="作者应该是俩中国人 Tarski定理对于完全格 $&lt;L,\preceq&gt;$,以及$L \to L$的单调增函数$f$，$f$一定存在不动点 有点像格上的介值定理 文章贡献对于n阶k维格点格(grid lattice),以及定义在其上的单调函数$f$,构造出了一个$O(\log^{\lceil \frac{k+1}{2} \rceil}n)$算法找到一个不动点。 算法流程在k+1个维度中">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Tarski 问题">
+<meta property="og:url" content="http://example.com/2024/02/28/lattice-fix/index.html">
+<meta property="og:site_name" content="Meiqwq&#39;s blog~">
+<meta property="og:description" content="作者应该是俩中国人 Tarski定理对于完全格 $&lt;L,\preceq&gt;$,以及$L \to L$的单调增函数$f$，$f$一定存在不动点 有点像格上的介值定理 文章贡献对于n阶k维格点格(grid lattice),以及定义在其上的单调函数$f$,构造出了一个$O(\log^{\lceil \frac{k+1}{2} \rceil}n)$算法找到一个不动点。 算法流程在k+1个维度中">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-02-28T12:52:50.000Z">
+<meta property="article:modified_time" content="2024-03-02T03:33:35.758Z">
+<meta property="article:author" content="Meiqwq">
+<meta property="article:tag" content="计算理论">
+<meta property="article:tag" content="离散数学">
+<meta property="article:tag" content="论文导读">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2024/02/28/lattice-fix/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2024/02/28/lattice-fix/","path":"2024/02/28/lattice-fix/","title":"Tarski 问题"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Tarski 问题 | Meiqwq's blog~</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Meiqwq's blog~</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Tarski%E5%AE%9A%E7%90%86"><span class="nav-number">1.</span> <span class="nav-text">Tarski定理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%96%87%E7%AB%A0%E8%B4%A1%E7%8C%AE"><span class="nav-number">2.</span> <span class="nav-text">文章贡献</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%E6%B5%81%E7%A8%8B"><span class="nav-number">3.</span> <span class="nav-text">算法流程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Tarski-n-k"><span class="nav-number">3.1.</span> <span class="nav-text">Tarski*(n,k)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Refined-Tarski-n-k"><span class="nav-number">3.2.</span> <span class="nav-text">Refined Tarski*(n,k)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Refined-Tarski-n-k-%E9%97%AE%E9%A2%98%E7%9A%84%E6%B1%82%E8%A7%A3"><span class="nav-number">3.3.</span> <span class="nav-text">Refined Tarski*(n,k) 问题的求解</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A0%B8%E5%BF%83%E5%AE%9A%E7%90%86%E4%BB%A5%E5%8F%8A%E5%85%B6%E8%AF%81%E6%98%8E"><span class="nav-number">4.</span> <span class="nav-text">核心定理以及其证明</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%97%E6%B3%95"><span class="nav-number">4.1.</span> <span class="nav-text">算法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%80%E5%90%8E%E6%AD%A5%E9%AA%A4%E4%BB%A5%E5%8F%8A%E6%80%BB%E7%BB%93"><span class="nav-number">5.</span> <span class="nav-text">最后步骤以及总结</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Meiqwq</p>
+  <div class="site-description" itemprop="description">A blog correlated with CS</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/02/28/lattice-fix/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Meiqwq">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Meiqwq's blog~">
+      <meta itemprop="description" content="A blog correlated with CS">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Tarski 问题 | Meiqwq's blog~">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Tarski 问题
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2024-02-28 20:52:50" itemprop="dateCreated datePublished" datetime="2024-02-28T20:52:50+08:00">2024-02-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-03-02 11:33:35" itemprop="dateModified" datetime="2024-03-02T11:33:35+08:00">2024-03-02</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>作者应该是俩中国人</p>
+<h1 id="Tarski定理"><a href="#Tarski定理" class="headerlink" title="Tarski定理"></a>Tarski定理</h1><p>对于完全格 $&lt;L,\preceq&gt;$,以及$L \to L$的单调增函数$f$，$f$一定存在不动点</p>
+<p>有点像格上的介值定理</p>
+<h1 id="文章贡献"><a href="#文章贡献" class="headerlink" title="文章贡献"></a>文章贡献</h1><p>对于n阶k维格点格(grid lattice),以及定义在其上的单调函数$f$,构造出了一个$O(\log^{\lceil \frac{k+1}{2} \rceil}n)$算法找到一个不动点。</p>
+<h1 id="算法流程"><a href="#算法流程" class="headerlink" title="算法流程"></a>算法流程</h1><p>在k+1个维度中选择一个切片，比如$x_{k+1}&#x3D;\lceil\frac{n}{2}\rceil$,在这个切片上，一定有一个点要么是前驱点要么是后缀点，（前驱点指$x \preceq f(x)$,后缀点同理）</p>
+<p>（证明很简单，指考虑前$k$维，一定存在一个不动点，即$\exist x$ $st.$ $\forall i \in[k],x_i&#x3D;f(x)_i$，那么$x$就一定是一个前驱or后缀点)</p>
+<p>假设找到前驱点$l$的复杂度为$q(n,k)$,此时，在$l$到上界$r&#x3D;[n]^k$的子格中，$f$一定封闭，由于$f$单调且$ranf\in L_{l,r}$,根据Tarski定理，$L_{l,r}$中一定存在一个不动点,因此问题规模缩减一半，总复杂度的上界为$O(2^k+k\log n \cdot q(n,k))$,因此，问题变成了如何在切片上求prefix&#x2F;suffix</p>
+<p>为了在切片上求prefix&#x2F;suffix，作者引入了一个新问题记作Tarski*问题：</p>
+<h2 id="Tarski-n-k"><a href="#Tarski-n-k" class="headerlink" title="Tarski*(n,k)"></a>Tarski*(n,k)</h2><p>$Tarski*(n,k)$是指如下问题：</p>
+<p>定义函数$g,[n]^k \to {-1,0,1}^{k+1}$,为:$\forall i \in [k],g(x)<em>i&#x3D;sgn(f(x)<em>i-x_i),g(x)</em>{k+1}&#x3D;sgn(f(x)</em>{k+1}-\lceil \frac{n}{2} \rceil)$,也就是说，$g$是表示一个点的偏移的函数，Tarski*问题就是找到一个$x$使得${g(x)_i}$中不同时存在$1,-1$</p>
+<p>很显然这样的$x$就是前驱or后继点。</p>
+<p>很可惜，这样并没有简化问题，因此我们再引入refined Tarski*(n,k)问题.</p>
+<h2 id="Refined-Tarski-n-k"><a href="#Refined-Tarski-n-k" class="headerlink" title="Refined Tarski*(n,k)"></a>Refined Tarski*(n,k)</h2><p>对于满足如下条件的函数$g,[n]^k \to {-1,0,1}^{k+1}$:</p>
+<ol>
+<li>$\forall i \in [k] and x \in L,x_i+g(x)_i \in [n]$</li>
+<li>$(x,0)+g(x)$是单调不降函数</li>
+</ol>
+<p>可以计算出$p^l,p^r$,满足:$\forall i \in [k] g(p^l)<em>i \geq 0 ,g(p^r)<em>i \leq 0$,并且$g(p^l)</em>{k+1}&#x3D;g(p^r)</em>{k+1}$</p>
+<h2 id="Refined-Tarski-n-k-问题的求解"><a href="#Refined-Tarski-n-k-问题的求解" class="headerlink" title="Refined Tarski*(n,k) 问题的求解"></a>Refined Tarski*(n,k) 问题的求解</h2><p>好像很简单，暂时懒得写了，留作习题</p>
+<h1 id="核心定理以及其证明"><a href="#核心定理以及其证明" class="headerlink" title="核心定理以及其证明"></a>核心定理以及其证明</h1><p>这篇文章的精髓，或者说是解决Tarski不动点问题的关键是如下定理:</p>
+<p>假设，Tarski*(n,a) 可以在 $q(n,a)$复杂度内求解，Tarski*(n,b) 可以在 $q(n,b)$复杂度内求解，那么 Tarski*(n,a+b)可以在$O((b+1)q(n,a)q(n,b))$内求解</p>
+<h2 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h2><p>注意，下述算法中 Tarski*(n,b)依赖的$g$函数是在线生成的，你可能会担心这样的$g$不满足Tarski*问题对$g$函数的限制，但是请不要惊慌，因为最终我们会证明这样的$g$是满足1. $\forall i \in [k] and x \in L,x_i+g(x)_i \in [n]$<br>2. $(x,0)+g(x)$是单调不降函数 的。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">q=[];<span class="comment">//前几轮 Tarski*(n,b)的询问记录</span></span><br><span class="line">r=[];<span class="comment">//前几轮对 q_i的回答</span></span><br><span class="line">pl=[];</span><br><span class="line">pr=[];</span><br><span class="line"><span class="keyword">for</span>(i=<span class="number">1</span>;;++i)&#123;</span><br><span class="line">    pl[i]=[<span class="number">1</span>]^k;</span><br><span class="line">    pr[i]=[n]^k;</span><br><span class="line">    q[i]=Tarski*(n,b).query;</span><br><span class="line">    <span class="keyword">for</span>(j=<span class="number">1</span>;j&lt;i;++j)&#123;</span><br><span class="line">        <span class="keyword">if</span>(q[j]&lt;=q[i])pl[i]=<span class="built_in">max</span>(pl[i],pl[j]);</span><br><span class="line">        <span class="keyword">if</span>(q[i]&lt;=q[j])pr[i]=<span class="built_in">min</span>(pr[i],pr[j]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(j=a+<span class="number">1</span>;j&lt;=a+b+<span class="number">1</span>;++j)&#123;</span><br><span class="line">        构造g_j函数为 <span class="built_in">g</span>(x,q[i])的前a维和第j维;</span><br><span class="line">        用g_j计算在[pl[i],pr[i]] 内refined Tarski*(n,a)的解，并更新pl[i],pr[i]</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(t=a+<span class="number">1</span>;t&lt;=a+b+<span class="number">1</span>;++t)&#123;</span><br><span class="line">        r[i][t-a]=<span class="built_in">g</span>(pl[i],q[i])[t];</span><br><span class="line">    &#125;</span><br><span class="line">    若r[i]全非负 <span class="keyword">return</span> (p[l][i],r[i]);</span><br><span class="line">    若r[i]全非正 <span class="keyword">return</span> (p[r][i],r[i]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以注意到如下事实:</p>
+<ol>
+<li><p>由于refined Tarski* 问题的特性，最后更新出来的 $p^l_i,p^r_i$一定满足前a维度l正r负，其它维度lr都一样.</p>
+</li>
+<li><p>对Tarski*(n,b)的回复是满足条件的：注意到在第一个小for里，我们保证了$p^l_i$一定比所以更小询问的$p^l$大，因而$q^{x}_j+r^{x}_j$的每一项都比$q^{i}_j+r^{i}_j$小</p>
+</li>
+<li><p>由 1.可知，最后如果回复满足Tarski*(n,b)的要求，那么我们就求出了Tarski*(n,a+b)</p>
+</li>
+</ol>
+<h1 id="最后步骤以及总结"><a href="#最后步骤以及总结" class="headerlink" title="最后步骤以及总结"></a>最后步骤以及总结</h1><p>在另一篇文章中提到了，Tarski*(n,2) 可以 $O(\log n)$求解，因此，按照刚刚证明的定理， Tarski*(n,k) 可以$O(\log^{\lfloor \frac{k}{2} \rfloor}n)$求解 ，因此 Tarski(n,k)可以$O(\log^{\lceil \frac{k+1}{2} \rceil}n)$求解</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E8%AE%A1%E7%AE%97%E7%90%86%E8%AE%BA/" rel="tag"># 计算理论</a>
+              <a href="/tags/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/" rel="tag"># 离散数学</a>
+              <a href="/tags/%E8%AE%BA%E6%96%87%E5%AF%BC%E8%AF%BB/" rel="tag"># 论文导读</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/02/28/fair-division/" rel="prev" title="fair division">
+                  <i class="fa fa-angle-left"></i> fair division
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Meiqwq</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>
