@@ -114,7 +114,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">3</span>
+          <span class="site-state-item-count">4</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -141,6 +141,84 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/03/03/%E5%A4%8D%E6%9D%82%E5%BA%A6%E7%90%86%E8%AE%BA%E4%BD%9C%E4%B8%9A/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Meiqwq">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Meiqwq's blog~">
+      <meta itemprop="description" content="A blog correlated with CS">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Meiqwq's blog~">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/03/03/%E5%A4%8D%E6%9D%82%E5%BA%A6%E7%90%86%E8%AE%BA%E4%BD%9C%E4%B8%9A/" class="post-title-link" itemprop="url">复杂度理论作业</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2024-03-03 10:02:54 / Modified: 11:21:19" itemprop="dateCreated datePublished" datetime="2024-03-03T10:02:54+08:00">2024-03-03</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="1-Proof-sat-is-npc"><a href="#1-Proof-sat-is-npc" class="headerlink" title="1.Proof sat is npc"></a>1.Proof sat is npc</h1><h2 id="先证-sat-in-np-hard"><a href="#先证-sat-in-np-hard" class="headerlink" title="先证 sat $\in$ np-hard:"></a>先证 sat $\in$ np-hard:</h2><p>我们的目标是证明:sat难于任何np问题。考虑任何一个np问题$L$，存在一个图灵机$M$,$x \in L \Leftrightarrow \exist u \in {0,1}^{p(x)} s.t.M(x,u)&#x3D;1$,现在我们的目标是，将$x\in L$这个条件多项式地转化为一个CNF。</p>
+<p>对于上述TM，我们可以不依赖input纸带地找到它所有的configuration(详见zaq的ppt),对于一个$x$,我们再设定$p(x)$个布尔变量$y_1,y_2….y_{p(x)}$,要判断$M(x,{y})$是否会输出1，我们只需要判断以下条件：</p>
+<ol>
+<li>存在一个configuration sequence satisfying 每个configuration经过转移函数后都会到达下一个configuration（TM的定义）</li>
+<li>最后一个configuration 将会使TM halt and output <code>1</code>.<br>这可以在多项式复杂度内表示为两个CNF,因此我们成功将$x\in L$转化为了一个CNF。</li>
+</ol>
+<h2 id="再证-sat-in-NPC"><a href="#再证-sat-in-NPC" class="headerlink" title="再证 sat $\in$ NPC"></a>再证 sat $\in$ NPC</h2><p>只要证sat $\in$ NP,显然的。</p>
+<h1 id="2-Proof-SAT-leq-p-3-SAT"><a href="#2-Proof-SAT-leq-p-3-SAT" class="headerlink" title="2. Proof $SAT \leq_{p} 3-SAT$"></a>2. Proof $SAT \leq_{p} 3-SAT$</h1><p>考虑一个$k$元简单析取式$A_1 \vee A_2 \vee A_3\vee… A_k$加入一个新的变量$z$,可以作如下化简</p>
+<p>$A_1 \vee A_2 \vee A_3\vee… A_k &#x3D; (A_1 \vee A_2 \vee…A_{k-2} \vee z)\vee (A_{k-1} \vee A_k \vee \bar{z})$,重复上述过程即可，可以发现重复次数显然是线性的，因此是合法的卡普规约.</p>
+<h1 id="3-最大团是-NPC"><a href="#3-最大团是-NPC" class="headerlink" title="3. 最大团是 NPC"></a>3. 最大团是 NPC</h1>
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 

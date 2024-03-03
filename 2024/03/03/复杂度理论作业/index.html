@@ -19,30 +19,28 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="尝试了一个寒假的open problem，先放一段时间再想吧。。 先记录一下目前的思路们: 1先用$d_1$视角构造一组allocation $X&#x3D;(X_1,X_2,X_3)$ 满足对 $d_1$ tEFX，不失一般性，令 $X_3 &lt;{3} X_1 &lt;{3} X_2$将 $X_1$中的chores 按照 $d_3$ 升序排序，即 $X_1&#x3D;{c_1,c_2….},">
+    <meta name="description" content="1.Proof sat is npc先证 sat $\in$ np-hard:我们的目标是证明:sat难于任何np问题。考虑任何一个np问题$L$，存在一个图灵机$M$,$x \in L \Leftrightarrow \exist u \in {0,1}^{p(x)} s.t.M(x,u)&#x3D;1$,现在我们的目标是，将$x\in L$这个条件多项式地转化为一个CNF。 对于上述TM，我们">
 <meta property="og:type" content="article">
-<meta property="og:title" content="fair division">
-<meta property="og:url" content="http://example.com/2024/02/28/fair-division/index.html">
+<meta property="og:title" content="复杂度理论作业">
+<meta property="og:url" content="http://example.com/2024/03/03/%E5%A4%8D%E6%9D%82%E5%BA%A6%E7%90%86%E8%AE%BA%E4%BD%9C%E4%B8%9A/index.html">
 <meta property="og:site_name" content="Meiqwq&#39;s blog~">
-<meta property="og:description" content="尝试了一个寒假的open problem，先放一段时间再想吧。。 先记录一下目前的思路们: 1先用$d_1$视角构造一组allocation $X&#x3D;(X_1,X_2,X_3)$ 满足对 $d_1$ tEFX，不失一般性，令 $X_3 &lt;{3} X_1 &lt;{3} X_2$将 $X_1$中的chores 按照 $d_3$ 升序排序，即 $X_1&#x3D;{c_1,c_2….},">
+<meta property="og:description" content="1.Proof sat is npc先证 sat $\in$ np-hard:我们的目标是证明:sat难于任何np问题。考虑任何一个np问题$L$，存在一个图灵机$M$,$x \in L \Leftrightarrow \exist u \in {0,1}^{p(x)} s.t.M(x,u)&#x3D;1$,现在我们的目标是，将$x\in L$这个条件多项式地转化为一个CNF。 对于上述TM，我们">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2024-02-28T09:59:11.000Z">
-<meta property="article:modified_time" content="2024-03-02T03:53:10.662Z">
+<meta property="article:published_time" content="2024-03-03T02:02:54.000Z">
+<meta property="article:modified_time" content="2024-03-03T03:21:19.847Z">
 <meta property="article:author" content="Meiqwq">
 <meta property="article:tag" content="计算理论">
-<meta property="article:tag" content="组合数学">
-<meta property="article:tag" content="unsolved">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="http://example.com/2024/02/28/fair-division/">
+<link rel="canonical" href="http://example.com/2024/03/03/%E5%A4%8D%E6%9D%82%E5%BA%A6%E7%90%86%E8%AE%BA%E4%BD%9C%E4%B8%9A/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2024/02/28/fair-division/","path":"2024/02/28/fair-division/","title":"fair division"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2024/03/03/%E5%A4%8D%E6%9D%82%E5%BA%A6%E7%90%86%E8%AE%BA%E4%BD%9C%E4%B8%9A/","path":"2024/03/03/复杂度理论作业/","title":"复杂度理论作业"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>fair division | Meiqwq's blog~</title>
+<title>复杂度理论作业 | Meiqwq's blog~</title>
   
 
 
@@ -107,7 +105,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1"><span class="nav-number">1.</span> <span class="nav-text">1</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%BA%E9%99%B7"><span class="nav-number">1.1.</span> <span class="nav-text">缺陷</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2"><span class="nav-number">2.</span> <span class="nav-text">2</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%BA%E9%99%B7%EF%BC%9A"><span class="nav-number">2.1.</span> <span class="nav-text">缺陷：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3"><span class="nav-number">3.</span> <span class="nav-text">3</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-Proof-sat-is-npc"><span class="nav-number">1.</span> <span class="nav-text">1.Proof sat is npc</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%88%E8%AF%81-sat-in-np-hard"><span class="nav-number">1.1.</span> <span class="nav-text">先证 sat $\in$ np-hard:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%8D%E8%AF%81-sat-in-NPC"><span class="nav-number">1.2.</span> <span class="nav-text">再证 sat $\in$ NPC</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-Proof-SAT-leq-p-3-SAT"><span class="nav-number">2.</span> <span class="nav-text">2. Proof $SAT \leq_{p} 3-SAT$</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-%E6%9C%80%E5%A4%A7%E5%9B%A2%E6%98%AF-NPC"><span class="nav-number">3.</span> <span class="nav-text">3. 最大团是 NPC</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -157,7 +155,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/02/28/fair-division/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/03/03/%E5%A4%8D%E6%9D%82%E5%BA%A6%E7%90%86%E8%AE%BA%E4%BD%9C%E4%B8%9A/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -170,12 +168,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="fair division | Meiqwq's blog~">
+      <meta itemprop="name" content="复杂度理论作业 | Meiqwq's blog~">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          fair division
+          复杂度理论作业
         </h1>
 
         <div class="post-meta-container">
@@ -185,15 +183,9 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
+      
 
-      <time title="Created: 2024-02-28 17:59:11" itemprop="dateCreated datePublished" datetime="2024-02-28T17:59:11+08:00">2024-02-28</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-03-02 11:53:10" itemprop="dateModified" datetime="2024-03-02T11:53:10+08:00">2024-03-02</time>
+      <time title="Created: 2024-03-03 10:02:54 / Modified: 11:21:19" itemprop="dateCreated datePublished" datetime="2024-03-03T10:02:54+08:00">2024-03-03</time>
     </span>
 
   
@@ -205,23 +197,16 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p>尝试了一个寒假的open problem，先放一段时间再想吧。。</p>
-<p>先记录一下目前的思路们:</p>
-<h1 id="1"><a href="#1" class="headerlink" title="1"></a>1</h1><p>先用$d_1$视角构造一组allocation $X&#x3D;(X_1,X_2,X_3)$ 满足对 $d_1$ tEFX，不失一般性，令 $X_3 &lt;<em>{3} X_1 &lt;</em>{3} X_2$<br>将 $X_1$中的chores 按照 $d_3$ 升序排序，即 $X_1&#x3D;{c_1,c_2….},d_3(c_1)&lt;d_3(c_2)…$<br>然后执行</p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> <span class="attribute">i</span>=1 <span class="keyword">to</span> |X_1|&#123;</span><br><span class="line">    <span class="keyword">if</span>(d_3(X_1-c_i)&lt;d_3(X_3+c_i))break</span><br><span class="line">    X_3.<span class="built_in">add</span>(c_i)</span><br><span class="line">    X_1.delete(c_i)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>此时，必然有 $d_3(X_3)&lt;d_3(X_1)&lt;d_3(X_2)$,且 $X_3,X_1$都对agent3 tEFX-feasible. 同时，$d_1(X_1)&lt;d_1(X_3)$.</p>
-<p>如果 $X_2$ is tEFX feasible for agent1,那么算法结束</p>
-<p>反之，$X_2$ is not tEFX feasible for agent1, 则一定有$d_1(X_2)&gt;d_1(X_1)$，此时以$d_1$为disutility function使用PR算法,再回到算法开始。</p>
-<h2 id="缺陷"><a href="#缺陷" class="headerlink" title="缺陷"></a>缺陷</h2><p>无法保证 $min(d_1(X_1),d_1(X_2))$单调,无法确定算法是否有穷<br>已找到一组反例，在$X_1,X_3$之间来回传递。</p>
-<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">d</span>[<span class="number">1</span>][<span class="number">1</span>]=<span class="number">12</span>;d[<span class="number">1</span>][<span class="number">2</span>]=<span class="number">8</span>;d[<span class="number">1</span>][<span class="number">3</span>]=<span class="number">6</span>;d[<span class="number">1</span>][<span class="number">4</span>]=<span class="number">1</span>;d[<span class="number">1</span>][<span class="number">5</span>]=<span class="number">17</span>;</span><br><span class="line"><span class="attribute">d</span>[<span class="number">2</span>][<span class="number">1</span>]=<span class="number">7</span>;d[<span class="number">2</span>][<span class="number">2</span>]=<span class="number">1</span>;d[<span class="number">2</span>][<span class="number">3</span>]=<span class="number">11</span>;d[<span class="number">2</span>][<span class="number">4</span>]=<span class="number">2</span>;d[<span class="number">2</span>][<span class="number">5</span>]=<span class="number">1</span>;</span><br><span class="line"><span class="attribute">d</span>[<span class="number">3</span>][<span class="number">1</span>]=<span class="number">17</span>;d[<span class="number">3</span>][<span class="number">2</span>]=<span class="number">6</span>;d[<span class="number">3</span>][<span class="number">3</span>]=<span class="number">14</span>;d[<span class="number">3</span>][<span class="number">4</span>]=<span class="number">4</span>;d[<span class="number">3</span>][<span class="number">5</span>]=<span class="number">7</span>;</span><br></pre></td></tr></table></figure>
-
-<h1 id="2"><a href="#2" class="headerlink" title="2"></a>2</h1><p>先用$d_1$视角构造一组allocation $X&#x3D;(X_1,X_2,X_3)$ 满足对 $d_1$ tEFX，不失一般性，令 $X_3 &lt;<em>{3} X_1 &lt;</em>{3} X_2$<br>将 $X_1$中的chores 按照 $d_3$ 升序排序，即 $X_1&#x3D;{c_1,c_2….},d_3(c_1)&lt;d_3(c_2)…$</p>
-<p>如果出现 $X_1,X_2$都对agent2，3 不 tEFX feasible, 那么 此时直接对agent2或agent3的disutilities function使用PR算法,在开局就重构</p>
-<h2 id="缺陷："><a href="#缺陷：" class="headerlink" title="缺陷："></a>缺陷：</h2><p>也是没有单调性</p>
-<h1 id="3"><a href="#3" class="headerlink" title="3"></a>3</h1><p>直接摈弃原来的思路，直接对disutilities function的值域归纳。<br>也即，假设一组disutilities function可以做出tEFX，只要证明将其中任意一个值增加1仍然可以做出tEFX分配。</p>
-<p>正在讨论。。也是一堆问题</p>
-<p>upd:讨论不动了，研究值域是没有未来的</p>
-
+    <div class="post-body" itemprop="articleBody"><h1 id="1-Proof-sat-is-npc"><a href="#1-Proof-sat-is-npc" class="headerlink" title="1.Proof sat is npc"></a>1.Proof sat is npc</h1><h2 id="先证-sat-in-np-hard"><a href="#先证-sat-in-np-hard" class="headerlink" title="先证 sat $\in$ np-hard:"></a>先证 sat $\in$ np-hard:</h2><p>我们的目标是证明:sat难于任何np问题。考虑任何一个np问题$L$，存在一个图灵机$M$,$x \in L \Leftrightarrow \exist u \in {0,1}^{p(x)} s.t.M(x,u)&#x3D;1$,现在我们的目标是，将$x\in L$这个条件多项式地转化为一个CNF。</p>
+<p>对于上述TM，我们可以不依赖input纸带地找到它所有的configuration(详见zaq的ppt),对于一个$x$,我们再设定$p(x)$个布尔变量$y_1,y_2….y_{p(x)}$,要判断$M(x,{y})$是否会输出1，我们只需要判断以下条件：</p>
+<ol>
+<li>存在一个configuration sequence satisfying 每个configuration经过转移函数后都会到达下一个configuration（TM的定义）</li>
+<li>最后一个configuration 将会使TM halt and output <code>1</code>.<br>这可以在多项式复杂度内表示为两个CNF,因此我们成功将$x\in L$转化为了一个CNF。</li>
+</ol>
+<h2 id="再证-sat-in-NPC"><a href="#再证-sat-in-NPC" class="headerlink" title="再证 sat $\in$ NPC"></a>再证 sat $\in$ NPC</h2><p>只要证sat $\in$ NP,显然的。</p>
+<h1 id="2-Proof-SAT-leq-p-3-SAT"><a href="#2-Proof-SAT-leq-p-3-SAT" class="headerlink" title="2. Proof $SAT \leq_{p} 3-SAT$"></a>2. Proof $SAT \leq_{p} 3-SAT$</h1><p>考虑一个$k$元简单析取式$A_1 \vee A_2 \vee A_3\vee… A_k$加入一个新的变量$z$,可以作如下化简</p>
+<p>$A_1 \vee A_2 \vee A_3\vee… A_k &#x3D; (A_1 \vee A_2 \vee…A_{k-2} \vee z)\vee (A_{k-1} \vee A_k \vee \bar{z})$,重复上述过程即可，可以发现重复次数显然是线性的，因此是合法的卡普规约.</p>
+<h1 id="3-最大团是-NPC"><a href="#3-最大团是-NPC" class="headerlink" title="3. 最大团是 NPC"></a>3. 最大团是 NPC</h1>
     </div>
 
     
@@ -231,22 +216,17 @@
     <footer class="post-footer">
           <div class="post-tags">
               <a href="/tags/%E8%AE%A1%E7%AE%97%E7%90%86%E8%AE%BA/" rel="tag"># 计算理论</a>
-              <a href="/tags/%E7%BB%84%E5%90%88%E6%95%B0%E5%AD%A6/" rel="tag"># 组合数学</a>
-              <a href="/tags/unsolved/" rel="tag"># unsolved</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2024/02/27/CF1913E%E8%B4%B9%E7%94%A8%E6%B5%81/" rel="prev" title="CF1913E费用流">
-                  <i class="fa fa-angle-left"></i> CF1913E费用流
+                <a href="/2024/02/28/lattice-fix/" rel="prev" title="Tarski 问题">
+                  <i class="fa fa-angle-left"></i> Tarski 问题
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2024/02/28/lattice-fix/" rel="next" title="Tarski 问题">
-                  Tarski 问题 <i class="fa fa-angle-right"></i>
-                </a>
             </div>
           </div>
     </footer>
