@@ -178,9 +178,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2024-03-03 10:02:54 / Modified: 11:30:59" itemprop="dateCreated datePublished" datetime="2024-03-03T10:02:54+08:00">2024-03-03</time>
+      <time title="Created: 2024-03-03 10:02:54" itemprop="dateCreated datePublished" datetime="2024-03-03T10:02:54+08:00">2024-03-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-03-04 00:12:42" itemprop="dateModified" datetime="2024-03-04T00:12:42+08:00">2024-03-04</time>
     </span>
 
   
@@ -201,11 +207,23 @@
 </ol>
 <h2 id="再证-sat-in-NPC"><a href="#再证-sat-in-NPC" class="headerlink" title="再证 sat $\in$ NPC"></a>再证 sat $\in$ NPC</h2><p>只要证sat $\in$ NP,显然的。</p>
 <h1 id="2-Proof-SAT-leq-p-3-SAT"><a href="#2-Proof-SAT-leq-p-3-SAT" class="headerlink" title="2. Proof $SAT \leq_{p} 3-SAT$"></a>2. Proof $SAT \leq_{p} 3-SAT$</h1><p>考虑一个$k$元简单析取式$A_1 \vee A_2 \vee A_3\vee… A_k$加入一个新的变量$z$,可以作如下化简</p>
-<p>$A_1 \vee A_2 \vee A_3\vee… A_k &#x3D; (A_1 \vee A_2 \vee…A_{k-2} \vee z)\vee (A_{k-1} \vee A_k \vee \bar{z})$,重复上述过程即可，可以发现重复次数显然是线性的，因此是合法的卡普规约.</p>
+<p>$A_1 \vee A_2 \vee A_3\vee… A_k &#x3D; (A_1 \vee A_2 \vee…A_{k-2} \vee z)\wedge (A_{k-1} \vee A_k \vee \bar{z})$,重复上述过程即可，可以发现重复次数显然是线性的，因此是合法的卡普规约.</p>
 <h1 id="3-最大团是-NPC"><a href="#3-最大团是-NPC" class="headerlink" title="3. 最大团是 NPC"></a>3. 最大团是 NPC</h1><p>我们已经证明了3-sat是NPC，因此我们只要证明 $3-SAT \leq_{p}最大团问题$.</p>
 <p>考虑任何一个CNF，我们建如下图：</p>
 <p>对于m-clauses CNF,我们建立一个m部图，对于每一个从句，我们将所有成真的赋值拉出来，看成一个顶点，可以发现最多会拉出$2^3&#x3D;7$个点，没有出现的变量用*代替。</p>
 <p>然后，对于不矛盾的点，我们连一条边，最后只要判断最大团是否等于$m$即可。</p>
+<h1 id="4-整数规划是NPC"><a href="#4-整数规划是NPC" class="headerlink" title="4. 整数规划是NPC"></a>4. 整数规划是NPC</h1><p>考虑证明：$SAT \leq_{p} 整数规划$</p>
+<p>对于任意mclauses-CNF:$(A_1 \vee A_2…)\wedge (B_1 \vee B_2 \vee…)…$ 先限制所有字母为$0 \leq x \leq 1$,一共$m$个方程，再对每个析取式，写出$\sum A_i \geq 1$</p>
+<p>显然，整数规划是NP的，因此得证。</p>
+<h1 id="5-有向图哈密顿路是NPC"><a href="#5-有向图哈密顿路是NPC" class="headerlink" title="5. 有向图哈密顿路是NPC"></a>5. 有向图哈密顿路是NPC</h1><p>考虑将问题规约到SAT。我们换一种视角来看待SAT问题，对于每个变量$u$,如果$u$取 <code>1</code>那么所有包含$u$的从句都会被满足，如果$u$取<code>0</code>那么所有包含$\bar{u}$的从句将会被满足。</p>
+<p>这次，我们按照变量来建图：</p>
+<p>对于一个变量，我们单独对它建一层点：</p>
+<p><img src="/source/image/lk.jpg" alt="图片"></p>
+<p>对于所有的从句$c_1,c_2,c_3…c_m$,让他们相邻之间用双向边连接，规定从左往右是<code>True</code>,反之是<code>False</code>,如果取<code>True</code>时能让$c_2$满足，那么就向点$c_2$连边。</p>
+<p>现在我们已经处理好了一个变量，要处理所有$n$个变量，我们只需要建立起点st和终点ed，按如下方式把所有变量连起来:</p>
+<p><img src="/source/image/tot.jpg" alt="图片"></p>
+<p>每一层的端点处向下一层两个端点都连边。很显然这个图如果存在哈密顿路径那么每一层走的方向就是SAT问题的答案。</p>
+<h1 id="6-无向图哈密顿路径是NPC"><a href="#6-无向图哈密顿路径是NPC" class="headerlink" title="6.无向图哈密顿路径是NPC"></a>6.无向图哈密顿路径是NPC</h1><p>肯定是证明 $有向图哈密顿路径 \leq_{p} 无向图哈密顿路径$(未完待续)</p>
 
       
     </div>
