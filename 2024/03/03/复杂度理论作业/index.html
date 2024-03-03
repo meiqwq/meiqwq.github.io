@@ -27,7 +27,7 @@
 <meta property="og:description" content="1.Proof sat is npc先证 sat $\in$ np-hard:我们的目标是证明:sat难于任何np问题。考虑任何一个np问题$L$，存在一个图灵机$M$,$x \in L \Leftrightarrow \exist u \in {0,1}^{p(x)} s.t.M(x,u)&#x3D;1$,现在我们的目标是，将$x\in L$这个条件多项式地转化为一个CNF。 对于上述TM，我们">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2024-03-03T02:02:54.000Z">
-<meta property="article:modified_time" content="2024-03-03T03:21:19.847Z">
+<meta property="article:modified_time" content="2024-03-03T03:30:59.112Z">
 <meta property="article:author" content="Meiqwq">
 <meta property="article:tag" content="计算理论">
 <meta name="twitter:card" content="summary">
@@ -185,7 +185,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2024-03-03 10:02:54 / Modified: 11:21:19" itemprop="dateCreated datePublished" datetime="2024-03-03T10:02:54+08:00">2024-03-03</time>
+      <time title="Created: 2024-03-03 10:02:54 / Modified: 11:30:59" itemprop="dateCreated datePublished" datetime="2024-03-03T10:02:54+08:00">2024-03-03</time>
     </span>
 
   
@@ -206,7 +206,11 @@
 <h2 id="再证-sat-in-NPC"><a href="#再证-sat-in-NPC" class="headerlink" title="再证 sat $\in$ NPC"></a>再证 sat $\in$ NPC</h2><p>只要证sat $\in$ NP,显然的。</p>
 <h1 id="2-Proof-SAT-leq-p-3-SAT"><a href="#2-Proof-SAT-leq-p-3-SAT" class="headerlink" title="2. Proof $SAT \leq_{p} 3-SAT$"></a>2. Proof $SAT \leq_{p} 3-SAT$</h1><p>考虑一个$k$元简单析取式$A_1 \vee A_2 \vee A_3\vee… A_k$加入一个新的变量$z$,可以作如下化简</p>
 <p>$A_1 \vee A_2 \vee A_3\vee… A_k &#x3D; (A_1 \vee A_2 \vee…A_{k-2} \vee z)\vee (A_{k-1} \vee A_k \vee \bar{z})$,重复上述过程即可，可以发现重复次数显然是线性的，因此是合法的卡普规约.</p>
-<h1 id="3-最大团是-NPC"><a href="#3-最大团是-NPC" class="headerlink" title="3. 最大团是 NPC"></a>3. 最大团是 NPC</h1>
+<h1 id="3-最大团是-NPC"><a href="#3-最大团是-NPC" class="headerlink" title="3. 最大团是 NPC"></a>3. 最大团是 NPC</h1><p>我们已经证明了3-sat是NPC，因此我们只要证明 $3-SAT \leq_{p}最大团问题$.</p>
+<p>考虑任何一个CNF，我们建如下图：</p>
+<p>对于m-clauses CNF,我们建立一个m部图，对于每一个从句，我们将所有成真的赋值拉出来，看成一个顶点，可以发现最多会拉出$2^3&#x3D;7$个点，没有出现的变量用*代替。</p>
+<p>然后，对于不矛盾的点，我们连一条边，最后只要判断最大团是否等于$m$即可。</p>
+
     </div>
 
     
