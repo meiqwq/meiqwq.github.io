@@ -168,7 +168,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/03/03/%E5%A4%8D%E6%9D%82%E5%BA%A6%E7%90%86%E8%AE%BA%E4%BD%9C%E4%B8%9A/" class="post-title-link" itemprop="url">复杂度理论作业</a>
+          <a href="/2024/03/03/%E5%A4%8D%E6%9D%82%E5%BA%A6%E7%90%86%E8%AE%BA%E4%BD%9C%E4%B8%9A/" class="post-title-link" itemprop="url">复杂度理论作业（第一次）</a>
         </h2>
 
         <div class="post-meta-container">
@@ -186,7 +186,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-03-04 09:45:24" itemprop="dateModified" datetime="2024-03-04T09:45:24+08:00">2024-03-04</time>
+      <time title="Modified: 2024-03-05 00:28:09" itemprop="dateModified" datetime="2024-03-05T00:28:09+08:00">2024-03-05</time>
     </span>
 
   
@@ -199,7 +199,8 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="1-Proof-sat-is-npc"><a href="#1-Proof-sat-is-npc" class="headerlink" title="1.Proof sat is npc"></a>1.Proof sat is npc</h1><h2 id="先证-sat-in-np-hard"><a href="#先证-sat-in-np-hard" class="headerlink" title="先证 sat $\in$ np-hard:"></a>先证 sat $\in$ np-hard:</h2><p>我们的目标是证明:sat难于任何np问题。考虑任何一个np问题$L$，存在一个图灵机$M$,$x \in L \Leftrightarrow \exist u \in {0,1}^{p(x)} s.t.M(x,u)&#x3D;1$,现在我们的目标是，将$x\in L$这个条件多项式地转化为一个CNF。</p>
+          <p>后续大多只简写了证明是NP-H,NP毕竟都比较显然就不写了。。。</p>
+<h1 id="1-Proof-sat-is-npc"><a href="#1-Proof-sat-is-npc" class="headerlink" title="1.Proof sat is npc"></a>1.Proof sat is npc</h1><h2 id="先证-sat-in-np-hard"><a href="#先证-sat-in-np-hard" class="headerlink" title="先证 sat $\in$ np-hard:"></a>先证 sat $\in$ np-hard:</h2><p>我们的目标是证明:sat难于任何np问题。考虑任何一个np问题$L$，存在一个图灵机$M$,$x \in L \Leftrightarrow \exist u \in {0,1}^{p(x)} s.t.M(x,u)&#x3D;1$,现在我们的目标是，将$x\in L$这个条件多项式地转化为一个CNF。</p>
 <p>对于上述TM，我们可以不依赖input纸带地找到它所有的configuration(详见zaq的ppt),对于一个$x$,我们再设定$p(x)$个布尔变量$y_1,y_2….y_{p(x)}$,要判断$M(x,{y})$是否会输出1，我们只需要判断以下条件：</p>
 <ol>
 <li>存在一个configuration sequence satisfying 每个configuration经过转移函数后都会到达下一个configuration（TM的定义）</li>
@@ -223,7 +224,33 @@
 <p>现在我们已经处理好了一个变量，要处理所有$n$个变量，我们只需要建立起点st和终点ed，按如下方式把所有变量连起来:</p>
 <p><img src="image/tot.jpg" alt="图片"></p>
 <p>每一层的端点处向下一层两个端点都连边。很显然这个图如果存在哈密顿路径那么每一层走的方向就是SAT问题的答案。</p>
-<h1 id="6-无向图哈密顿路径是NPC"><a href="#6-无向图哈密顿路径是NPC" class="headerlink" title="6.无向图哈密顿路径是NPC"></a>6.无向图哈密顿路径是NPC</h1><p>肯定是证明 $有向图哈密顿路径 \leq_{p} 无向图哈密顿路径$(未完待续)</p>
+<h1 id="6-无向图哈密顿路径是NPC"><a href="#6-无向图哈密顿路径是NPC" class="headerlink" title="6.无向图哈密顿路径是NPC"></a>6.无向图哈密顿路径是NPC</h1><p>肯定是证明 $有向图哈密顿路径 \leq_{p} 无向图哈密顿路径$.</p>
+<p>那么给定一个有向图，我们要将它转化成一个无向图，使得哈密顿路存在性相同。对于一个节点，我们作如下转化：<br><img src="image/conv.jpg" alt="图片"><br>将一个点拆成三个点，可以发现如果要经过中间那个点，一定是要走一个入边和一个出边.</p>
+<h1 id="7-哈密顿回路是NPC"><a href="#7-哈密顿回路是NPC" class="headerlink" title="7.哈密顿回路是NPC"></a>7.哈密顿回路是NPC</h1><p>考虑将它规约到无向图哈密顿路径</p>
+<p>对于原来的无向图，直接加一个点，连接其它所有点即可。</p>
+<h1 id="8-TSP判定版本-是否存在小于-k-的路径-是NPC"><a href="#8-TSP判定版本-是否存在小于-k-的路径-是NPC" class="headerlink" title="8.TSP判定版本(是否存在小于$k$的路径)是NPC"></a>8.TSP判定版本(是否存在小于$k$的路径)是NPC</h1><p> 考虑归约到无向图哈密顿路径。</p>
+<p> 对于一个无向图，给它每条边赋权值$\frac{k}{n-1}$即可</p>
+<h1 id="9"><a href="#9" class="headerlink" title="9."></a>9.</h1><p>证明下述语言是NPC:</p>
+<p>${(\phi,1^n): 在ZF公理系统中，命题\phi 有长度至多为n 的证明}$</p>
+<p>感觉就是规约到SAT？把一个CNF看成一个math statement?</p>
+<p>(存疑)</p>
+<h1 id="10-求证二次整数01规划-模2下-是NPC"><a href="#10-求证二次整数01规划-模2下-是NPC" class="headerlink" title="10.求证二次整数01规划(模2下)是NPC"></a>10.求证二次整数01规划(模2下)是NPC</h1><p>考虑从3-SAT问题归约</p>
+<p>对于任意3-CNF，某个变量会出现$u$或$\bar{u}$的形式。我们构造二次01规划问题，对于CNF中的每个变量,构造二次约束：$u^2+\bar{u}^2&#x3D;1$,容易验证这个等式就约束了$u,\bar{u}$不同.</p>
+<p>这样，我们生成了变量个数个二次约束，接下来，我们要解决每个从句的约束.</p>
+<p>考虑到每个从句是一个简单析取式，考虑下列3种情况：</p>
+<ol>
+<li>从句只有一个变量$A$,构造方程$A^2&#x3D;1$即可</li>
+<li>从句有两个变量$A \vee B$,构造方程$A^2+B^2+AB&#x3D;1$即可 </li>
+<li>从句有三个变量$A \vee B \vee C$,构造新变量$t_i$,增加方程</li>
+</ol>
+<p>$\bar{A}\cdot \bar{B}+{t_i}^2&#x3D;0$</p>
+<p>$t_i \cdot \bar{C}&#x3D;0$</p>
+<p>容易验证这些方程的解会是合法的3-SAT解。</p>
+<h1 id="11-Exact-one-3-sat"><a href="#11-Exact-one-3-sat" class="headerlink" title="11.Exact one 3-sat"></a>11.Exact one 3-sat</h1><p>从3-sat归约，对于原来的3-sat问题，先把表达式中出现在$j$号从句的字母换成$A_{i,j}$,然后再在末尾增加析取式$(\bar{A_i}\vee A_{i,j} \vee t_i)$<br>同样的，还可以证明NAE-3-SAT是NPC</p>
+<h1 id="12-Subsetsum-问题的规模是-log值域"><a href="#12-Subsetsum-问题的规模是-log值域" class="headerlink" title="12. Subsetsum(问题的规模是$\log值域$)"></a>12. Subsetsum(问题的规模是$\log值域$)</h1><p>从Exact-one 3-sat归约，考虑一个exact-one 3-sat 问题，对于每个变量$u$,如果它为真，那么将会满足某些从句，如果它为假，则会满足另一些从句，因此，对于每个变量，我们创建两个数，一个数在每个从句2倍二进制位设为1，这样可以阻止进位的发生，在从句个数+2*变量编号处也设为1（保证二择），要求的和就是$\sum (2i)^2$</p>
+<h1 id="13-点覆盖，独立集"><a href="#13-点覆盖，独立集" class="headerlink" title="13.点覆盖，独立集"></a>13.点覆盖，独立集</h1><p>它们和最大团完全是一个东西，略</p>
+<h1 id="14-Maxcut-is-NPC"><a href="#14-Maxcut-is-NPC" class="headerlink" title="14.Maxcut is NPC"></a>14.Maxcut is NPC</h1><p>考虑从NAE-3-SAT归约。对于给定的CNF，每个从句的每个字母都看成一个点，从句之间互相连边，形成许多二元环和三元环，考虑赋值不同的节点之间cut,这样三元环最多贡献是2，二元环是1。</p>
+<p>但注意到同一变量在不同的从句之间的约束，因此，我们在一对相反的变量之间添加很多(比m多一个级别？比如$m^2$)边，相当于惩罚，如果这俩点一样就少cut了这么多条边。最后把边都加上，看看是不是$2 \cdot 三元环+重边$ </p>
 
       
     </div>
