@@ -19,13 +19,14 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="作者应该是俩中国人 Tarski定理对于完全格 $&lt;L,\preceq&gt;$,以及$L \to L$的单调增函数$f$，$f$一定存在不动点 有点像格上的介值定理 文章贡献对于n阶k维格点格(grid lattice),以及定义在其上的单调函数$f$,构造出了一个$O(\log^{\lceil \frac{k+1}{2} \rceil}n)$算法找到一个不动点。 后文假设我们的目标是解决">
+    <meta name="description" content="作者应该是俩中国人 Tarski定理对于完全格 $&lt;L,\preceq&gt;$,以及$L \to L$的单调增函数$f$，$f$一定存在不动点 有点像格上的介值定理 文章贡献对于n阶k维格点格(grid lattice),以及定义在其上的单调不降函数$f$,构造出了一个$O(\log^{\lceil \frac{k+1}{2} \rceil}n)$算法找到一个不动点。 后文假设我们的目标是">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Tarski upper bound 导读">
 <meta property="og:url" content="http://example.com/2024/02/28/lattice-fix/index.html">
 <meta property="og:site_name" content="Meiqwq&#39;s blog~">
-<meta property="og:description" content="作者应该是俩中国人 Tarski定理对于完全格 $&lt;L,\preceq&gt;$,以及$L \to L$的单调增函数$f$，$f$一定存在不动点 有点像格上的介值定理 文章贡献对于n阶k维格点格(grid lattice),以及定义在其上的单调函数$f$,构造出了一个$O(\log^{\lceil \frac{k+1}{2} \rceil}n)$算法找到一个不动点。 后文假设我们的目标是解决">
+<meta property="og:description" content="作者应该是俩中国人 Tarski定理对于完全格 $&lt;L,\preceq&gt;$,以及$L \to L$的单调增函数$f$，$f$一定存在不动点 有点像格上的介值定理 文章贡献对于n阶k维格点格(grid lattice),以及定义在其上的单调不降函数$f$,构造出了一个$O(\log^{\lceil \frac{k+1}{2} \rceil}n)$算法找到一个不动点。 后文假设我们的目标是">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2024/02/28/lattice-fix/exp.jpg">
 <meta property="og:image" content="http://example.com/2024/02/28/lattice-fix/tarskis.png">
 <meta property="og:image" content="http://example.com/2024/02/28/lattice-fix/red.png">
 <meta property="og:image" content="http://example.com/2024/02/28/lattice-fix/ref.png">
@@ -33,13 +34,13 @@
 <meta property="og:image" content="http://example.com/2024/02/28/lattice-fix/part.png">
 <meta property="og:image" content="http://example.com/2024/02/28/lattice-fix/ker.png">
 <meta property="article:published_time" content="2024-02-28T12:52:50.000Z">
-<meta property="article:modified_time" content="2024-03-06T13:37:39.641Z">
+<meta property="article:modified_time" content="2024-03-06T15:44:45.080Z">
 <meta property="article:author" content="Meiqwq">
 <meta property="article:tag" content="计算理论">
 <meta property="article:tag" content="离散数学">
 <meta property="article:tag" content="论文导读">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2024/02/28/lattice-fix/tarskis.png">
+<meta name="twitter:image" content="http://example.com/2024/02/28/lattice-fix/exp.jpg">
 
 
 <link rel="canonical" href="http://example.com/2024/02/28/lattice-fix/">
@@ -195,7 +196,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-03-06 21:37:39" itemprop="dateModified" datetime="2024-03-06T21:37:39+08:00">2024-03-06</time>
+      <time title="Modified: 2024-03-06 23:44:45" itemprop="dateModified" datetime="2024-03-06T23:44:45+08:00">2024-03-06</time>
     </span>
 
   
@@ -210,14 +211,14 @@
     <div class="post-body" itemprop="articleBody"><p>作者应该是俩中国人</p>
 <h1 id="Tarski定理"><a href="#Tarski定理" class="headerlink" title="Tarski定理"></a>Tarski定理</h1><p>对于完全格 $&lt;L,\preceq&gt;$,以及$L \to L$的单调增函数$f$，$f$一定存在不动点</p>
 <p>有点像格上的介值定理</p>
-<h1 id="文章贡献"><a href="#文章贡献" class="headerlink" title="文章贡献"></a>文章贡献</h1><p>对于n阶k维格点格(grid lattice),以及定义在其上的单调函数$f$,构造出了一个$O(\log^{\lceil \frac{k+1}{2} \rceil}n)$算法找到一个不动点。</p>
+<h1 id="文章贡献"><a href="#文章贡献" class="headerlink" title="文章贡献"></a>文章贡献</h1><p>对于n阶k维格点格(grid lattice),以及定义在其上的单调不降函数$f$,构造出了一个$O(\log^{\lceil \frac{k+1}{2} \rceil}n)$算法找到一个不动点。</p>
 <p>后文假设我们的目标是解决$Tarski(n,k+1)$</p>
-<h1 id="Step1-Reduce-to-Tarski-n-k"><a href="#Step1-Reduce-to-Tarski-n-k" class="headerlink" title="Step1 Reduce to $Tarski*(n,k)$"></a>Step1 Reduce to $Tarski*(n,k)$</h1><p>我们可以单独考虑某一个维度，先固定这个维度的值（也就是说取在这个格中取出一个切片）我们尝试在这个切面上找到一个prefix或者suffix。(前驱或者后继是一定存在的，因为只考虑这个切面($k$维)上，一定存在不动点，这个点肯定是一个前驱或后继),很显然哉suffix到$[n]^{k+1}$之间（或$[1]^{k+1}$到prefix之间）一定有不动点，于是第$k+1$维减半。</p>
+<h1 id="Step1-Reduce-to-Tarski-n-k"><a href="#Step1-Reduce-to-Tarski-n-k" class="headerlink" title="Step1 Reduce to $Tarski*(n,k)$"></a>Step1 Reduce to $Tarski*(n,k)$</h1><p><img src="exp.jpg" alt="图片"><br>我们可以单独考虑某一个维度，先固定这个维度的值（也就是说取在这个格中取出一个切片）我们尝试在这个切面上找到一个prefix或者suffix。(前驱或者后继是一定存在的，因为只考虑这个切面($k$维)上，一定存在不动点，这个点肯定是一个前驱或后继),很显然哉suffix到$[n]^{k+1}$之间（或$[1]^{k+1}$到prefix之间）一定有不动点，于是第$k+1$维减半。</p>
 <p>prefix: 指一个点$x$满足$f(x) \preceq x$</p>
 <p>suffix:指一个点$x$满足$x \preceq f(x)$</p>
 <h2 id="Tarski-n-k"><a href="#Tarski-n-k" class="headerlink" title="$Tarski*(n,k)$"></a>$Tarski*(n,k)$</h2><p><img src="tarskis.png" alt="图片"></p>
 <h2 id="Reduction"><a href="#Reduction" class="headerlink" title="Reduction"></a>Reduction</h2><p><img src="red.png" alt="图片"></p>
-<p>问题转变为求解$Tarski*(n,k)$</p>
+<p>问题转变为求解$Tarski*(n,k)$,假设求解$Tarski*(n,k)$的复杂度是$q(n,k)$，那么，求解$Tarski(n,k)$的复杂度是$O(2^k+k\log n\cdot q(n,k))$</p>
 <h1 id="Refined-Tarski-n-k"><a href="#Refined-Tarski-n-k" class="headerlink" title="$Refined Tarski*(n,k)$"></a>$Refined Tarski*(n,k)$</h1><p><img src="ref.png" alt="图片"></p>
 <h2 id="求解"><a href="#求解" class="headerlink" title="求解"></a>求解</h2><p><img src="note.jpg" alt="图片"></p>
 <h1 id="求解-Tarski-n-a-b"><a href="#求解-Tarski-n-a-b" class="headerlink" title="求解 $Tarski*(n,a+b)$"></a>求解 $Tarski*(n,a+b)$</h1><p>现在的目标是，假设我们能求解$Tarski*(n,a),Tarski*(n,b)$如何求解$Tarski*(n,a+b)$</p>
