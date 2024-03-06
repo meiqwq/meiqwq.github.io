@@ -302,7 +302,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-03-05 00:28:09" itemprop="dateModified" datetime="2024-03-05T00:28:09+08:00">2024-03-05</time>
+      <time title="Modified: 2024-03-06 11:49:15" itemprop="dateModified" datetime="2024-03-06T11:49:15+08:00">2024-03-06</time>
     </span>
 
   
@@ -335,13 +335,13 @@
 <h1 id="5-有向图哈密顿路是NPC"><a href="#5-有向图哈密顿路是NPC" class="headerlink" title="5. 有向图哈密顿路是NPC"></a>5. 有向图哈密顿路是NPC</h1><p>考虑将问题规约到SAT。我们换一种视角来看待SAT问题，对于每个变量$u$,如果$u$取 <code>1</code>那么所有包含$u$的从句都会被满足，如果$u$取<code>0</code>那么所有包含$\bar{u}$的从句将会被满足。</p>
 <p>这次，我们按照变量来建图：</p>
 <p>对于一个变量，我们单独对它建一层点：</p>
-<p><img src="image/lk.jpg" alt="图片"></p>
+<p><img src="lk.jpg" alt="图片"></p>
 <p>对于所有的从句$c_1,c_2,c_3…c_m$,让他们相邻之间用双向边连接，规定从左往右是<code>True</code>,反之是<code>False</code>,如果取<code>True</code>时能让$c_2$满足，那么就向点$c_2$连边。</p>
 <p>现在我们已经处理好了一个变量，要处理所有$n$个变量，我们只需要建立起点st和终点ed，按如下方式把所有变量连起来:</p>
-<p><img src="image/tot.jpg" alt="图片"></p>
+<p><img src="tot.jpg" alt="图片"></p>
 <p>每一层的端点处向下一层两个端点都连边。很显然这个图如果存在哈密顿路径那么每一层走的方向就是SAT问题的答案。</p>
 <h1 id="6-无向图哈密顿路径是NPC"><a href="#6-无向图哈密顿路径是NPC" class="headerlink" title="6.无向图哈密顿路径是NPC"></a>6.无向图哈密顿路径是NPC</h1><p>肯定是证明 $有向图哈密顿路径 \leq_{p} 无向图哈密顿路径$.</p>
-<p>那么给定一个有向图，我们要将它转化成一个无向图，使得哈密顿路存在性相同。对于一个节点，我们作如下转化：<br><img src="image/conv.jpg" alt="图片"><br>将一个点拆成三个点，可以发现如果要经过中间那个点，一定是要走一个入边和一个出边.</p>
+<p>那么给定一个有向图，我们要将它转化成一个无向图，使得哈密顿路存在性相同。对于一个节点，我们作如下转化：<br><img src="conv.jpg" alt="图片"><br>将一个点拆成三个点，可以发现如果要经过中间那个点，一定是要走一个入边和一个出边.</p>
 <h1 id="7-哈密顿回路是NPC"><a href="#7-哈密顿回路是NPC" class="headerlink" title="7.哈密顿回路是NPC"></a>7.哈密顿回路是NPC</h1><p>考虑将它规约到无向图哈密顿路径</p>
 <p>对于原来的无向图，直接加一个点，连接其它所有点即可。</p>
 <h1 id="8-TSP判定版本-是否存在小于-k-的路径-是NPC"><a href="#8-TSP判定版本-是否存在小于-k-的路径-是NPC" class="headerlink" title="8.TSP判定版本(是否存在小于$k$的路径)是NPC"></a>8.TSP判定版本(是否存在小于$k$的路径)是NPC</h1><p> 考虑归约到无向图哈密顿路径。</p>
@@ -429,7 +429,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-03-02 11:33:35" itemprop="dateModified" datetime="2024-03-02T11:33:35+08:00">2024-03-02</time>
+      <time title="Modified: 2024-03-06 11:21:04" itemprop="dateModified" datetime="2024-03-06T11:21:04+08:00">2024-03-06</time>
     </span>
 
   
@@ -460,8 +460,7 @@
 <li>$(x,0)+g(x)$是单调不降函数</li>
 </ol>
 <p>可以计算出$p^l,p^r$,满足:$\forall i \in [k] g(p^l)<em>i \geq 0 ,g(p^r)<em>i \leq 0$,并且$g(p^l)</em>{k+1}&#x3D;g(p^r)</em>{k+1}$</p>
-<h2 id="Refined-Tarski-n-k-问题的求解"><a href="#Refined-Tarski-n-k-问题的求解" class="headerlink" title="Refined Tarski*(n,k) 问题的求解"></a>Refined Tarski*(n,k) 问题的求解</h2><p>好像很简单，暂时懒得写了，留作习题</p>
-<h1 id="核心定理以及其证明"><a href="#核心定理以及其证明" class="headerlink" title="核心定理以及其证明"></a>核心定理以及其证明</h1><p>这篇文章的精髓，或者说是解决Tarski不动点问题的关键是如下定理:</p>
+<h2 id="Refined-Tarski-n-k-问题的求解"><a href="#Refined-Tarski-n-k-问题的求解" class="headerlink" title="Refined Tarski*(n,k) 问题的求解"></a>Refined Tarski*(n,k) 问题的求解</h2><h1 id="核心定理以及其证明"><a href="#核心定理以及其证明" class="headerlink" title="核心定理以及其证明"></a>核心定理以及其证明</h1><p>这篇文章的精髓，或者说是解决Tarski不动点问题的关键是如下定理:</p>
 <p>假设，Tarski*(n,a) 可以在 $q(n,a)$复杂度内求解，Tarski*(n,b) 可以在 $q(n,b)$复杂度内求解，那么 Tarski*(n,a+b)可以在$O((b+1)q(n,a)q(n,b))$内求解</p>
 <h2 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h2><p>注意，下述算法中 Tarski*(n,b)依赖的$g$函数是在线生成的，你可能会担心这样的$g$不满足Tarski*问题对$g$函数的限制，但是请不要惊慌，因为最终我们会证明这样的$g$是满足1. $\forall i \in [k] and x \in L,x_i+g(x)_i \in [n]$<br>2. $(x,0)+g(x)$是单调不降函数 的。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">q=[];<span class="comment">//前几轮 Tarski*(n,b)的询问记录</span></span><br><span class="line">r=[];<span class="comment">//前几轮对 q_i的回答</span></span><br><span class="line">pl=[];</span><br><span class="line">pr=[];</span><br><span class="line"><span class="keyword">for</span>(i=<span class="number">1</span>;;++i)&#123;</span><br><span class="line">    pl[i]=[<span class="number">1</span>]^k;</span><br><span class="line">    pr[i]=[n]^k;</span><br><span class="line">    q[i]=Tarski*(n,b).query;</span><br><span class="line">    <span class="keyword">for</span>(j=<span class="number">1</span>;j&lt;i;++j)&#123;</span><br><span class="line">        <span class="keyword">if</span>(q[j]&lt;=q[i])pl[i]=<span class="built_in">max</span>(pl[i],pl[j]);</span><br><span class="line">        <span class="keyword">if</span>(q[i]&lt;=q[j])pr[i]=<span class="built_in">min</span>(pr[i],pr[j]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(j=a+<span class="number">1</span>;j&lt;=a+b+<span class="number">1</span>;++j)&#123;</span><br><span class="line">        构造g_j函数为 <span class="built_in">g</span>(x,q[i])的前a维和第j维;</span><br><span class="line">        用g_j计算在[pl[i],pr[i]] 内refined Tarski*(n,a)的解，并更新pl[i],pr[i]</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(t=a+<span class="number">1</span>;t&lt;=a+b+<span class="number">1</span>;++t)&#123;</span><br><span class="line">        r[i][t-a]=<span class="built_in">g</span>(pl[i],q[i])[t];</span><br><span class="line">    &#125;</span><br><span class="line">    若r[i]全非负 <span class="keyword">return</span> (p[l][i],r[i]);</span><br><span class="line">    若r[i]全非正 <span class="keyword">return</span> (p[r][i],r[i]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
