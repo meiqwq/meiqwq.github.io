@@ -39,7 +39,7 @@ $Tarski*(n,k)$是指如下问题：
 可以计算出$p^l,p^r$,满足:$\forall i \in [k] g(p^l)_i \geq 0 ,g(p^r)_i \leq 0$,并且$g(p^l)_{k+1}=g(p^r)_{k+1}$
 
 ## Refined Tarski*(n,k) 问题的求解
-好像很简单，暂时懒得写了，留作习题
+
 
 # 核心定理以及其证明
 这篇文章的精髓，或者说是解决Tarski不动点问题的关键是如下定理:
