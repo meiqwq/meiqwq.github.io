@@ -11,10 +11,11 @@ mathjax: true
 
 有点像格上的介值定理
 # 文章贡献
-对于n阶k维格点格(grid lattice),以及定义在其上的单调函数$f$,构造出了一个$O(\log^{\lceil \frac{k+1}{2} \rceil}n)$算法找到一个不动点。
+对于n阶k维格点格(grid lattice),以及定义在其上的单调不降函数$f$,构造出了一个$O(\log^{\lceil \frac{k+1}{2} \rceil}n)$算法找到一个不动点。
 
 后文假设我们的目标是解决$Tarski(n,k+1)$
 # Step1 Reduce to $Tarski*(n,k)$
+![图片](exp.jpg)
 我们可以单独考虑某一个维度，先固定这个维度的值（也就是说取在这个格中取出一个切片）我们尝试在这个切面上找到一个prefix或者suffix。(前驱或者后继是一定存在的，因为只考虑这个切面($k$维)上，一定存在不动点，这个点肯定是一个前驱或后继),很显然哉suffix到$[n]^{k+1}$之间（或$[1]^{k+1}$到prefix之间）一定有不动点，于是第$k+1$维减半。
 
 prefix: 指一个点$x$满足$f(x) \preceq x$
@@ -26,7 +27,7 @@ suffix:指一个点$x$满足$x \preceq f(x)$
 ## Reduction
 ![图片](red.png)
 
-问题转变为求解$Tarski*(n,k)$
+问题转变为求解$Tarski*(n,k)$,假设求解$Tarski*(n,k)$的复杂度是$q(n,k)$，那么，求解$Tarski(n,k)$的复杂度是$O(2^k+k\log n\cdot q(n,k))$
 
 # $Refined Tarski*(n,k)$
 ![图片](ref.png)
