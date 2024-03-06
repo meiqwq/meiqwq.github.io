@@ -114,12 +114,12 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-count">5</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">9</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>
@@ -141,6 +141,122 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/03/06/pytorchreview1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Meiqwq">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Meiqwq's blog~">
+      <meta itemprop="description" content="A blog correlated with CS">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Meiqwq's blog~">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/03/06/pytorchreview1/" class="post-title-link" itemprop="url">Pytorch巩固1 one-hot 编码</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2024-03-06 10:22:34 / Modified: 11:15:33" itemprop="dateCreated datePublished" datetime="2024-03-06T10:22:34+08:00">2024-03-06</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>恶补pytorch系列,数据与项目内容来自：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Ky4y1g7Nk/?p=2">链接</a>,代码是自己写的，和up可能不大一样</p>
+<h1 id="One-hot"><a href="#One-hot" class="headerlink" title="One-hot"></a>One-hot</h1><p>将句子分词后，生成一个向量 $\vec{v}$,向量第 $i$维为1当且仅当词$i$出现过。</p>
+<h1 id="本次任务"><a href="#本次任务" class="headerlink" title="本次任务"></a>本次任务</h1><p>数据集是csv文件，包括了单词转化为编码的形式，每个句子的标签（0，1二分类），train&#x2F;val&#x2F;test标注。<br>建立一个NN，本次重心不在backbone上，因此骨架只是一个单词数量映射到2的一个线性层。</p>
+<h1 id="训练准备"><a href="#训练准备" class="headerlink" title="训练准备"></a>训练准备</h1><p>由于每次训练的训练集数据都是批量拿取的，因此我们再复习下Dataset类和Dataloader的使用。</p>
+<p>前置条件:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">batch_size=<span class="number">200</span></span><br><span class="line">word_num=<span class="number">8945</span></span><br></pre></td></tr></table></figure>
+<h2 id="Dataset-类"><a href="#Dataset-类" class="headerlink" title="Dataset 类"></a>Dataset 类</h2><p>先调库:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> torch.utils.data <span class="keyword">import</span> Dataset</span><br></pre></td></tr></table></figure>
+<p>读入数据:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">src=pd.read_csv(<span class="string">&quot;data/数字化数据.csv&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p>要继承Dataset类，需要写好构造函数<code>__init__()</code>,重写两个函数<code>__getitem__</code>与<code>__len__</code>。</p>
+<p>构造函数可以记录一些基本的数据，记录好表示(比如train&#x2F;val&#x2F;test)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self,typ</span>):</span><br><span class="line">    self.typ=typ</span><br><span class="line">    self.data=src[src.part==typ]</span><br></pre></td></tr></table></figure>
+<p>这里存下了数据作用与对应的dataframe</p>
+<h3 id="get-item"><a href="#get-item" class="headerlink" title="get_item"></a>get_item</h3><p>get_item会读入一个参数<code>idx</code>,函数要返回第<code>idx</code>个数据。</p>
+<p>这里同时要对数据完成onehot编码，其中<code>-1</code>表示不认识这个词，忽略</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">__getitem__</span>(<span class="params">self, idx</span>):</span><br><span class="line">    ts=torch.zeros(word_num,dtype=torch.<span class="built_in">float</span>)</span><br><span class="line">    sentence=self.data.iloc[idx][<span class="string">&#x27;x&#x27;</span>]</span><br><span class="line">    seq=[<span class="built_in">int</span>(x) <span class="keyword">for</span> x <span class="keyword">in</span> sentence.split(<span class="string">&#x27;,&#x27;</span>)]</span><br><span class="line">    <span class="keyword">for</span> x <span class="keyword">in</span> seq:</span><br><span class="line">        <span class="keyword">if</span> x!=-<span class="number">1</span>:</span><br><span class="line">            ts[x]=<span class="number">1</span></span><br><span class="line">    tag=<span class="built_in">int</span>(self.data.iloc[idx][<span class="string">&#x27;y&#x27;</span>])</span><br><span class="line">    ts_tar=torch.zeros(<span class="number">2</span>,dtype=torch.<span class="built_in">float</span>)</span><br><span class="line">    ts_tar[tag]=<span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> ts,ts_tar</span><br></pre></td></tr></table></figure>
+<h3 id="len"><a href="#len" class="headerlink" title="len"></a>len</h3><p>返回数据集大小即可</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">__len__</span>(<span class="params">self</span>):</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">len</span>(self.data)</span><br></pre></td></tr></table></figure>
+
+<p>最后产生具体对象</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">train_set=mydata(<span class="string">&quot;train&quot;</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="Dataloader"><a href="#Dataloader" class="headerlink" title="Dataloader"></a>Dataloader</h2><p>调的库在</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> torch.utils.data <span class="keyword">import</span> DataLoader</span><br></pre></td></tr></table></figure>
+<p>本质是用Dataloader类创建一个对象,几个参数如下:</p>
+<ol>
+<li>dataset 就是Dataset类构建出来的</li>
+<li>batch_size 每次取出的个数</li>
+<li>shuffle最好设为<code>True</code><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">train_load=DataLoader(dataset=train_set,batch_size=batch_size,shuffle=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+同样的还要构造好<code>val_load</code>,<code>test_load</code></li>
+</ol>
+<h1 id="神经网络骨架"><a href="#神经网络骨架" class="headerlink" title="神经网络骨架"></a>神经网络骨架</h1><p>不是这次的重点，只整一个线性层:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> torch <span class="keyword">import</span> nn</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Mol</span>(nn.Module):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">super</span>().__init__()</span><br><span class="line">        self.mol=nn.Sequential(</span><br><span class="line">            nn.Linear(word_num,<span class="number">2</span>),</span><br><span class="line">        )</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, x</span>):</span><br><span class="line">        y_out = self.mol(x)</span><br><span class="line">        <span class="keyword">return</span> y_out</span><br><span class="line">mynn=Mol()</span><br></pre></td></tr></table></figure>
+<p>模型单个数据最后会输出一个shape为(2)的tensor，分别表示0类和1类的概率。</p>
+<h1 id="测试准确率"><a href="#测试准确率" class="headerlink" title="测试准确率"></a>测试准确率</h1><p>注意在测试时模型参数不能动，因此要设置</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> torch.no_grad():</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">test_accuracy</span>(<span class="params">data_load</span>):</span><br><span class="line">    <span class="keyword">with</span> torch.no_grad(): </span><br><span class="line">        siz=<span class="number">0</span></span><br><span class="line">        ac=<span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> data <span class="keyword">in</span> data_load:</span><br><span class="line">            sen,tag=data</span><br><span class="line">            out=mynn(sen)</span><br><span class="line">            <span class="keyword">for</span> x,y <span class="keyword">in</span> <span class="built_in">zip</span>(out,tag):</span><br><span class="line">                <span class="keyword">if</span> (x[<span class="number">0</span>]&gt;x[<span class="number">1</span>])==(y[<span class="number">0</span>]&gt;y[<span class="number">1</span>]):</span><br><span class="line">                    ac+=<span class="number">1</span></span><br><span class="line">                siz+=<span class="number">1</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;准确率为&#123;&#125;&quot;</span>.<span class="built_in">format</span>(ac/siz))</span><br></pre></td></tr></table></figure>
+<h1 id="训练过程"><a href="#训练过程" class="headerlink" title="训练过程"></a>训练过程</h1><h2 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h2><p>损失函数设定为交叉熵，优化器为随机梯度下降，学习速率为<code>0.01</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">loss_fn=nn.CrossEntropyLoss()</span><br><span class="line">    optim=torch.optim.SGD(mynn.parameters(),lr=<span class="number">0.01</span>)</span><br></pre></td></tr></table></figure>
+<p>训练分多个批次(epoch),每个批次都会把所有数据训练一遍，每次训练先算当前神经网络输出，再算损失函数，然后反向传播梯度下降。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> epoch <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;训练批次数：&#123;&#125;&quot;</span>.<span class="built_in">format</span>(epoch))</span><br><span class="line">    <span class="keyword">for</span> data <span class="keyword">in</span> train_load:</span><br><span class="line">        optim.zero_grad()</span><br><span class="line">        sen,tag=data</span><br><span class="line">        output=mynn(sen)</span><br><span class="line">        res_loss=loss_fn(output,tag)</span><br><span class="line">        res_loss.backward()</span><br><span class="line">        optim.step()</span><br><span class="line">        <span class="keyword">if</span> train_step%<span class="number">10</span>==<span class="number">0</span>:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;训练次数:&#123;&#125;,loss=&#123;&#125;&quot;</span>.<span class="built_in">format</span>(train_step,res_loss.item()))</span><br><span class="line">        train_step+=<span class="number">1</span></span><br><span class="line">    test_accuracy(test_load)</span><br><span class="line">    torch.save(mynn.state_dict(),<span class="string">&quot;./model/epoch&#123;&#125;.pth&quot;</span>.<span class="built_in">format</span>(epoch))</span><br></pre></td></tr></table></figure>
+<h2 id="模型保存-读取"><a href="#模型保存-读取" class="headerlink" title="模型保存&#x2F;读取"></a>模型保存&#x2F;读取</h2><p>这次我只保存了模型参数：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">torch.save(mynn.state_dict(),<span class="string">&quot;./model/final.pth&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p>模型读取(要先创建好骨架)：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mynn.load_state_dict(torch.load(<span class="string">&quot;./model/final.pth&quot;</span>))</span><br></pre></td></tr></table></figure>
+<h2 id="训练结果"><a href="#训练结果" class="headerlink" title="训练结果"></a>训练结果</h2><p><code>准确率为0.8693622448979592</code></p>
+<h1 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h1><p>后续放github上</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
