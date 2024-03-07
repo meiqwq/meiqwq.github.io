@@ -114,7 +114,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-count">6</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -136,6 +136,80 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/03/07/pytorchreview2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Meiqwq">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Meiqwq's blog~">
+      <meta itemprop="description" content="A blog correlated with CS">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Meiqwq's blog~">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/03/07/pytorchreview2/" class="post-title-link" itemprop="url">Pytorch巩固2 CNN</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2024-03-07 23:52:44 / Modified: 23:57:26" itemprop="dateCreated datePublished" datetime="2024-03-07T23:52:44+08:00">2024-03-07</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>恶补pytorch系列,数据与项目内容来自：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Ky4y1g7Nk/?p=2">链接</a>,代码是自己写的，和up可能不大一样</p>
+<p>这次任务是个18分类的问题，<br>除了网络结构不一样，其它和上一个基本一致.<br>只贴代码了</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">from</span> torch.utils.data <span class="keyword">import</span> Dataset</span><br><span class="line"><span class="keyword">from</span> torch.utils.data <span class="keyword">import</span> DataLoader</span><br><span class="line"><span class="keyword">from</span> torch <span class="keyword">import</span> nn</span><br><span class="line"><span class="keyword">from</span> os.path <span class="keyword">import</span> exists</span><br><span class="line">batch_size=<span class="number">100</span></span><br><span class="line">word_cnt=<span class="number">29</span></span><br><span class="line"></span><br><span class="line">src=pd.read_csv(<span class="string">&quot;./data/data.csv&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">mydata</span>(<span class="title class_ inherited__">Dataset</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self,typ</span>):</span><br><span class="line">        self.data=src[src.part==typ]</span><br><span class="line">        self.typ=typ</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__getitem__</span>(<span class="params">self, idx</span>):</span><br><span class="line">        sen=[<span class="built_in">int</span>(x) <span class="keyword">for</span> x <span class="keyword">in</span> self.data.iloc[idx][<span class="string">&#x27;x&#x27;</span>].split(<span class="string">&#x27;,&#x27;</span>)]</span><br><span class="line">        oht=np.zeros((<span class="number">15</span>,word_cnt))</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">min</span>(<span class="built_in">len</span>(sen),<span class="number">15</span>)):</span><br><span class="line">            oht[i,sen[i]-<span class="number">1</span>]=<span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> torch.FloatTensor(oht),<span class="built_in">int</span>(self.data.iloc[idx][<span class="string">&#x27;y&#x27;</span>])</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__len__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">len</span>(self.data)</span><br><span class="line">train_set=mydata(<span class="string">&quot;train&quot;</span>)</span><br><span class="line">train_load=DataLoader(dataset=train_set,batch_size=batch_size,shuffle=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">test_set=mydata(<span class="string">&quot;test&quot;</span>)</span><br><span class="line">test_load=DataLoader(dataset=test_set,batch_size=batch_size,shuffle=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">val_set=mydata(<span class="string">&quot;val&quot;</span>)</span><br><span class="line">val_load=DataLoader(dataset=val_set,batch_size=batch_size,shuffle=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Mol</span>(nn.Module):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">super</span>().__init__()</span><br><span class="line">        self.h=<span class="number">50</span></span><br><span class="line">        self.mol=nn.Sequential(</span><br><span class="line">            nn.Conv1d(<span class="number">15</span>,self.h,<span class="number">5</span>,<span class="number">2</span>),nn.ELU(),</span><br><span class="line">            nn.Conv1d(self.h,self.h,<span class="number">5</span>,<span class="number">2</span>),nn.ELU(),</span><br><span class="line">            nn.Conv1d(self.h,self.h,<span class="number">5</span>,<span class="number">1</span>),nn.ELU(),</span><br><span class="line">        )</span><br><span class="line">        self.lin=nn.Linear(self.h,<span class="number">18</span>)</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self,x</span>):</span><br><span class="line">        y1=self.mol(x).squeeze(dim=<span class="number">2</span>)</span><br><span class="line">        <span class="keyword">return</span> self.lin(y1)</span><br><span class="line">mynn=Mol()</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">test_accuracy</span>(<span class="params">data_load</span>):</span><br><span class="line">    <span class="keyword">with</span> torch.no_grad():</span><br><span class="line">        siz=<span class="number">0</span></span><br><span class="line">        ac=<span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> data <span class="keyword">in</span> data_load:</span><br><span class="line">            sen,tag=data</span><br><span class="line">            out=mynn(sen)</span><br><span class="line">            <span class="keyword">for</span> x,y <span class="keyword">in</span> <span class="built_in">zip</span>(out,tag):</span><br><span class="line">                x=x.argmax(dim=<span class="number">0</span>)</span><br><span class="line">                siz+=<span class="number">1</span></span><br><span class="line">                <span class="keyword">if</span> x==y:</span><br><span class="line">                    ac+=<span class="number">1</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;准确率为&#123;:f&#125;&quot;</span>.<span class="built_in">format</span>(ac/siz))</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">train_model</span>():</span><br><span class="line">    epoch=<span class="number">0</span></span><br><span class="line">    train_step=<span class="number">0</span></span><br><span class="line">    loss_fn=nn.CrossEntropyLoss()</span><br><span class="line">    optim=torch.optim.Adam(mynn.parameters(), lr=<span class="number">1e-3</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> epoch <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">30</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;批次:&#123;&#125;&quot;</span>.<span class="built_in">format</span>(epoch))</span><br><span class="line">        <span class="keyword">for</span> data <span class="keyword">in</span> train_load:</span><br><span class="line">            optim.zero_grad()</span><br><span class="line">            sen,tag=data</span><br><span class="line">            output=mynn(sen)</span><br><span class="line">            res_loss=loss_fn(output,tag)</span><br><span class="line">            res_loss.backward()</span><br><span class="line">            optim.step()</span><br><span class="line">            train_step+=<span class="number">1</span></span><br><span class="line">            <span class="keyword">if</span> train_step%<span class="number">10</span>==<span class="number">0</span>:</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">&quot;训练次数:&#123;&#125;,loss:&#123;&#125;&quot;</span>.<span class="built_in">format</span>(train_step,res_loss))</span><br><span class="line">        test_accuracy(test_load)</span><br><span class="line">        torch.save(mynn.state_dict(),<span class="string">&quot;./model/epoch_&#123;&#125;.pth&quot;</span>.<span class="built_in">format</span>(epoch))</span><br><span class="line">    torch.save(mynn.state_dict(),<span class="string">&quot;./model/final.pth&quot;</span>)</span><br><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> exists(<span class="string">&quot;./model/final.pth&quot;</span>):</span><br><span class="line">    train_model()</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    mynn.load_state_dict(torch.load(<span class="string">&quot;./model/final.pth&quot;</span>))</span><br><span class="line">test_accuracy(val_load)</span><br></pre></td></tr></table></figure>
+
+<p>输出:<code>准确率为0.707317</code></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
