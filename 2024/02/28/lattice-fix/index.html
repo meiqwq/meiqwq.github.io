@@ -19,12 +19,12 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="作者应该是俩中国人 Tarski定理对于完全格 $&lt;L,\preceq&gt;$,以及$L \to L$的单调增函数$f$，$f$一定存在不动点 有点像格上的介值定理 文章贡献对于n阶k维格点格(grid lattice),以及定义在其上的单调不降函数$f$,构造出了一个$O(\log^{\lceil \frac{k+1}{2} \rceil}n)$算法找到一个不动点。 后文假设我们的目标是">
+    <meta name="description" content="作者应该是俩中国人 Tarski定理 对于完全格 \(&lt;L,\preceq&gt;\),以及\(L \to L\)的单调增函数\(f\)，\(f\)一定存在不动点 有点像格上的介值定理 # 文章贡献 对于n阶k维格点格(grid lattice),以及定义在其上的单调不降函数\(f\),构造出了一个\(O(\log^{\lceil \frac{k+1}{2} \rceil}n)\)">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Tarski upper bound 导读">
 <meta property="og:url" content="http://example.com/2024/02/28/lattice-fix/index.html">
 <meta property="og:site_name" content="Meiqwq&#39;s blog~">
-<meta property="og:description" content="作者应该是俩中国人 Tarski定理对于完全格 $&lt;L,\preceq&gt;$,以及$L \to L$的单调增函数$f$，$f$一定存在不动点 有点像格上的介值定理 文章贡献对于n阶k维格点格(grid lattice),以及定义在其上的单调不降函数$f$,构造出了一个$O(\log^{\lceil \frac{k+1}{2} \rceil}n)$算法找到一个不动点。 后文假设我们的目标是">
+<meta property="og:description" content="作者应该是俩中国人 Tarski定理 对于完全格 \(&lt;L,\preceq&gt;\),以及\(L \to L\)的单调增函数\(f\)，\(f\)一定存在不动点 有点像格上的介值定理 # 文章贡献 对于n阶k维格点格(grid lattice),以及定义在其上的单调不降函数\(f\),构造出了一个\(O(\log^{\lceil \frac{k+1}{2} \rceil}n)\)">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/2024/02/28/lattice-fix/exp.jpg">
 <meta property="og:image" content="http://example.com/2024/02/28/lattice-fix/tarskis.png">
@@ -115,7 +115,8 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Tarski%E5%AE%9A%E7%90%86"><span class="nav-number">1.</span> <span class="nav-text">Tarski定理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%96%87%E7%AB%A0%E8%B4%A1%E7%8C%AE"><span class="nav-number">2.</span> <span class="nav-text">文章贡献</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Step1-Reduce-to-Tarski-n-k"><span class="nav-number">3.</span> <span class="nav-text">Step1 Reduce to $Tarski*(n,k)$</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Tarski-n-k"><span class="nav-number">3.1.</span> <span class="nav-text">$Tarski*(n,k)$</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reduction"><span class="nav-number">3.2.</span> <span class="nav-text">Reduction</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Refined-Tarski-n-k"><span class="nav-number">4.</span> <span class="nav-text">$Refined Tarski*(n,k)$</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B1%82%E8%A7%A3"><span class="nav-number">4.1.</span> <span class="nav-text">求解</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B1%82%E8%A7%A3-Tarski-n-a-b"><span class="nav-number">5.</span> <span class="nav-text">求解 $Tarski*(n,a+b)$</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%80%E5%90%8E"><span class="nav-number">6.</span> <span class="nav-text">最后</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#tarski%E5%AE%9A%E7%90%86"><span class="nav-number">1.</span> <span class="nav-text">Tarski定理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#reduction"><span class="nav-number">1.1.</span> <span class="nav-text">Reduction</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#refined-tarskink"><span class="nav-number">2.</span> <span class="nav-text">\(Refined
+Tarski*(n,k)\)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B1%82%E8%A7%A3"><span class="nav-number">2.1.</span> <span class="nav-text">求解</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B1%82%E8%A7%A3-tarskinab"><span class="nav-number">3.</span> <span class="nav-text">求解 \(Tarski*(n,a+b)\)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9C%80%E5%90%8E"><span class="nav-number">4.</span> <span class="nav-text">最后</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -128,7 +129,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-count">8</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -209,26 +210,50 @@
     
     
     <div class="post-body" itemprop="articleBody"><p>作者应该是俩中国人</p>
-<h1 id="Tarski定理"><a href="#Tarski定理" class="headerlink" title="Tarski定理"></a>Tarski定理</h1><p>对于完全格 $&lt;L,\preceq&gt;$,以及$L \to L$的单调增函数$f$，$f$一定存在不动点</p>
-<p>有点像格上的介值定理</p>
-<h1 id="文章贡献"><a href="#文章贡献" class="headerlink" title="文章贡献"></a>文章贡献</h1><p>对于n阶k维格点格(grid lattice),以及定义在其上的单调不降函数$f$,构造出了一个$O(\log^{\lceil \frac{k+1}{2} \rceil}n)$算法找到一个不动点。</p>
-<p>后文假设我们的目标是解决$Tarski(n,k+1)$</p>
-<h1 id="Step1-Reduce-to-Tarski-n-k"><a href="#Step1-Reduce-to-Tarski-n-k" class="headerlink" title="Step1 Reduce to $Tarski*(n,k)$"></a>Step1 Reduce to $Tarski*(n,k)$</h1><p><img src="exp.jpg" alt="图片"><br>我们可以单独考虑某一个维度，先固定这个维度的值（也就是说取在这个格中取出一个切片）我们尝试在这个切面上找到一个prefix或者suffix。(前驱或者后继是一定存在的，因为只考虑这个切面($k$维)上，一定存在不动点，这个点肯定是一个前驱或后继),很显然哉suffix到$[n]^{k+1}$之间（或$[1]^{k+1}$到prefix之间）一定有不动点，于是第$k+1$维减半。</p>
-<p>prefix: 指一个点$x$满足$f(x) \preceq x$</p>
-<p>suffix:指一个点$x$满足$x \preceq f(x)$</p>
-<h2 id="Tarski-n-k"><a href="#Tarski-n-k" class="headerlink" title="$Tarski*(n,k)$"></a>$Tarski*(n,k)$</h2><p><img src="tarskis.png" alt="图片"></p>
-<h2 id="Reduction"><a href="#Reduction" class="headerlink" title="Reduction"></a>Reduction</h2><p><img src="red.png" alt="图片"></p>
-<p>问题转变为求解$Tarski*(n,k)$,假设求解$Tarski*(n,k)$的复杂度是$q(n,k)$，那么，求解$Tarski(n,k)$的复杂度是$O(2^k+k\log n\cdot q(n,k))$</p>
-<h1 id="Refined-Tarski-n-k"><a href="#Refined-Tarski-n-k" class="headerlink" title="$Refined Tarski*(n,k)$"></a>$Refined Tarski*(n,k)$</h1><p><img src="ref.png" alt="图片"></p>
-<h2 id="求解"><a href="#求解" class="headerlink" title="求解"></a>求解</h2><p><img src="note.jpg" alt="图片"></p>
-<h1 id="求解-Tarski-n-a-b"><a href="#求解-Tarski-n-a-b" class="headerlink" title="求解 $Tarski*(n,a+b)$"></a>求解 $Tarski*(n,a+b)$</h1><p>现在的目标是，假设我们能求解$Tarski*(n,a),Tarski*(n,b)$如何求解$Tarski*(n,a+b)$</p>
-<p>一个很自然的想法是，对于$[a+1,a+b]$维，我们直接枚举它们的值（假设枚举了$q_i$）然后我们执行如下算法:</p>
-<p><img src="part.png" alt="图片"></p>
-<p>此时我们会发现，在前$a$维的切面上，$p^{(l,i)},p^{(r,i)}$之间的点，这些点的$g(x)$在$a+1$维之后都相等(由于Refined Tarski*的作用),前$a$维肯定非负或非正，因此，如果我们能保证$[a+1,a+b+1]$维也非负&#x2F;非正，那么就做完了。</p>
-<p>如何保证呢，我们发现实际上这可以转化成一个求解$Tarski(n,b)$的过程,如果我们可以保证对$q_i$的回复满足 <code>Definition2</code>，那么最终就能找到一组非正或非负的回复。</p>
-<p><img src="ker.png" alt="图片"></p>
-<p>在这里，每次询问$q_i$时，我们都会找到之前的询问记录，保证下界要比以前的大，上界要比以前的小，这样的回复一定是可以满足<code>Definition2</code>的（因为$(q_i,0)+g(p^{(l,i)},q_i)$关于$q_i$单调）。因此，假设$Tarski*(n,a)$复杂度是$q(n,a)$,$Tarski*(n,b)$复杂度是$q(n,b)$，那么我们在$O((b+1)q(n,a)q(n,b))$内完成了$Tarski*(n,a+b)$</p>
-<h1 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h1><p>由于$Tarski*(n,2)$可以在$O(\log n)$内完成，因此$Tarski*(n,k)$可以在$O(\log^{k&#x2F;2}n)$完成,进而证明了Tarski(n,k)的复杂度</p>
+<h1 id="tarski定理">Tarski定理</h1>
+<p>对于完全格 <span class="math inline">\(&lt;L,\preceq&gt;\)</span>,以及<span class="math inline">\(L \to L\)</span>的单调增函数<span class="math inline">\(f\)</span>，<span class="math inline">\(f\)</span>一定存在不动点</p>
+<p>有点像格上的介值定理 # 文章贡献 对于n阶k维格点格(grid
+lattice),以及定义在其上的单调不降函数<span class="math inline">\(f\)</span>,构造出了一个<span class="math inline">\(O(\log^{\lceil \frac{k+1}{2}
+\rceil}n)\)</span>算法找到一个不动点。</p>
+<p>后文假设我们的目标是解决<span class="math inline">\(Tarski(n,k+1)\)</span> # Step1 Reduce to <span class="math inline">\(Tarski*(n,k)\)</span> <img src="exp.jpg" alt="图片">
+我们可以单独考虑某一个维度，先固定这个维度的值（也就是说取在这个格中取出一个切片）我们尝试在这个切面上找到一个prefix或者suffix。(前驱或者后继是一定存在的，因为只考虑这个切面(<span class="math inline">\(k\)</span>维)上，一定存在不动点，这个点肯定是一个前驱或后继),很显然哉suffix到<span class="math inline">\([n]^{k+1}\)</span>之间（或<span class="math inline">\([1]^{k+1}\)</span>到prefix之间）一定有不动点，于是第<span class="math inline">\(k+1\)</span>维减半。</p>
+<p>prefix: 指一个点<span class="math inline">\(x\)</span>满足<span class="math inline">\(f(x) \preceq x\)</span></p>
+<p>suffix:指一个点<span class="math inline">\(x\)</span>满足<span class="math inline">\(x \preceq f(x)\)</span> ## <span class="math inline">\(Tarski*(n,k)\)</span> <img src="tarskis.png" alt="图片"></p>
+<h2 id="reduction">Reduction</h2>
+<figure>
+<img src="red.png" alt="图片">
+<figcaption aria-hidden="true">图片</figcaption>
+</figure>
+<p>问题转变为求解<span class="math inline">\(Tarski*(n,k)\)</span>,假设求解<span class="math inline">\(Tarski*(n,k)\)</span>的复杂度是<span class="math inline">\(q(n,k)\)</span>，那么，求解<span class="math inline">\(Tarski(n,k)\)</span>的复杂度是<span class="math inline">\(O(2^k+k\log n\cdot q(n,k))\)</span></p>
+<h1 id="refined-tarskink"><span class="math inline">\(Refined
+Tarski*(n,k)\)</span></h1>
+<figure>
+<img src="ref.png" alt="图片">
+<figcaption aria-hidden="true">图片</figcaption>
+</figure>
+<h2 id="求解">求解</h2>
+<figure>
+<img src="note.jpg" alt="图片">
+<figcaption aria-hidden="true">图片</figcaption>
+</figure>
+<h1 id="求解-tarskinab">求解 <span class="math inline">\(Tarski*(n,a+b)\)</span></h1>
+<p>现在的目标是，假设我们能求解<span class="math inline">\(Tarski*(n,a),Tarski*(n,b)\)</span>如何求解<span class="math inline">\(Tarski*(n,a+b)\)</span></p>
+<p>一个很自然的想法是，对于<span class="math inline">\([a+1,a+b]\)</span>维，我们直接枚举它们的值（假设枚举了<span class="math inline">\(q_i\)</span>）然后我们执行如下算法:</p>
+<figure>
+<img src="part.png" alt="图片">
+<figcaption aria-hidden="true">图片</figcaption>
+</figure>
+<p>此时我们会发现，在前<span class="math inline">\(a\)</span>维的切面上，<span class="math inline">\(p^{(l,i)},p^{(r,i)}\)</span>之间的点，这些点的<span class="math inline">\(g(x)\)</span>在<span class="math inline">\(a+1\)</span>维之后都相等(由于Refined
+Tarski*的作用),前<span class="math inline">\(a\)</span>维肯定非负或非正，因此，如果我们能保证<span class="math inline">\([a+1,a+b+1]\)</span>维也非负/非正，那么就做完了。</p>
+<p>如何保证呢，我们发现实际上这可以转化成一个求解<span class="math inline">\(Tarski(n,b)\)</span>的过程,如果我们可以保证对<span class="math inline">\(q_i\)</span>的回复满足
+<code>Definition2</code>，那么最终就能找到一组非正或非负的回复。</p>
+<figure>
+<img src="ker.png" alt="图片">
+<figcaption aria-hidden="true">图片</figcaption>
+</figure>
+<p>在这里，每次询问<span class="math inline">\(q_i\)</span>时，我们都会找到之前的询问记录，保证下界要比以前的大，上界要比以前的小，这样的回复一定是可以满足<code>Definition2</code>的（因为<span class="math inline">\((q_i,0)+g(p^{(l,i)},q_i)\)</span>关于<span class="math inline">\(q_i\)</span>单调）。因此，假设<span class="math inline">\(Tarski*(n,a)\)</span>复杂度是<span class="math inline">\(q(n,a)\)</span>,<span class="math inline">\(Tarski*(n,b)\)</span>复杂度是<span class="math inline">\(q(n,b)\)</span>，那么我们在<span class="math inline">\(O((b+1)q(n,a)q(n,b))\)</span>内完成了<span class="math inline">\(Tarski*(n,a+b)\)</span></p>
+<h1 id="最后">最后</h1>
+<p>由于<span class="math inline">\(Tarski*(n,2)\)</span>可以在<span class="math inline">\(O(\log n)\)</span>内完成，因此<span class="math inline">\(Tarski*(n,k)\)</span>可以在<span class="math inline">\(O(\log^{k/2}n)\)</span>完成,进而证明了Tarski(n,k)的复杂度</p>
 
     </div>
 

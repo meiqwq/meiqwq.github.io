@@ -19,15 +19,15 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="对偶问题考虑一个标准的线性规划问题： $max:z&#x3D;\sum\limits_{i&#x3D;1}^{n}c_i\cdot x_i$ 限制如下:$$\begin{cases} \sum\limits_{i&#x3D;1}^{n}a_{1,i}\cdot x_i \leq b_1 \ \sum\limits_{i&#x3D;1}^{n}a_{2,i}\cdot x_i \leq b_2 \">
+    <meta name="description" content="对偶问题 考虑一个标准的线性规划问题： \(max:z&#x3D;\sum\limits_{i&#x3D;1}^{n}c_i\cdot x_i\) 限制如下: \[\begin{cases} \sum\limits_{i&#x3D;1}^{n}a_{1,i}\cdot x_i \leq b_1 \\ \sum\limits_{i&#x3D;1}^{n}a_{2,i}\cdot x_i \leq b_2 \\ .....\\">
 <meta property="og:type" content="article">
 <meta property="og:title" content="线性规划对偶">
 <meta property="og:url" content="http://example.com/2024/03/11/lingp/index.html">
 <meta property="og:site_name" content="Meiqwq&#39;s blog~">
-<meta property="og:description" content="对偶问题考虑一个标准的线性规划问题： $max:z&#x3D;\sum\limits_{i&#x3D;1}^{n}c_i\cdot x_i$ 限制如下:$$\begin{cases} \sum\limits_{i&#x3D;1}^{n}a_{1,i}\cdot x_i \leq b_1 \ \sum\limits_{i&#x3D;1}^{n}a_{2,i}\cdot x_i \leq b_2 \">
+<meta property="og:description" content="对偶问题 考虑一个标准的线性规划问题： \(max:z&#x3D;\sum\limits_{i&#x3D;1}^{n}c_i\cdot x_i\) 限制如下: \[\begin{cases} \sum\limits_{i&#x3D;1}^{n}a_{1,i}\cdot x_i \leq b_1 \\ \sum\limits_{i&#x3D;1}^{n}a_{2,i}\cdot x_i \leq b_2 \\ .....\\">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2024-03-11T11:49:36.000Z">
-<meta property="article:modified_time" content="2024-03-11T12:46:19.413Z">
+<meta property="article:modified_time" content="2024-03-11T16:16:25.306Z">
 <meta property="article:author" content="Meiqwq">
 <meta property="article:tag" content="计算理论">
 <meta property="article:tag" content="线性规划">
@@ -119,7 +119,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-count">8</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -179,9 +179,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2024-03-11 19:49:36 / Modified: 20:46:19" itemprop="dateCreated datePublished" datetime="2024-03-11T19:49:36+08:00">2024-03-11</time>
+      <time title="Created: 2024-03-11 19:49:36" itemprop="dateCreated datePublished" datetime="2024-03-11T19:49:36+08:00">2024-03-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-03-12 00:16:25" itemprop="dateModified" datetime="2024-03-12T00:16:25+08:00">2024-03-12</time>
     </span>
 
   
@@ -193,33 +199,64 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><h1 id="对偶问题"><a href="#对偶问题" class="headerlink" title="对偶问题"></a>对偶问题</h1><p>考虑一个标准的线性规划问题：</p>
-<p>$max:z&#x3D;\sum\limits_{i&#x3D;1}^{n}c_i\cdot x_i$</p>
-<p>限制如下:<br>$$\begin{cases} \sum\limits_{i&#x3D;1}^{n}a_{1,i}\cdot x_i \leq b_1 \ \sum\limits_{i&#x3D;1}^{n}a_{2,i}\cdot x_i \leq b_2 \ …..\\sum\limits_{i&#x3D;1}^{n}a_{m,i}\cdot x_i \leq b_m\end{cases}$$</p>
-<p>$\forall i \in [n] ,x_i \geq0$</p>
+    <div class="post-body" itemprop="articleBody"><h1 id="对偶问题">对偶问题</h1>
+<p>考虑一个标准的线性规划问题：</p>
+<p><span class="math inline">\(max:z=\sum\limits_{i=1}^{n}c_i\cdot
+x_i\)</span></p>
+<p>限制如下: <span class="math display">\[\begin{cases}
+\sum\limits_{i=1}^{n}a_{1,i}\cdot x_i \leq b_1 \\
+\sum\limits_{i=1}^{n}a_{2,i}\cdot x_i \leq b_2 \\
+.....\\\sum\limits_{i=1}^{n}a_{m,i}\cdot x_i \leq
+b_m\end{cases}\]</span></p>
+<p><span class="math inline">\(\forall i \in [n] ,x_i \geq0\)</span></p>
 <p>它的对偶形式是：</p>
-<p>$min:z’&#x3D;\sum\limits_{j&#x3D;1}^m b_j\cdot y_j$</p>
+<p><span class="math inline">\(min:z&#39;=\sum\limits_{j=1}^m b_j\cdot
+y_j\)</span></p>
 <p>限制：</p>
-<p>$$\begin{cases} \sum\limits_{j&#x3D;1}^{m}a_{j,1}\cdot y_j \geq c_1 \ \sum\limits_{j&#x3D;1}^{m}a_{j,2}\cdot y_j \geq c_2 \ …..\ \sum\limits_{j&#x3D;1}^{m}a_{j,n}\cdot y_j \geq c_n\end{cases}$$</p>
-<p>$\forall j \in [m],y_j \geq 0$</p>
+<p><span class="math display">\[\begin{cases}
+\sum\limits_{j=1}^{m}a_{j,1}\cdot y_j \geq c_1 \\
+\sum\limits_{j=1}^{m}a_{j,2}\cdot y_j \geq c_2 \\ .....\\
+\sum\limits_{j=1}^{m}a_{j,n}\cdot y_j \geq c_n\end{cases}\]</span></p>
+<p><span class="math inline">\(\forall j \in [m],y_j \geq 0\)</span></p>
 <p>用矩阵的语言就是：</p>
 <p>prime LP:</p>
-<p>$max:z&#x3D;\vec{c}^T\cdot \vec{x}$</p>
-<p>$A\cdot \vec{x} \preceq \vec{b}$</p>
-<p>$\vec{x} \succeq 0$</p>
-<p>dual LP:<br>$min:z’&#x3D;\vec{b}^T\cdot \vec{y}$</p>
-<p>$A^T\vec{y} \succeq \vec{c}$</p>
-<p>$\vec{y} \succeq$</p>
-<h1 id="weak-duality"><a href="#weak-duality" class="headerlink" title="weak duality"></a>weak duality</h1><p>上述两个LP,的任意一组feasible solution $\hat{x},\hat{y}$,有$\vec{c}^T\cdot \hat{x} \leq \vec{b}^T \cdot \vec{y}$,i.e.最大化一定小于等于最小化.</p>
+<p><span class="math inline">\(max:z=\vec{c}^T\cdot \vec{x}\)</span></p>
+<p><span class="math inline">\(A\cdot \vec{x} \preceq
+\vec{b}\)</span></p>
+<p><span class="math inline">\(\vec{x} \succeq 0\)</span></p>
+<p>dual LP: <span class="math inline">\(min:z&#39;=\vec{b}^T\cdot
+\vec{y}\)</span></p>
+<p><span class="math inline">\(A^T\vec{y} \succeq \vec{c}\)</span></p>
+<p><span class="math inline">\(\vec{y} \succeq\)</span></p>
+<h1 id="weak-duality">weak duality</h1>
+<p>上述两个LP,的任意一组feasible solution <span class="math inline">\(\hat{x},\hat{y}\)</span>,有<span class="math inline">\(\vec{c}^T\cdot \hat{x} \leq \vec{b}^T \cdot
+\vec{y}\)</span>,i.e.最大化一定小于等于最小化.</p>
 <p>证:</p>
-<p>由于:$A^T \cdot \hat{y} \succeq \vec{c}$并且$\hat{x} \succeq 0$,因而:$\vec{c}^T\cdot \vec{x} \leq (A^T\cdot \hat{y})^T \hat{x}&#x3D;\hat{y}^T\cdot A \cdot \hat{x}$</p>
-<p>同样地：因为 $A\cdot \hat{x} \preceq \vec{b}$,$\hat{y} \succeq 0$,因而 $\vec{b}^T\cdot \hat{y} \geq (A \cdot \hat{x})^T \cdot (\hat{y}^T)^T&#x3D;(\hat{y}^T\cdot A \cdot \hat{x})^T$,注意到 $\hat{y}^T\cdot A \cdot \hat{x}$是一个实数，所以 $(\hat{y}^T\cdot A \cdot \hat{x})^T&#x3D;\hat{y}^T\cdot A \cdot \hat{x}$</p>
-<p>因而：$\vec{c}^T \cdot \hat{x} \leq \hat{y}^T\cdot A \cdot \hat{x} \leq \vec{b}^T \cdot \hat{y} $</p>
-<h1 id="互补松弛"><a href="#互补松弛" class="headerlink" title="互补松弛"></a>互补松弛</h1><p>假设 $\hat{x},\hat{y}$是两个LP的最优解，有$$\vec{c}^T \cdot \hat{x} &#x3D; \hat{y}^T\cdot A \cdot \hat{x} &#x3D; \vec{b}^T \cdot \hat{y}$$</p>
-<p>我们对其变形：<br>$$\hat{y}^T\cdot A \cdot \hat{x}-\vec{c}^T \cdot \hat{x} &#x3D; 0$$<br>$$(\hat{y}^T\cdot A-\vec{c}^T)\cdot \vec{x} &#x3D; 0$$</p>
-<p>由于 $\hat{y}^T\cdot A-\vec{c}^T&#x3D;(A^T\cdot \hat{y}-\vec{c})^T$,i.e. $(A^T\cdot \hat{y}-\vec{c})^T \cdot \hat{x} &#x3D;0$</p>
-<p>写成代数形式：$\sum\limits_{i&#x3D;1}^n[({\sum\limits_{j&#x3D;1}^ma_{j,i}\cdot \hat{y}_j})-c_i]\cdot \hat{x}_i &#x3D; 0$</p>
-<p>这说明了：如果$x_i非0，那么对偶问题中它对应的不等式一定取<code>=</code>，如果一个不等式不取<code>=</code>,那么对偶问题中这个不等式对应的变量一定为<code>0</code></p>
+<p>由于: <span class="math inline">\(A^T \cdot \hat{y} \succeq
+\vec{c}\)</span>并且<span class="math inline">\(\hat{x} \succeq
+0\)</span>,因而:<span class="math inline">\(\vec{c}^T\cdot \vec{x} \leq
+(A^T\cdot \hat{y})^T \hat{x}=\hat{y}^T\cdot A \cdot \hat{x}\)</span></p>
+<p>同样地：因为 <span class="math inline">\(A\cdot \hat{x} \preceq
+\vec{b}\)</span>,<span class="math inline">\(\hat{y} \succeq
+0\)</span>,因而 <span class="math inline">\(\vec{b}^T\cdot \hat{y} \geq
+(A \cdot \hat{x})^T \cdot (\hat{y}^T)^T=(\hat{y}^T\cdot A \cdot
+\hat{x})^T\)</span>,注意到 <span class="math inline">\(\hat{y}^T\cdot A
+\cdot \hat{x}\)</span>是一个实数，所以 <span class="math inline">\((\hat{y}^T\cdot A \cdot \hat{x})^T=\hat{y}^T\cdot
+A \cdot \hat{x}\)</span></p>
+<p>因而：</p>
+<p>${}^{T} ^{T} A ^{T} $</p>
+<h1 id="互补松弛">互补松弛</h1>
+<p>假设 <span class="math inline">\(\hat{x},\hat{y}\)</span>是两个LP的最优解，有<span class="math display">\[\vec{c}^T \cdot \hat{x} = \hat{y}^T\cdot A \cdot
+\hat{x} = \vec{b}^T \cdot \hat{y}\]</span></p>
+<p>我们对其变形： <span class="math display">\[\hat{y}^T\cdot A \cdot
+\hat{x}-\vec{c}^T \cdot \hat{x} = 0\]</span> <span class="math display">\[(\hat{y}^T\cdot A-\vec{c}^T)\cdot \vec{x} =
+0\]</span></p>
+<p>由于 <span class="math inline">\(\hat{y}^T\cdot A-\vec{c}^T=(A^T\cdot
+\hat{y}-\vec{c})^T\)</span>,i.e. <span class="math inline">\((A^T\cdot
+\hat{y}-\vec{c})^T \cdot \hat{x} =0\)</span></p>
+<p>写成代数形式：<span class="math inline">\(\sum\limits_{i=1}^n[({\sum\limits_{j=1}^ma_{j,i}\cdot
+\hat{y}_j})-c_i]\cdot \hat{x}_i = 0\)</span></p>
+<p>这说明了：如果<span class="math inline">\(x_i\)</span>非0，那么对偶问题中它对应的不等式一定取<code>=</code>，如果一个不等式不取<code>=</code>,那么对偶问题中这个不等式对应的变量一定为<code>0</code></p>
 
     </div>
 
@@ -242,6 +279,9 @@
                 </a>
             </div>
             <div class="post-nav-item">
+                <a href="/2024/03/12/CF1307G/" rel="next" title="CF1307G">
+                  CF1307G <i class="fa fa-angle-right"></i>
+                </a>
             </div>
           </div>
     </footer>

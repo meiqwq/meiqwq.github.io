@@ -114,7 +114,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-count">8</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -136,6 +136,120 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/03/12/CF1307G/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Meiqwq">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Meiqwq's blog~">
+      <meta itemprop="description" content="A blog correlated with CS">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Meiqwq's blog~">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/03/12/CF1307G/" class="post-title-link" itemprop="url">CF1307G</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2024-03-12 00:19:50 / Modified: 00:44:34" itemprop="dateCreated datePublished" datetime="2024-03-12T00:19:50+08:00">2024-03-12</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><a target="_blank" rel="noopener" href="https://codeforces.com/contest/1307/problem/G">题目链接</a></p>
+<h1 id="题意">题意：</h1>
+<p>给出一个 <span class="math inline">\(n\)</span> 个点 <span class="math inline">\(m\)</span>
+条边的<strong>有向图</strong>，每条边有边权 <span class="math inline">\(w_i\)</span> 。</p>
+<p>有 <span class="math inline">\(Q\)</span> 次询问，每次询问给出一个
+<span class="math inline">\(x\)</span> 。你可以把一条边修改成 <span class="math inline">\(w_i+a_i\)</span> （<span class="math inline">\(a_i\)</span>
+<strong>不一定</strong>是整数），不过需要保证 <span class="math inline">\(a_i \geq 0\)</span> 且 <span class="math inline">\(\sum a_i \leq x\)</span> 。</p>
+<p>你要通过修改边权使得从 <span class="math inline">\(1\)</span> 到
+<span class="math inline">\(n\)</span>
+的最短路径尽可能长，每次询问之间<strong>独立</strong>。</p>
+<p>数据保证至少存在一条从 <span class="math inline">\(1\)</span> 到
+<span class="math inline">\(n\)</span> 的路径，无重边自环。</p>
+<p>输出答案和标准答案的相对误差或绝对误差应不超过 <span class="math inline">\(10^{-6}\)</span> 。(翻译来自luogu)</p>
+<h1 id="分析">分析</h1>
+<p>先观察一下费用流的LP：</p>
+<p><span class="math inline">\(min:z=\sum flow_i \cdot
+cst_i\)</span></p>
+<p>限制:</p>
+$
+<span class="math display">\[\begin{cases} u=1时:\sum\limits_{i \in
+out_u}-flow_i=-F\\ u\in[2,n-1]: \sum\limits_{i \in
+out_u}-flow_i+\sum\limits_{i\in in_u}flow_i=0 \\ u=n时:\sum\limits_{i
+\in in_u}flow_i=F \\ flow_1 \leq cap_1 \\ flow_2 \leq cap_2 \\ ...... \\
+flow_m \leq cap_m \\ \forall i \in [m],flow_i \geq 0
+\end{cases}\]</span>
+<p>$</p>
+<p>转对偶LP：</p>
+<p><span class="math inline">\(max:
+z=F(y_n-y_1)+\sum\limits_{i=1}^{m}y_{n+i}\cdot cap_i\)</span></p>
+<p>限制:</p>
+<p><span class="math inline">\(\begin{cases} \forall (v,u) \in
+E:y_u-y_v+y_{n+i} \leq cst_i \\ \forall i \in [n+1,n+m] ,y_{i}\leq
+0\end{cases}\)</span></p>
+<p>因而令<span class="math inline">\(\forall i \in [n+1,n+m],
+x_{i-n}=-y_i\)</span></p>
+<p>对偶LP为： <span class="math inline">\(max: z&#39;=F(y_n-y_1)-\sum
+x_i\)</span> <span class="math inline">\(\begin{cases} \forall (v,u) \in
+E:y_u-y_v\leq cst_i+x_i \\ \forall i \in [1,m] ,x_{i}\geq
+0\end{cases}\)</span></p>
+<p>很明显，这里的<span class="math inline">\(y_n-y_1\)</span>就是最短路，整个对偶的LP的限制与题目相符。</p>
+<p>令这对LP的最优解的值为<span class="math inline">\(t\)</span>,那么<span class="math display">\[F(y_n-y_1)-\sum x_i \leq t\]</span> <span class="math display">\[y_n-y_1\leq \frac{t+\sum x_i}{F}\]</span></p>
+<p>因此我们只要求<span class="math inline">\(\frac{t+\sum
+x_i}{F}\)</span>的最小值。只要在费用流每次增广的时候几下对应的<span class="math inline">\((flow,cst)\)</span>，每次询问在这些点里算最小值即可.</p>
+<h1 id="代码">代码</h1>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">pragma</span> GCC optimize(3)</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="meta">#<span class="keyword">define</span> rep(i,j,k) for(i=j;i&lt;=k;++i)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> dow(i,j,k) for(i=j;i&gt;=k;--i)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> pr pair</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> mkp make_pair</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> fi first</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> se second</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N=<span class="number">60</span>;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> M=N*N+N;</span><br><span class="line"><span class="keyword">namespace</span> MCMF&#123;</span><br><span class="line">    <span class="keyword">struct</span> <span class="title class_">edge</span>&#123;</span><br><span class="line">        <span class="type">int</span> nxt,to,w,c;</span><br><span class="line">    &#125;e[M&lt;&lt;<span class="number">1</span>];</span><br><span class="line">    <span class="type">int</span> head[N],pos=<span class="number">1</span>,s,t,dis[N],pre[N],ep[N],flow,cst;</span><br><span class="line">    <span class="type">bool</span> vis[N];</span><br><span class="line">    vector&lt;pr&lt;<span class="type">int</span>,<span class="type">int</span>&gt; &gt;rec;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">add</span><span class="params">(<span class="type">int</span> u,<span class="type">int</span> v,<span class="type">int</span> w,<span class="type">int</span> c)</span></span>&#123;</span><br><span class="line">        e[++pos]=(edge)&#123;head[u],v,w,c&#125;;head[u]=pos;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">spfa</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="type">int</span> i;<span class="built_in">rep</span>(i,<span class="number">1</span>,t)dis[i]=<span class="number">1</span>&lt;&lt;<span class="number">30</span>;</span><br><span class="line">        queue&lt;<span class="type">int</span>&gt;q;</span><br><span class="line">        <span class="built_in">memset</span>(vis,<span class="number">0</span>,<span class="built_in">sizeof</span>(vis));</span><br><span class="line">        <span class="built_in">rep</span>(i,<span class="number">1</span>,t)pre[i]=<span class="number">-1</span>;</span><br><span class="line">        dis[s]=<span class="number">0</span>;vis[s]=<span class="number">1</span>;</span><br><span class="line">        q.<span class="built_in">push</span>(s);</span><br><span class="line">        <span class="keyword">while</span>(!q.<span class="built_in">empty</span>())&#123;</span><br><span class="line">            <span class="type">int</span> u=q.<span class="built_in">front</span>();q.<span class="built_in">pop</span>();vis[u]=<span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span>(i=head[u];i;i=e[i].nxt)<span class="keyword">if</span>(e[i].w&gt;<span class="number">0</span> &amp;&amp; dis[e[i].to]&gt;dis[u]+e[i].c)&#123;</span><br><span class="line">                    dis[e[i].to]=dis[u]+e[i].c;ep[e[i].to]=i;</span><br><span class="line">                    pre[e[i].to]=u;<span class="keyword">if</span>(!vis[e[i].to])q.<span class="built_in">push</span>(e[i].to);vis[e[i].to]=<span class="number">1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dis[t]&lt;(<span class="number">1</span>&lt;&lt;<span class="number">30</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">EK</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="type">int</span> i;</span><br><span class="line">        <span class="keyword">while</span>(<span class="built_in">spfa</span>())&#123;</span><br><span class="line">            <span class="type">int</span> f=<span class="number">1</span>&lt;&lt;<span class="number">30</span>;</span><br><span class="line">            <span class="keyword">for</span>(i=t;i!=s;i=pre[i])</span><br><span class="line">                f=<span class="built_in">min</span>(f,e[ep[i]].w);</span><br><span class="line">            flow+=f;cst+=f*dis[t];</span><br><span class="line">            <span class="keyword">for</span>(i=t;i!=s;i=pre[i])e[ep[i]].w-=f,e[ep[i]^<span class="number">1</span>].w+=f;</span><br><span class="line">            rec.<span class="built_in">push_back</span>(<span class="built_in">mkp</span>(flow,cst));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> n,m,u[M],v[M],w[M];</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">solve</span><span class="params">(<span class="type">int</span> F)</span></span>&#123;</span><br><span class="line">    MCMF::pos=<span class="number">1</span>;</span><br><span class="line">    <span class="built_in">memset</span>(MCMF::head,<span class="number">0</span>,<span class="built_in">sizeof</span>(MCMF::head));</span><br><span class="line">    <span class="type">int</span> i,j;</span><br><span class="line">    <span class="built_in">rep</span>(i,<span class="number">1</span>,m)&#123;</span><br><span class="line">        MCMF::<span class="built_in">add</span>(u[i],v[i],<span class="number">1</span>,w[i]);</span><br><span class="line">        MCMF::<span class="built_in">add</span>(v[i],u[i],<span class="number">0</span>,-w[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    MCMF::s=n+<span class="number">1</span>;MCMF::t=n+<span class="number">2</span>;</span><br><span class="line">    MCMF::<span class="built_in">add</span>(n+<span class="number">1</span>,<span class="number">1</span>,F,<span class="number">0</span>);MCMF::<span class="built_in">add</span>(<span class="number">1</span>,n+<span class="number">1</span>,<span class="number">0</span>,<span class="number">0</span>);</span><br><span class="line">    MCMF::<span class="built_in">add</span>(n,n+<span class="number">2</span>,F,<span class="number">0</span>);MCMF::<span class="built_in">add</span>(n+<span class="number">2</span>,n,<span class="number">0</span>,<span class="number">0</span>);</span><br><span class="line">    MCMF::flow=<span class="number">0</span>;MCMF::cst=<span class="number">0</span>;</span><br><span class="line">    MCMF::<span class="built_in">EK</span>();</span><br><span class="line">    <span class="keyword">if</span>(MCMF::flow^F)<span class="keyword">return</span> <span class="number">1000000</span>;<span class="keyword">return</span> MCMF::cst;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;<span class="comment">//freopen(&quot;in.txt&quot;,&quot;r&quot;,stdin);</span></span><br><span class="line">    ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">    <span class="type">int</span> i,j;</span><br><span class="line">    cin&gt;&gt;n&gt;&gt;m;</span><br><span class="line">    <span class="built_in">rep</span>(i,<span class="number">1</span>,m)cin&gt;&gt;u[i]&gt;&gt;v[i]&gt;&gt;w[i];</span><br><span class="line">    <span class="type">int</span> q;</span><br><span class="line">    cin&gt;&gt;q;</span><br><span class="line">    <span class="built_in">solve</span>(m);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(q--)&#123;</span><br><span class="line">        <span class="type">int</span> xx;cin&gt;&gt;xx;</span><br><span class="line">        <span class="type">double</span> ans=<span class="number">1e9</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> v:MCMF::rec)ans=<span class="built_in">min</span>(ans,(<span class="number">1.0</span>*xx+v.se)/v.fi);</span><br><span class="line">        cout&lt;&lt;fixed;cout&lt;&lt;<span class="built_in">setprecision</span>(<span class="number">10</span>)&lt;&lt;ans&lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -173,9 +287,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2024-03-11 19:49:36 / Modified: 20:46:19" itemprop="dateCreated datePublished" datetime="2024-03-11T19:49:36+08:00">2024-03-11</time>
+      <time title="Created: 2024-03-11 19:49:36" itemprop="dateCreated datePublished" datetime="2024-03-11T19:49:36+08:00">2024-03-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-03-12 00:16:25" itemprop="dateModified" datetime="2024-03-12T00:16:25+08:00">2024-03-12</time>
     </span>
 
   
@@ -188,33 +308,64 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="对偶问题"><a href="#对偶问题" class="headerlink" title="对偶问题"></a>对偶问题</h1><p>考虑一个标准的线性规划问题：</p>
-<p>$max:z&#x3D;\sum\limits_{i&#x3D;1}^{n}c_i\cdot x_i$</p>
-<p>限制如下:<br>$$\begin{cases} \sum\limits_{i&#x3D;1}^{n}a_{1,i}\cdot x_i \leq b_1 \ \sum\limits_{i&#x3D;1}^{n}a_{2,i}\cdot x_i \leq b_2 \ …..\\sum\limits_{i&#x3D;1}^{n}a_{m,i}\cdot x_i \leq b_m\end{cases}$$</p>
-<p>$\forall i \in [n] ,x_i \geq0$</p>
+          <h1 id="对偶问题">对偶问题</h1>
+<p>考虑一个标准的线性规划问题：</p>
+<p><span class="math inline">\(max:z=\sum\limits_{i=1}^{n}c_i\cdot
+x_i\)</span></p>
+<p>限制如下: <span class="math display">\[\begin{cases}
+\sum\limits_{i=1}^{n}a_{1,i}\cdot x_i \leq b_1 \\
+\sum\limits_{i=1}^{n}a_{2,i}\cdot x_i \leq b_2 \\
+.....\\\sum\limits_{i=1}^{n}a_{m,i}\cdot x_i \leq
+b_m\end{cases}\]</span></p>
+<p><span class="math inline">\(\forall i \in [n] ,x_i \geq0\)</span></p>
 <p>它的对偶形式是：</p>
-<p>$min:z’&#x3D;\sum\limits_{j&#x3D;1}^m b_j\cdot y_j$</p>
+<p><span class="math inline">\(min:z&#39;=\sum\limits_{j=1}^m b_j\cdot
+y_j\)</span></p>
 <p>限制：</p>
-<p>$$\begin{cases} \sum\limits_{j&#x3D;1}^{m}a_{j,1}\cdot y_j \geq c_1 \ \sum\limits_{j&#x3D;1}^{m}a_{j,2}\cdot y_j \geq c_2 \ …..\ \sum\limits_{j&#x3D;1}^{m}a_{j,n}\cdot y_j \geq c_n\end{cases}$$</p>
-<p>$\forall j \in [m],y_j \geq 0$</p>
+<p><span class="math display">\[\begin{cases}
+\sum\limits_{j=1}^{m}a_{j,1}\cdot y_j \geq c_1 \\
+\sum\limits_{j=1}^{m}a_{j,2}\cdot y_j \geq c_2 \\ .....\\
+\sum\limits_{j=1}^{m}a_{j,n}\cdot y_j \geq c_n\end{cases}\]</span></p>
+<p><span class="math inline">\(\forall j \in [m],y_j \geq 0\)</span></p>
 <p>用矩阵的语言就是：</p>
 <p>prime LP:</p>
-<p>$max:z&#x3D;\vec{c}^T\cdot \vec{x}$</p>
-<p>$A\cdot \vec{x} \preceq \vec{b}$</p>
-<p>$\vec{x} \succeq 0$</p>
-<p>dual LP:<br>$min:z’&#x3D;\vec{b}^T\cdot \vec{y}$</p>
-<p>$A^T\vec{y} \succeq \vec{c}$</p>
-<p>$\vec{y} \succeq$</p>
-<h1 id="weak-duality"><a href="#weak-duality" class="headerlink" title="weak duality"></a>weak duality</h1><p>上述两个LP,的任意一组feasible solution $\hat{x},\hat{y}$,有$\vec{c}^T\cdot \hat{x} \leq \vec{b}^T \cdot \vec{y}$,i.e.最大化一定小于等于最小化.</p>
+<p><span class="math inline">\(max:z=\vec{c}^T\cdot \vec{x}\)</span></p>
+<p><span class="math inline">\(A\cdot \vec{x} \preceq
+\vec{b}\)</span></p>
+<p><span class="math inline">\(\vec{x} \succeq 0\)</span></p>
+<p>dual LP: <span class="math inline">\(min:z&#39;=\vec{b}^T\cdot
+\vec{y}\)</span></p>
+<p><span class="math inline">\(A^T\vec{y} \succeq \vec{c}\)</span></p>
+<p><span class="math inline">\(\vec{y} \succeq\)</span></p>
+<h1 id="weak-duality">weak duality</h1>
+<p>上述两个LP,的任意一组feasible solution <span class="math inline">\(\hat{x},\hat{y}\)</span>,有<span class="math inline">\(\vec{c}^T\cdot \hat{x} \leq \vec{b}^T \cdot
+\vec{y}\)</span>,i.e.最大化一定小于等于最小化.</p>
 <p>证:</p>
-<p>由于:$A^T \cdot \hat{y} \succeq \vec{c}$并且$\hat{x} \succeq 0$,因而:$\vec{c}^T\cdot \vec{x} \leq (A^T\cdot \hat{y})^T \hat{x}&#x3D;\hat{y}^T\cdot A \cdot \hat{x}$</p>
-<p>同样地：因为 $A\cdot \hat{x} \preceq \vec{b}$,$\hat{y} \succeq 0$,因而 $\vec{b}^T\cdot \hat{y} \geq (A \cdot \hat{x})^T \cdot (\hat{y}^T)^T&#x3D;(\hat{y}^T\cdot A \cdot \hat{x})^T$,注意到 $\hat{y}^T\cdot A \cdot \hat{x}$是一个实数，所以 $(\hat{y}^T\cdot A \cdot \hat{x})^T&#x3D;\hat{y}^T\cdot A \cdot \hat{x}$</p>
-<p>因而：$\vec{c}^T \cdot \hat{x} \leq \hat{y}^T\cdot A \cdot \hat{x} \leq \vec{b}^T \cdot \hat{y} $</p>
-<h1 id="互补松弛"><a href="#互补松弛" class="headerlink" title="互补松弛"></a>互补松弛</h1><p>假设 $\hat{x},\hat{y}$是两个LP的最优解，有$$\vec{c}^T \cdot \hat{x} &#x3D; \hat{y}^T\cdot A \cdot \hat{x} &#x3D; \vec{b}^T \cdot \hat{y}$$</p>
-<p>我们对其变形：<br>$$\hat{y}^T\cdot A \cdot \hat{x}-\vec{c}^T \cdot \hat{x} &#x3D; 0$$<br>$$(\hat{y}^T\cdot A-\vec{c}^T)\cdot \vec{x} &#x3D; 0$$</p>
-<p>由于 $\hat{y}^T\cdot A-\vec{c}^T&#x3D;(A^T\cdot \hat{y}-\vec{c})^T$,i.e. $(A^T\cdot \hat{y}-\vec{c})^T \cdot \hat{x} &#x3D;0$</p>
-<p>写成代数形式：$\sum\limits_{i&#x3D;1}^n[({\sum\limits_{j&#x3D;1}^ma_{j,i}\cdot \hat{y}_j})-c_i]\cdot \hat{x}_i &#x3D; 0$</p>
-<p>这说明了：如果$x_i非0，那么对偶问题中它对应的不等式一定取<code>=</code>，如果一个不等式不取<code>=</code>,那么对偶问题中这个不等式对应的变量一定为<code>0</code></p>
+<p>由于: <span class="math inline">\(A^T \cdot \hat{y} \succeq
+\vec{c}\)</span>并且<span class="math inline">\(\hat{x} \succeq
+0\)</span>,因而:<span class="math inline">\(\vec{c}^T\cdot \vec{x} \leq
+(A^T\cdot \hat{y})^T \hat{x}=\hat{y}^T\cdot A \cdot \hat{x}\)</span></p>
+<p>同样地：因为 <span class="math inline">\(A\cdot \hat{x} \preceq
+\vec{b}\)</span>,<span class="math inline">\(\hat{y} \succeq
+0\)</span>,因而 <span class="math inline">\(\vec{b}^T\cdot \hat{y} \geq
+(A \cdot \hat{x})^T \cdot (\hat{y}^T)^T=(\hat{y}^T\cdot A \cdot
+\hat{x})^T\)</span>,注意到 <span class="math inline">\(\hat{y}^T\cdot A
+\cdot \hat{x}\)</span>是一个实数，所以 <span class="math inline">\((\hat{y}^T\cdot A \cdot \hat{x})^T=\hat{y}^T\cdot
+A \cdot \hat{x}\)</span></p>
+<p>因而：</p>
+<p>${}^{T} ^{T} A ^{T} $</p>
+<h1 id="互补松弛">互补松弛</h1>
+<p>假设 <span class="math inline">\(\hat{x},\hat{y}\)</span>是两个LP的最优解，有<span class="math display">\[\vec{c}^T \cdot \hat{x} = \hat{y}^T\cdot A \cdot
+\hat{x} = \vec{b}^T \cdot \hat{y}\]</span></p>
+<p>我们对其变形： <span class="math display">\[\hat{y}^T\cdot A \cdot
+\hat{x}-\vec{c}^T \cdot \hat{x} = 0\]</span> <span class="math display">\[(\hat{y}^T\cdot A-\vec{c}^T)\cdot \vec{x} =
+0\]</span></p>
+<p>由于 <span class="math inline">\(\hat{y}^T\cdot A-\vec{c}^T=(A^T\cdot
+\hat{y}-\vec{c})^T\)</span>,i.e. <span class="math inline">\((A^T\cdot
+\hat{y}-\vec{c})^T \cdot \hat{x} =0\)</span></p>
+<p>写成代数形式：<span class="math inline">\(\sum\limits_{i=1}^n[({\sum\limits_{j=1}^ma_{j,i}\cdot
+\hat{y}_j})-c_i]\cdot \hat{x}_i = 0\)</span></p>
+<p>这说明了：如果<span class="math inline">\(x_i\)</span>非0，那么对偶问题中它对应的不等式一定取<code>=</code>，如果一个不等式不取<code>=</code>,那么对偶问题中这个不等式对应的变量一定为<code>0</code></p>
 
       
     </div>
@@ -285,9 +436,9 @@
     
     <div class="post-body" itemprop="articleBody">
           <p>恶补pytorch系列,数据与项目内容来自：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Ky4y1g7Nk/?p=2">链接</a>,代码是自己写的，和up可能不大一样</p>
-<p>这次任务是个18分类的问题，<br>除了网络结构不一样，其它和上一个基本一致.<br>只贴代码了</p>
+<p>这次任务是个18分类的问题， 除了网络结构不一样，其它和上一个基本一致.
+只贴代码了</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">from</span> torch.utils.data <span class="keyword">import</span> Dataset</span><br><span class="line"><span class="keyword">from</span> torch.utils.data <span class="keyword">import</span> DataLoader</span><br><span class="line"><span class="keyword">from</span> torch <span class="keyword">import</span> nn</span><br><span class="line"><span class="keyword">from</span> os.path <span class="keyword">import</span> exists</span><br><span class="line">batch_size=<span class="number">100</span></span><br><span class="line">word_cnt=<span class="number">29</span></span><br><span class="line"></span><br><span class="line">src=pd.read_csv(<span class="string">&quot;./data/data.csv&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">mydata</span>(<span class="title class_ inherited__">Dataset</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self,typ</span>):</span><br><span class="line">        self.data=src[src.part==typ]</span><br><span class="line">        self.typ=typ</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__getitem__</span>(<span class="params">self, idx</span>):</span><br><span class="line">        sen=[<span class="built_in">int</span>(x) <span class="keyword">for</span> x <span class="keyword">in</span> self.data.iloc[idx][<span class="string">&#x27;x&#x27;</span>].split(<span class="string">&#x27;,&#x27;</span>)]</span><br><span class="line">        oht=np.zeros((<span class="number">15</span>,word_cnt))</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">min</span>(<span class="built_in">len</span>(sen),<span class="number">15</span>)):</span><br><span class="line">            oht[i,sen[i]-<span class="number">1</span>]=<span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> torch.FloatTensor(oht),<span class="built_in">int</span>(self.data.iloc[idx][<span class="string">&#x27;y&#x27;</span>])</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__len__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">len</span>(self.data)</span><br><span class="line">train_set=mydata(<span class="string">&quot;train&quot;</span>)</span><br><span class="line">train_load=DataLoader(dataset=train_set,batch_size=batch_size,shuffle=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">test_set=mydata(<span class="string">&quot;test&quot;</span>)</span><br><span class="line">test_load=DataLoader(dataset=test_set,batch_size=batch_size,shuffle=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">val_set=mydata(<span class="string">&quot;val&quot;</span>)</span><br><span class="line">val_load=DataLoader(dataset=val_set,batch_size=batch_size,shuffle=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Mol</span>(nn.Module):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">super</span>().__init__()</span><br><span class="line">        self.h=<span class="number">50</span></span><br><span class="line">        self.mol=nn.Sequential(</span><br><span class="line">            nn.Conv1d(<span class="number">15</span>,self.h,<span class="number">5</span>,<span class="number">2</span>),nn.ELU(),</span><br><span class="line">            nn.Conv1d(self.h,self.h,<span class="number">5</span>,<span class="number">2</span>),nn.ELU(),</span><br><span class="line">            nn.Conv1d(self.h,self.h,<span class="number">5</span>,<span class="number">1</span>),nn.ELU(),</span><br><span class="line">        )</span><br><span class="line">        self.lin=nn.Linear(self.h,<span class="number">18</span>)</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self,x</span>):</span><br><span class="line">        y1=self.mol(x).squeeze(dim=<span class="number">2</span>)</span><br><span class="line">        <span class="keyword">return</span> self.lin(y1)</span><br><span class="line">mynn=Mol()</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">test_accuracy</span>(<span class="params">data_load</span>):</span><br><span class="line">    <span class="keyword">with</span> torch.no_grad():</span><br><span class="line">        siz=<span class="number">0</span></span><br><span class="line">        ac=<span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> data <span class="keyword">in</span> data_load:</span><br><span class="line">            sen,tag=data</span><br><span class="line">            out=mynn(sen)</span><br><span class="line">            <span class="keyword">for</span> x,y <span class="keyword">in</span> <span class="built_in">zip</span>(out,tag):</span><br><span class="line">                x=x.argmax(dim=<span class="number">0</span>)</span><br><span class="line">                siz+=<span class="number">1</span></span><br><span class="line">                <span class="keyword">if</span> x==y:</span><br><span class="line">                    ac+=<span class="number">1</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;准确率为&#123;:f&#125;&quot;</span>.<span class="built_in">format</span>(ac/siz))</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">train_model</span>():</span><br><span class="line">    epoch=<span class="number">0</span></span><br><span class="line">    train_step=<span class="number">0</span></span><br><span class="line">    loss_fn=nn.CrossEntropyLoss()</span><br><span class="line">    optim=torch.optim.Adam(mynn.parameters(), lr=<span class="number">1e-3</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> epoch <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">30</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;批次:&#123;&#125;&quot;</span>.<span class="built_in">format</span>(epoch))</span><br><span class="line">        <span class="keyword">for</span> data <span class="keyword">in</span> train_load:</span><br><span class="line">            optim.zero_grad()</span><br><span class="line">            sen,tag=data</span><br><span class="line">            output=mynn(sen)</span><br><span class="line">            res_loss=loss_fn(output,tag)</span><br><span class="line">            res_loss.backward()</span><br><span class="line">            optim.step()</span><br><span class="line">            train_step+=<span class="number">1</span></span><br><span class="line">            <span class="keyword">if</span> train_step%<span class="number">10</span>==<span class="number">0</span>:</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">&quot;训练次数:&#123;&#125;,loss:&#123;&#125;&quot;</span>.<span class="built_in">format</span>(train_step,res_loss))</span><br><span class="line">        test_accuracy(test_load)</span><br><span class="line">        torch.save(mynn.state_dict(),<span class="string">&quot;./model/epoch_&#123;&#125;.pth&quot;</span>.<span class="built_in">format</span>(epoch))</span><br><span class="line">    torch.save(mynn.state_dict(),<span class="string">&quot;./model/final.pth&quot;</span>)</span><br><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> exists(<span class="string">&quot;./model/final.pth&quot;</span>):</span><br><span class="line">    train_model()</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    mynn.load_state_dict(torch.load(<span class="string">&quot;./model/final.pth&quot;</span>))</span><br><span class="line">test_accuracy(val_load)</span><br></pre></td></tr></table></figure>
-
 <p>输出:<code>准确率为0.707317</code></p>
 
       
@@ -359,52 +510,40 @@
     
     <div class="post-body" itemprop="articleBody">
           <p>恶补pytorch系列,数据与项目内容来自：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Ky4y1g7Nk/?p=2">链接</a>,代码是自己写的，和up可能不大一样</p>
-<h1 id="One-hot"><a href="#One-hot" class="headerlink" title="One-hot"></a>One-hot</h1><p>将句子分词后，生成一个向量 $\vec{v}$,向量第 $i$维为1当且仅当词$i$出现过。</p>
-<h1 id="本次任务"><a href="#本次任务" class="headerlink" title="本次任务"></a>本次任务</h1><p>数据集是csv文件，包括了单词转化为编码的形式，每个句子的标签（0，1二分类），train&#x2F;val&#x2F;test标注。<br>建立一个NN，本次重心不在backbone上，因此骨架只是一个单词数量映射到2的一个线性层。</p>
-<h1 id="训练准备"><a href="#训练准备" class="headerlink" title="训练准备"></a>训练准备</h1><p>由于每次训练的训练集数据都是批量拿取的，因此我们再复习下Dataset类和Dataloader的使用。</p>
+<h1 id="one-hot">One-hot</h1>
+<p>将句子分词后，生成一个向量 <span class="math inline">\(\vec{v}\)</span>,向量第 <span class="math inline">\(i\)</span>维为1当且仅当词<span class="math inline">\(i\)</span>出现过。 # 本次任务
+数据集是csv文件，包括了单词转化为编码的形式，每个句子的标签（0，1二分类），train/val/test标注。
+建立一个NN，本次重心不在backbone上，因此骨架只是一个单词数量映射到2的一个线性层。</p>
+<h1 id="训练准备">训练准备</h1>
+<p>由于每次训练的训练集数据都是批量拿取的，因此我们再复习下Dataset类和Dataloader的使用。</p>
 <p>前置条件:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">batch_size=<span class="number">200</span></span><br><span class="line">word_num=<span class="number">8945</span></span><br></pre></td></tr></table></figure>
-<h2 id="Dataset-类"><a href="#Dataset-类" class="headerlink" title="Dataset 类"></a>Dataset 类</h2><p>先调库:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> torch.utils.data <span class="keyword">import</span> Dataset</span><br></pre></td></tr></table></figure>
-<p>读入数据:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">src=pd.read_csv(<span class="string">&quot;data/数字化数据.csv&quot;</span>)</span><br></pre></td></tr></table></figure>
-<p>要继承Dataset类，需要写好构造函数<code>__init__()</code>,重写两个函数<code>__getitem__</code>与<code>__len__</code>。</p>
-<p>构造函数可以记录一些基本的数据，记录好表示(比如train&#x2F;val&#x2F;test)</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self,typ</span>):</span><br><span class="line">    self.typ=typ</span><br><span class="line">    self.data=src[src.part==typ]</span><br></pre></td></tr></table></figure>
-<p>这里存下了数据作用与对应的dataframe</p>
-<h3 id="get-item"><a href="#get-item" class="headerlink" title="get_item"></a>get_item</h3><p>get_item会读入一个参数<code>idx</code>,函数要返回第<code>idx</code>个数据。</p>
-<p>这里同时要对数据完成onehot编码，其中<code>-1</code>表示不认识这个词，忽略</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">__getitem__</span>(<span class="params">self, idx</span>):</span><br><span class="line">    ts=torch.zeros(word_num,dtype=torch.<span class="built_in">float</span>)</span><br><span class="line">    sentence=self.data.iloc[idx][<span class="string">&#x27;x&#x27;</span>]</span><br><span class="line">    seq=[<span class="built_in">int</span>(x) <span class="keyword">for</span> x <span class="keyword">in</span> sentence.split(<span class="string">&#x27;,&#x27;</span>)]</span><br><span class="line">    <span class="keyword">for</span> x <span class="keyword">in</span> seq:</span><br><span class="line">        <span class="keyword">if</span> x!=-<span class="number">1</span>:</span><br><span class="line">            ts[x]=<span class="number">1</span></span><br><span class="line">    tag=<span class="built_in">int</span>(self.data.iloc[idx][<span class="string">&#x27;y&#x27;</span>])</span><br><span class="line">    ts_tar=torch.zeros(<span class="number">2</span>,dtype=torch.<span class="built_in">float</span>)</span><br><span class="line">    ts_tar[tag]=<span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> ts,ts_tar</span><br></pre></td></tr></table></figure>
-<h3 id="len"><a href="#len" class="headerlink" title="len"></a>len</h3><p>返回数据集大小即可</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">__len__</span>(<span class="params">self</span>):</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">len</span>(self.data)</span><br></pre></td></tr></table></figure>
-
-<p>最后产生具体对象</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">train_set=mydata(<span class="string">&quot;train&quot;</span>)</span><br></pre></td></tr></table></figure>
-<h2 id="Dataloader"><a href="#Dataloader" class="headerlink" title="Dataloader"></a>Dataloader</h2><p>调的库在</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> torch.utils.data <span class="keyword">import</span> DataLoader</span><br></pre></td></tr></table></figure>
-<p>本质是用Dataloader类创建一个对象,几个参数如下:</p>
-<ol>
-<li>dataset 就是Dataset类构建出来的</li>
-<li>batch_size 每次取出的个数</li>
-<li>shuffle最好设为<code>True</code><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">train_load=DataLoader(dataset=train_set,batch_size=batch_size,shuffle=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
-同样的还要构造好<code>val_load</code>,<code>test_load</code></li>
-</ol>
-<h1 id="神经网络骨架"><a href="#神经网络骨架" class="headerlink" title="神经网络骨架"></a>神经网络骨架</h1><p>不是这次的重点，只整一个线性层:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> torch <span class="keyword">import</span> nn</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Mol</span>(nn.Module):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">super</span>().__init__()</span><br><span class="line">        self.mol=nn.Sequential(</span><br><span class="line">            nn.Linear(word_num,<span class="number">2</span>),</span><br><span class="line">        )</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, x</span>):</span><br><span class="line">        y_out = self.mol(x)</span><br><span class="line">        <span class="keyword">return</span> y_out</span><br><span class="line">mynn=Mol()</span><br></pre></td></tr></table></figure>
-<p>模型单个数据最后会输出一个shape为(2)的tensor，分别表示0类和1类的概率。</p>
-<h1 id="测试准确率"><a href="#测试准确率" class="headerlink" title="测试准确率"></a>测试准确率</h1><p>注意在测试时模型参数不能动，因此要设置</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> torch.no_grad():</span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">test_accuracy</span>(<span class="params">data_load</span>):</span><br><span class="line">    <span class="keyword">with</span> torch.no_grad(): </span><br><span class="line">        siz=<span class="number">0</span></span><br><span class="line">        ac=<span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> data <span class="keyword">in</span> data_load:</span><br><span class="line">            sen,tag=data</span><br><span class="line">            out=mynn(sen)</span><br><span class="line">            <span class="keyword">for</span> x,y <span class="keyword">in</span> <span class="built_in">zip</span>(out,tag):</span><br><span class="line">                <span class="keyword">if</span> (x[<span class="number">0</span>]&gt;x[<span class="number">1</span>])==(y[<span class="number">0</span>]&gt;y[<span class="number">1</span>]):</span><br><span class="line">                    ac+=<span class="number">1</span></span><br><span class="line">                siz+=<span class="number">1</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;准确率为&#123;&#125;&quot;</span>.<span class="built_in">format</span>(ac/siz))</span><br></pre></td></tr></table></figure>
-<h1 id="训练过程"><a href="#训练过程" class="headerlink" title="训练过程"></a>训练过程</h1><h2 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h2><p>损失函数设定为交叉熵，优化器为随机梯度下降，学习速率为<code>0.01</code></p>
+<h2 id="dataset-类">Dataset 类</h2>
+<p>先调库: <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> torch.utils.data <span class="keyword">import</span> Dataset</span><br></pre></td></tr></table></figure> 读入数据: <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">src=pd.read_csv(<span class="string">&quot;data/数字化数据.csv&quot;</span>)</span><br></pre></td></tr></table></figure>
+要继承Dataset类，需要写好构造函数<code>__init__()</code>,重写两个函数<code>__getitem__</code>与<code>__len__</code>。</p>
+<p>构造函数可以记录一些基本的数据，记录好表示(比如train/val/test)
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self,typ</span>):</span><br><span class="line">    self.typ=typ</span><br><span class="line">    self.data=src[src.part==typ]</span><br></pre></td></tr></table></figure> 这里存下了数据作用与对应的dataframe ### get_item
+get_item会读入一个参数<code>idx</code>,函数要返回第<code>idx</code>个数据。</p>
+<p>这里同时要对数据完成onehot编码，其中<code>-1</code>表示不认识这个词，忽略
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">__getitem__</span>(<span class="params">self, idx</span>):</span><br><span class="line">    ts=torch.zeros(word_num,dtype=torch.<span class="built_in">float</span>)</span><br><span class="line">    sentence=self.data.iloc[idx][<span class="string">&#x27;x&#x27;</span>]</span><br><span class="line">    seq=[<span class="built_in">int</span>(x) <span class="keyword">for</span> x <span class="keyword">in</span> sentence.split(<span class="string">&#x27;,&#x27;</span>)]</span><br><span class="line">    <span class="keyword">for</span> x <span class="keyword">in</span> seq:</span><br><span class="line">        <span class="keyword">if</span> x!=-<span class="number">1</span>:</span><br><span class="line">            ts[x]=<span class="number">1</span></span><br><span class="line">    tag=<span class="built_in">int</span>(self.data.iloc[idx][<span class="string">&#x27;y&#x27;</span>])</span><br><span class="line">    ts_tar=torch.zeros(<span class="number">2</span>,dtype=torch.<span class="built_in">float</span>)</span><br><span class="line">    ts_tar[tag]=<span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> ts,ts_tar</span><br></pre></td></tr></table></figure> ### len 返回数据集大小即可 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">__len__</span>(<span class="params">self</span>):</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">len</span>(self.data)</span><br></pre></td></tr></table></figure></p>
+<p>最后产生具体对象 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">train_set=mydata(<span class="string">&quot;train&quot;</span>)</span><br></pre></td></tr></table></figure> ## Dataloader 调的库在 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> torch.utils.data <span class="keyword">import</span> DataLoader</span><br></pre></td></tr></table></figure>
+本质是用Dataloader类创建一个对象,几个参数如下: 1. dataset
+就是Dataset类构建出来的 2. batch_size 每次取出的个数 3.
+shuffle最好设为<code>True</code> <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">train_load=DataLoader(dataset=train_set,batch_size=batch_size,shuffle=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
+同样的还要构造好<code>val_load</code>,<code>test_load</code> #
+神经网络骨架 不是这次的重点，只整一个线性层: <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> torch <span class="keyword">import</span> nn</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Mol</span>(nn.Module):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">super</span>().__init__()</span><br><span class="line">        self.mol=nn.Sequential(</span><br><span class="line">            nn.Linear(word_num,<span class="number">2</span>),</span><br><span class="line">        )</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, x</span>):</span><br><span class="line">        y_out = self.mol(x)</span><br><span class="line">        <span class="keyword">return</span> y_out</span><br><span class="line">mynn=Mol()</span><br></pre></td></tr></table></figure>
+模型单个数据最后会输出一个shape为(2)的tensor，分别表示0类和1类的概率。</p>
+<h1 id="测试准确率">测试准确率</h1>
+<p>注意在测试时模型参数不能动，因此要设置 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> torch.no_grad():</span><br></pre></td></tr></table></figure> <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">test_accuracy</span>(<span class="params">data_load</span>):</span><br><span class="line">    <span class="keyword">with</span> torch.no_grad(): </span><br><span class="line">        siz=<span class="number">0</span></span><br><span class="line">        ac=<span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> data <span class="keyword">in</span> data_load:</span><br><span class="line">            sen,tag=data</span><br><span class="line">            out=mynn(sen)</span><br><span class="line">            <span class="keyword">for</span> x,y <span class="keyword">in</span> <span class="built_in">zip</span>(out,tag):</span><br><span class="line">                <span class="keyword">if</span> (x[<span class="number">0</span>]&gt;x[<span class="number">1</span>])==(y[<span class="number">0</span>]&gt;y[<span class="number">1</span>]):</span><br><span class="line">                    ac+=<span class="number">1</span></span><br><span class="line">                siz+=<span class="number">1</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;准确率为&#123;&#125;&quot;</span>.<span class="built_in">format</span>(ac/siz))</span><br></pre></td></tr></table></figure>
+# 训练过程 ## 工具
+损失函数设定为交叉熵，优化器为随机梯度下降，学习速率为<code>0.01</code>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">loss_fn=nn.CrossEntropyLoss()</span><br><span class="line">    optim=torch.optim.SGD(mynn.parameters(),lr=<span class="number">0.01</span>)</span><br></pre></td></tr></table></figure>
-<p>训练分多个批次(epoch),每个批次都会把所有数据训练一遍，每次训练先算当前神经网络输出，再算损失函数，然后反向传播梯度下降。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> epoch <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;训练批次数：&#123;&#125;&quot;</span>.<span class="built_in">format</span>(epoch))</span><br><span class="line">    <span class="keyword">for</span> data <span class="keyword">in</span> train_load:</span><br><span class="line">        optim.zero_grad()</span><br><span class="line">        sen,tag=data</span><br><span class="line">        output=mynn(sen)</span><br><span class="line">        res_loss=loss_fn(output,tag)</span><br><span class="line">        res_loss.backward()</span><br><span class="line">        optim.step()</span><br><span class="line">        <span class="keyword">if</span> train_step%<span class="number">10</span>==<span class="number">0</span>:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;训练次数:&#123;&#125;,loss=&#123;&#125;&quot;</span>.<span class="built_in">format</span>(train_step,res_loss.item()))</span><br><span class="line">        train_step+=<span class="number">1</span></span><br><span class="line">    test_accuracy(test_load)</span><br><span class="line">    torch.save(mynn.state_dict(),<span class="string">&quot;./model/epoch&#123;&#125;.pth&quot;</span>.<span class="built_in">format</span>(epoch))</span><br></pre></td></tr></table></figure>
-<h2 id="模型保存-读取"><a href="#模型保存-读取" class="headerlink" title="模型保存&#x2F;读取"></a>模型保存&#x2F;读取</h2><p>这次我只保存了模型参数：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">torch.save(mynn.state_dict(),<span class="string">&quot;./model/final.pth&quot;</span>)</span><br></pre></td></tr></table></figure>
-<p>模型读取(要先创建好骨架)：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mynn.load_state_dict(torch.load(<span class="string">&quot;./model/final.pth&quot;</span>))</span><br></pre></td></tr></table></figure>
-<h2 id="训练结果"><a href="#训练结果" class="headerlink" title="训练结果"></a>训练结果</h2><p><code>准确率为0.8693622448979592</code></p>
-<h1 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h1><p>后续放github上</p>
+训练分多个批次(epoch),每个批次都会把所有数据训练一遍，每次训练先算当前神经网络输出，再算损失函数，然后反向传播梯度下降。
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> epoch <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;训练批次数：&#123;&#125;&quot;</span>.<span class="built_in">format</span>(epoch))</span><br><span class="line">    <span class="keyword">for</span> data <span class="keyword">in</span> train_load:</span><br><span class="line">        optim.zero_grad()</span><br><span class="line">        sen,tag=data</span><br><span class="line">        output=mynn(sen)</span><br><span class="line">        res_loss=loss_fn(output,tag)</span><br><span class="line">        res_loss.backward()</span><br><span class="line">        optim.step()</span><br><span class="line">        <span class="keyword">if</span> train_step%<span class="number">10</span>==<span class="number">0</span>:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;训练次数:&#123;&#125;,loss=&#123;&#125;&quot;</span>.<span class="built_in">format</span>(train_step,res_loss.item()))</span><br><span class="line">        train_step+=<span class="number">1</span></span><br><span class="line">    test_accuracy(test_load)</span><br><span class="line">    torch.save(mynn.state_dict(),<span class="string">&quot;./model/epoch&#123;&#125;.pth&quot;</span>.<span class="built_in">format</span>(epoch))</span><br></pre></td></tr></table></figure> ## 模型保存/读取 这次我只保存了模型参数： <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">torch.save(mynn.state_dict(),<span class="string">&quot;./model/final.pth&quot;</span>)</span><br></pre></td></tr></table></figure>
+模型读取(要先创建好骨架)： <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mynn.load_state_dict(torch.load(<span class="string">&quot;./model/final.pth&quot;</span>))</span><br></pre></td></tr></table></figure> ## 训练结果
+<code>准确率为0.8693622448979592</code></p>
+<h1 id="完整代码">完整代码</h1>
+<p>后续放github上</p>
 
       
     </div>
@@ -480,58 +619,89 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>后续大多只简写了证明是NP-H,NP毕竟都比较显然就不写了。。。</p>
-<h1 id="1-Proof-sat-is-npc"><a href="#1-Proof-sat-is-npc" class="headerlink" title="1.Proof sat is npc"></a>1.Proof sat is npc</h1><h2 id="先证-sat-in-np-hard"><a href="#先证-sat-in-np-hard" class="headerlink" title="先证 sat $\in$ np-hard:"></a>先证 sat $\in$ np-hard:</h2><p>我们的目标是证明:sat难于任何np问题。考虑任何一个np问题$L$，存在一个图灵机$M$,$x \in L \Leftrightarrow \exist u \in {0,1}^{p(x)} s.t.M(x,u)&#x3D;1$,现在我们的目标是，将$x\in L$这个条件多项式地转化为一个CNF。</p>
-<p>对于上述TM，我们可以不依赖input纸带地找到它所有的configuration(详见zaq的ppt),对于一个$x$,我们再设定$p(x)$个布尔变量$y_1,y_2….y_{p(x)}$,要判断$M(x,{y})$是否会输出1，我们只需要判断以下条件：</p>
-<ol>
-<li>存在一个configuration sequence satisfying 每个configuration经过转移函数后都会到达下一个configuration（TM的定义）</li>
-<li>最后一个configuration 将会使TM halt and output <code>1</code>.<br>这可以在多项式复杂度内表示为两个CNF,因此我们成功将$x\in L$转化为了一个CNF。</li>
-</ol>
-<h2 id="再证-sat-in-NPC"><a href="#再证-sat-in-NPC" class="headerlink" title="再证 sat $\in$ NPC"></a>再证 sat $\in$ NPC</h2><p>只要证sat $\in$ NP,显然的。</p>
-<h1 id="2-Proof-SAT-leq-p-3-SAT"><a href="#2-Proof-SAT-leq-p-3-SAT" class="headerlink" title="2. Proof $SAT \leq_{p} 3-SAT$"></a>2. Proof $SAT \leq_{p} 3-SAT$</h1><p>考虑一个$k$元简单析取式$A_1 \vee A_2 \vee A_3\vee… A_k$加入一个新的变量$z$,可以作如下化简</p>
-<p>$A_1 \vee A_2 \vee A_3\vee… A_k &#x3D; (A_1 \vee A_2 \vee…A_{k-2} \vee z)\wedge (A_{k-1} \vee A_k \vee \bar{z})$,重复上述过程即可，可以发现重复次数显然是线性的，因此是合法的卡普规约.</p>
-<h1 id="3-最大团是-NPC"><a href="#3-最大团是-NPC" class="headerlink" title="3. 最大团是 NPC"></a>3. 最大团是 NPC</h1><p>我们已经证明了3-sat是NPC，因此我们只要证明 $3-SAT \leq_{p}最大团问题$.</p>
+          <p>后续大多只简写了证明是NP-H,NP毕竟都比较显然就不写了。。。 # 1.Proof
+sat is npc ## 先证 sat <span class="math inline">\(\in\)</span>
+np-hard:</p>
+<p>我们的目标是证明:sat难于任何np问题。考虑任何一个np问题<span class="math inline">\(L\)</span>，存在一个图灵机<span class="math inline">\(M\)</span>,<span class="math inline">\(x \in L
+\Leftrightarrow \exist u \in \{0,1\}^{p(x)}
+s.t.M(x,u)=1\)</span>,现在我们的目标是，将<span class="math inline">\(x\in L\)</span>这个条件多项式地转化为一个CNF。</p>
+<p>对于上述TM，我们可以不依赖input纸带地找到它所有的configuration(详见zaq的ppt),对于一个<span class="math inline">\(x\)</span>,我们再设定<span class="math inline">\(p(x)\)</span>个布尔变量<span class="math inline">\(y_1,y_2....y_{p(x)}\)</span>,要判断<span class="math inline">\(M(x,\{y\})\)</span>是否会输出1，我们只需要判断以下条件：
+1. 存在一个configuration sequence satisfying
+每个configuration经过转移函数后都会到达下一个configuration（TM的定义）
+2. 最后一个configuration 将会使TM halt and output <code>1</code>.
+这可以在多项式复杂度内表示为两个CNF,因此我们成功将<span class="math inline">\(x\in L\)</span>转化为了一个CNF。</p>
+<h2 id="再证-sat-in-npc">再证 sat <span class="math inline">\(\in\)</span> NPC</h2>
+<p>只要证sat <span class="math inline">\(\in\)</span> NP,显然的。</p>
+<h1 id="proof-sat-leq_p-3-sat">2. Proof <span class="math inline">\(SAT
+\leq_{p} 3-SAT\)</span></h1>
+<p>考虑一个<span class="math inline">\(k\)</span>元简单析取式<span class="math inline">\(A_1 \vee A_2 \vee A_3\vee...
+A_k\)</span>加入一个新的变量<span class="math inline">\(z\)</span>,可以作如下化简</p>
+<p><span class="math inline">\(A_1 \vee A_2 \vee A_3\vee... A_k = (A_1
+\vee A_2 \vee...A_{k-2} \vee z)\wedge (A_{k-1} \vee A_k \vee
+\bar{z})\)</span>,重复上述过程即可，可以发现重复次数显然是线性的，因此是合法的卡普规约.</p>
+<h1 id="最大团是-npc">3. 最大团是 NPC</h1>
+<p>我们已经证明了3-sat是NPC，因此我们只要证明 <span class="math inline">\(3-SAT \leq_{p}最大团问题\)</span>.</p>
 <p>考虑任何一个CNF，我们建如下图：</p>
-<p>对于m-clauses CNF,我们建立一个m部图，对于每一个从句，我们将所有成真的赋值拉出来，看成一个顶点，可以发现最多会拉出$2^3&#x3D;7$个点，没有出现的变量用*代替。</p>
-<p>然后，对于不矛盾的点，我们连一条边，最后只要判断最大团是否等于$m$即可。</p>
-<h1 id="4-整数规划是NPC"><a href="#4-整数规划是NPC" class="headerlink" title="4. 整数规划是NPC"></a>4. 整数规划是NPC</h1><p>考虑证明：$SAT \leq_{p} 整数规划$</p>
-<p>对于任意mclauses-CNF:$(A_1 \vee A_2…)\wedge (B_1 \vee B_2 \vee…)…$ 先限制所有字母为$0 \leq x \leq 1$,一共$m$个方程，再对每个析取式，写出$\sum A_i \geq 1$</p>
+<p>对于m-clauses
+CNF,我们建立一个m部图，对于每一个从句，我们将所有成真的赋值拉出来，看成一个顶点，可以发现最多会拉出<span class="math inline">\(2^3=7\)</span>个点，没有出现的变量用*代替。</p>
+<p>然后，对于不矛盾的点，我们连一条边，最后只要判断最大团是否等于<span class="math inline">\(m\)</span>即可。</p>
+<h1 id="整数规划是npc">4. 整数规划是NPC</h1>
+<p>考虑证明：<span class="math inline">\(SAT \leq_{p}
+整数规划\)</span></p>
+<p>对于任意mclauses-CNF:<span class="math inline">\((A_1 \vee
+A_2...)\wedge (B_1 \vee B_2 \vee...)...\)</span> 先限制所有字母为<span class="math inline">\(0 \leq x \leq 1\)</span>,一共<span class="math inline">\(m\)</span>个方程，再对每个析取式，写出<span class="math inline">\(\sum A_i \geq 1\)</span></p>
 <p>显然，整数规划是NP的，因此得证。</p>
-<h1 id="5-有向图哈密顿路是NPC"><a href="#5-有向图哈密顿路是NPC" class="headerlink" title="5. 有向图哈密顿路是NPC"></a>5. 有向图哈密顿路是NPC</h1><p>考虑将问题规约到SAT。我们换一种视角来看待SAT问题，对于每个变量$u$,如果$u$取 <code>1</code>那么所有包含$u$的从句都会被满足，如果$u$取<code>0</code>那么所有包含$\bar{u}$的从句将会被满足。</p>
+<h1 id="有向图哈密顿路是npc">5. 有向图哈密顿路是NPC</h1>
+<p>考虑将问题规约到SAT。我们换一种视角来看待SAT问题，对于每个变量<span class="math inline">\(u\)</span>,如果<span class="math inline">\(u\)</span>取 <code>1</code>那么所有包含<span class="math inline">\(u\)</span>的从句都会被满足，如果<span class="math inline">\(u\)</span>取<code>0</code>那么所有包含<span class="math inline">\(\bar{u}\)</span>的从句将会被满足。</p>
 <p>这次，我们按照变量来建图：</p>
 <p>对于一个变量，我们单独对它建一层点：</p>
-<p><img src="lk.jpg" alt="图片"></p>
-<p>对于所有的从句$c_1,c_2,c_3…c_m$,让他们相邻之间用双向边连接，规定从左往右是<code>True</code>,反之是<code>False</code>,如果取<code>True</code>时能让$c_2$满足，那么就向点$c_2$连边。</p>
-<p>现在我们已经处理好了一个变量，要处理所有$n$个变量，我们只需要建立起点st和终点ed，按如下方式把所有变量连起来:</p>
-<p><img src="tot.jpg" alt="图片"></p>
+<figure>
+<img src="lk.jpg" alt="图片">
+<figcaption aria-hidden="true">图片</figcaption>
+</figure>
+<p>对于所有的从句<span class="math inline">\(c_1,c_2,c_3...c_m\)</span>,让他们相邻之间用双向边连接，规定从左往右是<code>True</code>,反之是<code>False</code>,如果取<code>True</code>时能让<span class="math inline">\(c_2\)</span>满足，那么就向点<span class="math inline">\(c_2\)</span>连边。</p>
+<p>现在我们已经处理好了一个变量，要处理所有<span class="math inline">\(n\)</span>个变量，我们只需要建立起点st和终点ed，按如下方式把所有变量连起来:</p>
+<figure>
+<img src="tot.jpg" alt="图片">
+<figcaption aria-hidden="true">图片</figcaption>
+</figure>
 <p>每一层的端点处向下一层两个端点都连边。很显然这个图如果存在哈密顿路径那么每一层走的方向就是SAT问题的答案。</p>
-<h1 id="6-无向图哈密顿路径是NPC"><a href="#6-无向图哈密顿路径是NPC" class="headerlink" title="6.无向图哈密顿路径是NPC"></a>6.无向图哈密顿路径是NPC</h1><p>肯定是证明 $有向图哈密顿路径 \leq_{p} 无向图哈密顿路径$.</p>
-<p>那么给定一个有向图，我们要将它转化成一个无向图，使得哈密顿路存在性相同。对于一个节点，我们作如下转化：<br><img src="conv.jpg" alt="图片"><br>将一个点拆成三个点，可以发现如果要经过中间那个点，一定是要走一个入边和一个出边.</p>
-<h1 id="7-哈密顿回路是NPC"><a href="#7-哈密顿回路是NPC" class="headerlink" title="7.哈密顿回路是NPC"></a>7.哈密顿回路是NPC</h1><p>考虑将它规约到无向图哈密顿路径</p>
+<h1 id="无向图哈密顿路径是npc">6.无向图哈密顿路径是NPC</h1>
+<p>肯定是证明 <span class="math inline">\(有向图哈密顿路径 \leq_{p}
+无向图哈密顿路径\)</span>.</p>
+<p>那么给定一个有向图，我们要将它转化成一个无向图，使得哈密顿路存在性相同。对于一个节点，我们作如下转化：
+<img src="conv.jpg" alt="图片">
+将一个点拆成三个点，可以发现如果要经过中间那个点，一定是要走一个入边和一个出边.</p>
+<h1 id="哈密顿回路是npc">7.哈密顿回路是NPC</h1>
+<p>考虑将它规约到无向图哈密顿路径</p>
 <p>对于原来的无向图，直接加一个点，连接其它所有点即可。</p>
-<h1 id="8-TSP判定版本-是否存在小于-k-的路径-是NPC"><a href="#8-TSP判定版本-是否存在小于-k-的路径-是NPC" class="headerlink" title="8.TSP判定版本(是否存在小于$k$的路径)是NPC"></a>8.TSP判定版本(是否存在小于$k$的路径)是NPC</h1><p> 考虑归约到无向图哈密顿路径。</p>
-<p> 对于一个无向图，给它每条边赋权值$\frac{k}{n-1}$即可</p>
-<h1 id="9"><a href="#9" class="headerlink" title="9."></a>9.</h1><p>证明下述语言是NPC:</p>
-<p>${(\phi,1^n): 在ZF公理系统中，命题\phi 有长度至多为n 的证明}$</p>
+<h1 id="tsp判定版本是否存在小于k的路径是npc">8.TSP判定版本(是否存在小于<span class="math inline">\(k\)</span>的路径)是NPC</h1>
+<p>考虑归约到无向图哈密顿路径。</p>
+<p>对于一个无向图，给它每条边赋权值<span class="math inline">\(\frac{k}{n-1}\)</span>即可</p>
+<h1 id="section">9.</h1>
+<p>证明下述语言是NPC:</p>
+<p><span class="math inline">\(\{(\phi,1^n): 在ZF公理系统中，命题\phi
+有长度至多为n 的证明\}\)</span></p>
 <p>感觉就是规约到SAT？把一个CNF看成一个math statement?</p>
-<p>(存疑)</p>
-<h1 id="10-求证二次整数01规划-模2下-是NPC"><a href="#10-求证二次整数01规划-模2下-是NPC" class="headerlink" title="10.求证二次整数01规划(模2下)是NPC"></a>10.求证二次整数01规划(模2下)是NPC</h1><p>考虑从3-SAT问题归约</p>
-<p>对于任意3-CNF，某个变量会出现$u$或$\bar{u}$的形式。我们构造二次01规划问题，对于CNF中的每个变量,构造二次约束：$u^2+\bar{u}^2&#x3D;1$,容易验证这个等式就约束了$u,\bar{u}$不同.</p>
+<p>(存疑) # 10.求证二次整数01规划(模2下)是NPC</p>
+<p>考虑从3-SAT问题归约</p>
+<p>对于任意3-CNF，某个变量会出现<span class="math inline">\(u\)</span>或<span class="math inline">\(\bar{u}\)</span>的形式。我们构造二次01规划问题，对于CNF中的每个变量,构造二次约束：<span class="math inline">\(u^2+\bar{u}^2=1\)</span>,容易验证这个等式就约束了<span class="math inline">\(u,\bar{u}\)</span>不同.</p>
 <p>这样，我们生成了变量个数个二次约束，接下来，我们要解决每个从句的约束.</p>
-<p>考虑到每个从句是一个简单析取式，考虑下列3种情况：</p>
-<ol>
-<li>从句只有一个变量$A$,构造方程$A^2&#x3D;1$即可</li>
-<li>从句有两个变量$A \vee B$,构造方程$A^2+B^2+AB&#x3D;1$即可 </li>
-<li>从句有三个变量$A \vee B \vee C$,构造新变量$t_i$,增加方程</li>
-</ol>
-<p>$\bar{A}\cdot \bar{B}+{t_i}^2&#x3D;0$</p>
-<p>$t_i \cdot \bar{C}&#x3D;0$</p>
+<p>考虑到每个从句是一个简单析取式，考虑下列3种情况： 1.
+从句只有一个变量<span class="math inline">\(A\)</span>,构造方程<span class="math inline">\(A^2=1\)</span>即可 2. 从句有两个变量<span class="math inline">\(A \vee B\)</span>,构造方程<span class="math inline">\(A^2+B^2+AB=1\)</span>即可 3. 从句有三个变量<span class="math inline">\(A \vee B \vee C\)</span>,构造新变量<span class="math inline">\(t_i\)</span>,增加方程</p>
+<p><span class="math inline">\(\bar{A}\cdot
+\bar{B}+{t_i}^2=0\)</span></p>
+<p><span class="math inline">\(t_i \cdot \bar{C}=0\)</span></p>
 <p>容易验证这些方程的解会是合法的3-SAT解。</p>
-<h1 id="11-Exact-one-3-sat"><a href="#11-Exact-one-3-sat" class="headerlink" title="11.Exact one 3-sat"></a>11.Exact one 3-sat</h1><p>从3-sat归约，对于原来的3-sat问题，先把表达式中出现在$j$号从句的字母换成$A_{i,j}$,然后再在末尾增加析取式$(\bar{A_i}\vee A_{i,j} \vee t_i)$<br>同样的，还可以证明NAE-3-SAT是NPC</p>
-<h1 id="12-Subsetsum-问题的规模是-log值域"><a href="#12-Subsetsum-问题的规模是-log值域" class="headerlink" title="12. Subsetsum(问题的规模是$\log值域$)"></a>12. Subsetsum(问题的规模是$\log值域$)</h1><p>从Exact-one 3-sat归约，考虑一个exact-one 3-sat 问题，对于每个变量$u$,如果它为真，那么将会满足某些从句，如果它为假，则会满足另一些从句，因此，对于每个变量，我们创建两个数，一个数在每个从句2倍二进制位设为1，这样可以阻止进位的发生，在从句个数+2*变量编号处也设为1（保证二择），要求的和就是$\sum (2i)^2$</p>
-<h1 id="13-点覆盖，独立集"><a href="#13-点覆盖，独立集" class="headerlink" title="13.点覆盖，独立集"></a>13.点覆盖，独立集</h1><p>它们和最大团完全是一个东西，略</p>
-<h1 id="14-Maxcut-is-NPC"><a href="#14-Maxcut-is-NPC" class="headerlink" title="14.Maxcut is NPC"></a>14.Maxcut is NPC</h1><p>考虑从NAE-3-SAT归约。对于给定的CNF，每个从句的每个字母都看成一个点，从句之间互相连边，形成许多二元环和三元环，考虑赋值不同的节点之间cut,这样三元环最多贡献是2，二元环是1。</p>
-<p>但注意到同一变量在不同的从句之间的约束，因此，我们在一对相反的变量之间添加很多(比m多一个级别？比如$m^2$)边，相当于惩罚，如果这俩点一样就少cut了这么多条边。最后把边都加上，看看是不是$2 \cdot 三元环+重边$ </p>
+<h1 id="exact-one-3-sat">11.Exact one 3-sat</h1>
+<p>从3-sat归约，对于原来的3-sat问题，先把表达式中出现在<span class="math inline">\(j\)</span>号从句的字母换成<span class="math inline">\(A_{i,j}\)</span>,然后再在末尾增加析取式<span class="math inline">\((\bar{A_i}\vee A_{i,j} \vee t_i)\)</span>
+同样的，还可以证明NAE-3-SAT是NPC # 12. Subsetsum(问题的规模是<span class="math inline">\(\log值域\)</span>) 从Exact-one
+3-sat归约，考虑一个exact-one 3-sat 问题，对于每个变量<span class="math inline">\(u\)</span>,如果它为真，那么将会满足某些从句，如果它为假，则会满足另一些从句，因此，对于每个变量，我们创建两个数，一个数在每个从句2倍二进制位设为1，这样可以阻止进位的发生，在从句个数+2*变量编号处也设为1（保证二择），要求的和就是<span class="math inline">\(\sum (2i)^2\)</span></p>
+<h1 id="点覆盖独立集">13.点覆盖，独立集</h1>
+<p>它们和最大团完全是一个东西，略</p>
+<h1 id="maxcut-is-npc">14.Maxcut is NPC</h1>
+<p>考虑从NAE-3-SAT归约。对于给定的CNF，每个从句的每个字母都看成一个点，从句之间互相连边，形成许多二元环和三元环，考虑赋值不同的节点之间cut,这样三元环最多贡献是2，二元环是1。</p>
+<p>但注意到同一变量在不同的从句之间的约束，因此，我们在一对相反的变量之间添加很多(比m多一个级别？比如<span class="math inline">\(m^2\)</span>)边，相当于惩罚，如果这俩点一样就少cut了这么多条边。最后把边都加上，看看是不是<span class="math inline">\(2 \cdot 三元环+重边\)</span></p>
 
       
     </div>
@@ -608,26 +778,50 @@
     
     <div class="post-body" itemprop="articleBody">
           <p>作者应该是俩中国人</p>
-<h1 id="Tarski定理"><a href="#Tarski定理" class="headerlink" title="Tarski定理"></a>Tarski定理</h1><p>对于完全格 $&lt;L,\preceq&gt;$,以及$L \to L$的单调增函数$f$，$f$一定存在不动点</p>
-<p>有点像格上的介值定理</p>
-<h1 id="文章贡献"><a href="#文章贡献" class="headerlink" title="文章贡献"></a>文章贡献</h1><p>对于n阶k维格点格(grid lattice),以及定义在其上的单调不降函数$f$,构造出了一个$O(\log^{\lceil \frac{k+1}{2} \rceil}n)$算法找到一个不动点。</p>
-<p>后文假设我们的目标是解决$Tarski(n,k+1)$</p>
-<h1 id="Step1-Reduce-to-Tarski-n-k"><a href="#Step1-Reduce-to-Tarski-n-k" class="headerlink" title="Step1 Reduce to $Tarski*(n,k)$"></a>Step1 Reduce to $Tarski*(n,k)$</h1><p><img src="exp.jpg" alt="图片"><br>我们可以单独考虑某一个维度，先固定这个维度的值（也就是说取在这个格中取出一个切片）我们尝试在这个切面上找到一个prefix或者suffix。(前驱或者后继是一定存在的，因为只考虑这个切面($k$维)上，一定存在不动点，这个点肯定是一个前驱或后继),很显然哉suffix到$[n]^{k+1}$之间（或$[1]^{k+1}$到prefix之间）一定有不动点，于是第$k+1$维减半。</p>
-<p>prefix: 指一个点$x$满足$f(x) \preceq x$</p>
-<p>suffix:指一个点$x$满足$x \preceq f(x)$</p>
-<h2 id="Tarski-n-k"><a href="#Tarski-n-k" class="headerlink" title="$Tarski*(n,k)$"></a>$Tarski*(n,k)$</h2><p><img src="tarskis.png" alt="图片"></p>
-<h2 id="Reduction"><a href="#Reduction" class="headerlink" title="Reduction"></a>Reduction</h2><p><img src="red.png" alt="图片"></p>
-<p>问题转变为求解$Tarski*(n,k)$,假设求解$Tarski*(n,k)$的复杂度是$q(n,k)$，那么，求解$Tarski(n,k)$的复杂度是$O(2^k+k\log n\cdot q(n,k))$</p>
-<h1 id="Refined-Tarski-n-k"><a href="#Refined-Tarski-n-k" class="headerlink" title="$Refined Tarski*(n,k)$"></a>$Refined Tarski*(n,k)$</h1><p><img src="ref.png" alt="图片"></p>
-<h2 id="求解"><a href="#求解" class="headerlink" title="求解"></a>求解</h2><p><img src="note.jpg" alt="图片"></p>
-<h1 id="求解-Tarski-n-a-b"><a href="#求解-Tarski-n-a-b" class="headerlink" title="求解 $Tarski*(n,a+b)$"></a>求解 $Tarski*(n,a+b)$</h1><p>现在的目标是，假设我们能求解$Tarski*(n,a),Tarski*(n,b)$如何求解$Tarski*(n,a+b)$</p>
-<p>一个很自然的想法是，对于$[a+1,a+b]$维，我们直接枚举它们的值（假设枚举了$q_i$）然后我们执行如下算法:</p>
-<p><img src="part.png" alt="图片"></p>
-<p>此时我们会发现，在前$a$维的切面上，$p^{(l,i)},p^{(r,i)}$之间的点，这些点的$g(x)$在$a+1$维之后都相等(由于Refined Tarski*的作用),前$a$维肯定非负或非正，因此，如果我们能保证$[a+1,a+b+1]$维也非负&#x2F;非正，那么就做完了。</p>
-<p>如何保证呢，我们发现实际上这可以转化成一个求解$Tarski(n,b)$的过程,如果我们可以保证对$q_i$的回复满足 <code>Definition2</code>，那么最终就能找到一组非正或非负的回复。</p>
-<p><img src="ker.png" alt="图片"></p>
-<p>在这里，每次询问$q_i$时，我们都会找到之前的询问记录，保证下界要比以前的大，上界要比以前的小，这样的回复一定是可以满足<code>Definition2</code>的（因为$(q_i,0)+g(p^{(l,i)},q_i)$关于$q_i$单调）。因此，假设$Tarski*(n,a)$复杂度是$q(n,a)$,$Tarski*(n,b)$复杂度是$q(n,b)$，那么我们在$O((b+1)q(n,a)q(n,b))$内完成了$Tarski*(n,a+b)$</p>
-<h1 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h1><p>由于$Tarski*(n,2)$可以在$O(\log n)$内完成，因此$Tarski*(n,k)$可以在$O(\log^{k&#x2F;2}n)$完成,进而证明了Tarski(n,k)的复杂度</p>
+<h1 id="tarski定理">Tarski定理</h1>
+<p>对于完全格 <span class="math inline">\(&lt;L,\preceq&gt;\)</span>,以及<span class="math inline">\(L \to L\)</span>的单调增函数<span class="math inline">\(f\)</span>，<span class="math inline">\(f\)</span>一定存在不动点</p>
+<p>有点像格上的介值定理 # 文章贡献 对于n阶k维格点格(grid
+lattice),以及定义在其上的单调不降函数<span class="math inline">\(f\)</span>,构造出了一个<span class="math inline">\(O(\log^{\lceil \frac{k+1}{2}
+\rceil}n)\)</span>算法找到一个不动点。</p>
+<p>后文假设我们的目标是解决<span class="math inline">\(Tarski(n,k+1)\)</span> # Step1 Reduce to <span class="math inline">\(Tarski*(n,k)\)</span> <img src="exp.jpg" alt="图片">
+我们可以单独考虑某一个维度，先固定这个维度的值（也就是说取在这个格中取出一个切片）我们尝试在这个切面上找到一个prefix或者suffix。(前驱或者后继是一定存在的，因为只考虑这个切面(<span class="math inline">\(k\)</span>维)上，一定存在不动点，这个点肯定是一个前驱或后继),很显然哉suffix到<span class="math inline">\([n]^{k+1}\)</span>之间（或<span class="math inline">\([1]^{k+1}\)</span>到prefix之间）一定有不动点，于是第<span class="math inline">\(k+1\)</span>维减半。</p>
+<p>prefix: 指一个点<span class="math inline">\(x\)</span>满足<span class="math inline">\(f(x) \preceq x\)</span></p>
+<p>suffix:指一个点<span class="math inline">\(x\)</span>满足<span class="math inline">\(x \preceq f(x)\)</span> ## <span class="math inline">\(Tarski*(n,k)\)</span> <img src="tarskis.png" alt="图片"></p>
+<h2 id="reduction">Reduction</h2>
+<figure>
+<img src="red.png" alt="图片">
+<figcaption aria-hidden="true">图片</figcaption>
+</figure>
+<p>问题转变为求解<span class="math inline">\(Tarski*(n,k)\)</span>,假设求解<span class="math inline">\(Tarski*(n,k)\)</span>的复杂度是<span class="math inline">\(q(n,k)\)</span>，那么，求解<span class="math inline">\(Tarski(n,k)\)</span>的复杂度是<span class="math inline">\(O(2^k+k\log n\cdot q(n,k))\)</span></p>
+<h1 id="refined-tarskink"><span class="math inline">\(Refined
+Tarski*(n,k)\)</span></h1>
+<figure>
+<img src="ref.png" alt="图片">
+<figcaption aria-hidden="true">图片</figcaption>
+</figure>
+<h2 id="求解">求解</h2>
+<figure>
+<img src="note.jpg" alt="图片">
+<figcaption aria-hidden="true">图片</figcaption>
+</figure>
+<h1 id="求解-tarskinab">求解 <span class="math inline">\(Tarski*(n,a+b)\)</span></h1>
+<p>现在的目标是，假设我们能求解<span class="math inline">\(Tarski*(n,a),Tarski*(n,b)\)</span>如何求解<span class="math inline">\(Tarski*(n,a+b)\)</span></p>
+<p>一个很自然的想法是，对于<span class="math inline">\([a+1,a+b]\)</span>维，我们直接枚举它们的值（假设枚举了<span class="math inline">\(q_i\)</span>）然后我们执行如下算法:</p>
+<figure>
+<img src="part.png" alt="图片">
+<figcaption aria-hidden="true">图片</figcaption>
+</figure>
+<p>此时我们会发现，在前<span class="math inline">\(a\)</span>维的切面上，<span class="math inline">\(p^{(l,i)},p^{(r,i)}\)</span>之间的点，这些点的<span class="math inline">\(g(x)\)</span>在<span class="math inline">\(a+1\)</span>维之后都相等(由于Refined
+Tarski*的作用),前<span class="math inline">\(a\)</span>维肯定非负或非正，因此，如果我们能保证<span class="math inline">\([a+1,a+b+1]\)</span>维也非负/非正，那么就做完了。</p>
+<p>如何保证呢，我们发现实际上这可以转化成一个求解<span class="math inline">\(Tarski(n,b)\)</span>的过程,如果我们可以保证对<span class="math inline">\(q_i\)</span>的回复满足
+<code>Definition2</code>，那么最终就能找到一组非正或非负的回复。</p>
+<figure>
+<img src="ker.png" alt="图片">
+<figcaption aria-hidden="true">图片</figcaption>
+</figure>
+<p>在这里，每次询问<span class="math inline">\(q_i\)</span>时，我们都会找到之前的询问记录，保证下界要比以前的大，上界要比以前的小，这样的回复一定是可以满足<code>Definition2</code>的（因为<span class="math inline">\((q_i,0)+g(p^{(l,i)},q_i)\)</span>关于<span class="math inline">\(q_i\)</span>单调）。因此，假设<span class="math inline">\(Tarski*(n,a)\)</span>复杂度是<span class="math inline">\(q(n,a)\)</span>,<span class="math inline">\(Tarski*(n,b)\)</span>复杂度是<span class="math inline">\(q(n,b)\)</span>，那么我们在<span class="math inline">\(O((b+1)q(n,a)q(n,b))\)</span>内完成了<span class="math inline">\(Tarski*(n,a+b)\)</span></p>
+<h1 id="最后">最后</h1>
+<p>由于<span class="math inline">\(Tarski*(n,2)\)</span>可以在<span class="math inline">\(O(\log n)\)</span>内完成，因此<span class="math inline">\(Tarski*(n,k)\)</span>可以在<span class="math inline">\(O(\log^{k/2}n)\)</span>完成,进而证明了Tarski(n,k)的复杂度</p>
 
       
     </div>
@@ -704,19 +898,30 @@
     
     <div class="post-body" itemprop="articleBody">
           <p>尝试了一个寒假的open problem，先放一段时间再想吧。。</p>
-<p>先记录一下目前的思路们:</p>
-<h1 id="1"><a href="#1" class="headerlink" title="1"></a>1</h1><p>先用$d_1$视角构造一组allocation $X&#x3D;(X_1,X_2,X_3)$ 满足对 $d_1$ tEFX，不失一般性，令 $X_3 &lt;<em>{3} X_1 &lt;</em>{3} X_2$<br>将 $X_1$中的chores 按照 $d_3$ 升序排序，即 $X_1&#x3D;{c_1,c_2….},d_3(c_1)&lt;d_3(c_2)…$<br>然后执行</p>
+<p>先记录一下目前的思路们: # 1 先用<span class="math inline">\(d_1\)</span>视角构造一组allocation <span class="math inline">\(X=(X_1,X_2,X_3)\)</span> 满足对 <span class="math inline">\(d_1\)</span> tEFX，不失一般性，令 <span class="math inline">\(X_3 &lt;_{3} X_1 &lt;_{3} X_2\)</span> 将 <span class="math inline">\(X_1\)</span>中的chores 按照 <span class="math inline">\(d_3\)</span> 升序排序，即 <span class="math inline">\(X_1={c_1,c_2....},d_3(c_1)&lt;d_3(c_2)...\)</span>
+然后执行</p>
 <figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> <span class="attribute">i</span>=1 <span class="keyword">to</span> |X_1|&#123;</span><br><span class="line">    <span class="keyword">if</span>(d_3(X_1-c_i)&lt;d_3(X_3+c_i))break</span><br><span class="line">    X_3.<span class="built_in">add</span>(c_i)</span><br><span class="line">    X_1.delete(c_i)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>此时，必然有 $d_3(X_3)&lt;d_3(X_1)&lt;d_3(X_2)$,且 $X_3,X_1$都对agent3 tEFX-feasible. 同时，$d_1(X_1)&lt;d_1(X_3)$.</p>
-<p>如果 $X_2$ is tEFX feasible for agent1,那么算法结束</p>
-<p>反之，$X_2$ is not tEFX feasible for agent1, 则一定有$d_1(X_2)&gt;d_1(X_1)$，此时以$d_1$为disutility function使用PR算法,再回到算法开始。</p>
-<h2 id="缺陷"><a href="#缺陷" class="headerlink" title="缺陷"></a>缺陷</h2><p>无法保证 $min(d_1(X_1),d_1(X_2))$单调,无法确定算法是否有穷<br>已找到一组反例，在$X_1,X_3$之间来回传递。</p>
+<p>此时，必然有 <span class="math inline">\(d_3(X_3)&lt;d_3(X_1)&lt;d_3(X_2)\)</span>,且 <span class="math inline">\(X_3,X_1\)</span>都对agent3 tEFX-feasible.
+同时，<span class="math inline">\(d_1(X_1)&lt;d_1(X_3)\)</span>.</p>
+<p>如果 <span class="math inline">\(X_2\)</span> is tEFX feasible for
+agent1,那么算法结束</p>
+<p>反之，<span class="math inline">\(X_2\)</span> is not tEFX feasible
+for agent1, 则一定有<span class="math inline">\(d_1(X_2)&gt;d_1(X_1)\)</span>，此时以<span class="math inline">\(d_1\)</span>为disutility
+function使用PR算法,再回到算法开始。 ## 缺陷 无法保证 <span class="math inline">\(min(d_1(X_1),d_1(X_2))\)</span>单调,无法确定算法是否有穷
+已找到一组反例，在<span class="math inline">\(X_1,X_3\)</span>之间来回传递。</p>
 <figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">d</span>[<span class="number">1</span>][<span class="number">1</span>]=<span class="number">12</span>;d[<span class="number">1</span>][<span class="number">2</span>]=<span class="number">8</span>;d[<span class="number">1</span>][<span class="number">3</span>]=<span class="number">6</span>;d[<span class="number">1</span>][<span class="number">4</span>]=<span class="number">1</span>;d[<span class="number">1</span>][<span class="number">5</span>]=<span class="number">17</span>;</span><br><span class="line"><span class="attribute">d</span>[<span class="number">2</span>][<span class="number">1</span>]=<span class="number">7</span>;d[<span class="number">2</span>][<span class="number">2</span>]=<span class="number">1</span>;d[<span class="number">2</span>][<span class="number">3</span>]=<span class="number">11</span>;d[<span class="number">2</span>][<span class="number">4</span>]=<span class="number">2</span>;d[<span class="number">2</span>][<span class="number">5</span>]=<span class="number">1</span>;</span><br><span class="line"><span class="attribute">d</span>[<span class="number">3</span>][<span class="number">1</span>]=<span class="number">17</span>;d[<span class="number">3</span>][<span class="number">2</span>]=<span class="number">6</span>;d[<span class="number">3</span>][<span class="number">3</span>]=<span class="number">14</span>;d[<span class="number">3</span>][<span class="number">4</span>]=<span class="number">4</span>;d[<span class="number">3</span>][<span class="number">5</span>]=<span class="number">7</span>;</span><br></pre></td></tr></table></figure>
-
-<h1 id="2"><a href="#2" class="headerlink" title="2"></a>2</h1><p>先用$d_1$视角构造一组allocation $X&#x3D;(X_1,X_2,X_3)$ 满足对 $d_1$ tEFX，不失一般性，令 $X_3 &lt;<em>{3} X_1 &lt;</em>{3} X_2$<br>将 $X_1$中的chores 按照 $d_3$ 升序排序，即 $X_1&#x3D;{c_1,c_2….},d_3(c_1)&lt;d_3(c_2)…$</p>
-<p>如果出现 $X_1,X_2$都对agent2，3 不 tEFX feasible, 那么 此时直接对agent2或agent3的disutilities function使用PR算法,在开局就重构</p>
-<h2 id="缺陷："><a href="#缺陷：" class="headerlink" title="缺陷："></a>缺陷：</h2><p>也是没有单调性</p>
-<h1 id="3"><a href="#3" class="headerlink" title="3"></a>3</h1><p>直接摈弃原来的思路，直接对disutilities function的值域归纳。<br>也即，假设一组disutilities function可以做出tEFX，只要证明将其中任意一个值增加1仍然可以做出tEFX分配。</p>
+<h1 id="section">2</h1>
+<p>先用<span class="math inline">\(d_1\)</span>视角构造一组allocation
+<span class="math inline">\(X=(X_1,X_2,X_3)\)</span> 满足对 <span class="math inline">\(d_1\)</span> tEFX，不失一般性，令 <span class="math inline">\(X_3 &lt;_{3} X_1 &lt;_{3} X_2\)</span> 将 <span class="math inline">\(X_1\)</span>中的chores 按照 <span class="math inline">\(d_3\)</span> 升序排序，即 <span class="math inline">\(X_1={c_1,c_2....},d_3(c_1)&lt;d_3(c_2)...\)</span></p>
+<p>如果出现 <span class="math inline">\(X_1,X_2\)</span>都对agent2，3 不
+tEFX feasible, 那么 此时直接对agent2或agent3的disutilities
+function使用PR算法,在开局就重构</p>
+<h2 id="缺陷">缺陷：</h2>
+<p>也是没有单调性</p>
+<h1 id="section-1">3</h1>
+<p>直接摈弃原来的思路，直接对disutilities function的值域归纳。
+也即，假设一组disutilities
+function可以做出tEFX，只要证明将其中任意一个值增加1仍然可以做出tEFX分配。</p>
 <p>正在讨论。。也是一堆问题</p>
 <p>upd:讨论不动了，研究值域是没有未来的</p>
 
@@ -794,12 +999,21 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p><a target="_blank" rel="noopener" href="https://codeforces.com/problemset/problem/1913/E">题目链接</a></p>
-<h1 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h1><p>给出一个 $n\times m$ 的 0&#x2F;1 矩阵，可以反转若干个位置，再给出 $A_n,B_m$，要求最终第 $i$ 行恰有 $A_i$ 个 $1$，第 $j$ 列恰有 $B_j$ 个 $1$，问最少需要反转多少个位置，无解输出 <code>-1</code>。$n,m\le 50$。</p>
-<h1 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h1><p>很自然可以想到网络流来模拟是否对矩阵反转，我的方法如下：</p>
-<p>每行，每列都加一个哨兵节点，源点向每个行哨兵节点连边，流量限制为 $A_i$,行哨兵节点再向矩阵的每个点连边，流量限制为$1$，矩阵的每个点再向列哨兵节点连边，流量为$1$,每个列哨兵节点再向汇点连边，流量为$B_j$。</p>
-<p>现在考虑如何衡量操作次数，在行哨兵向矩阵节点连边时，如果 $a_{i,j}&#x3D;1$,那么设定费用为 $-1$,反之设定为$1$,最后只要判断最大流是否等于 $\sum A_i$,$\sum A_i&#x3D;\sum B_j$,答案为$cst+\sum a_{i,j}$</p>
-<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="meta">#<span class="keyword">define</span> rep(i,j,k) for(i=j;i&lt;=k;++i)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> dow(i,j,k) for(i=j;i&gt;=k;--i)</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N=<span class="number">70</span>;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">edge</span>&#123;</span><br><span class="line">    <span class="type">int</span> nxt,to,w,c;</span><br><span class="line">&#125;e[(N*N)*<span class="number">3</span>];</span><br><span class="line"><span class="type">int</span> head[N*N],pos,s,t,dis[N*N],pre[N*N],ep[N*N],flow,cst;</span><br><span class="line"><span class="type">bool</span> vis[N*N];</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">add</span><span class="params">(<span class="type">int</span> u,<span class="type">int</span> v,<span class="type">int</span> w,<span class="type">int</span> c)</span></span>&#123;</span><br><span class="line">    e[++pos]=(edge)&#123;head[u],v,w,c&#125;;head[u]=pos;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">spfa</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="type">int</span> i;<span class="built_in">rep</span>(i,<span class="number">1</span>,t)dis[i]=<span class="number">1</span>&lt;&lt;<span class="number">30</span>;</span><br><span class="line">    queue&lt;<span class="type">int</span>&gt;q;</span><br><span class="line">    <span class="built_in">memset</span>(vis,<span class="number">0</span>,<span class="built_in">sizeof</span>(vis));</span><br><span class="line">    <span class="built_in">rep</span>(i,<span class="number">1</span>,t)pre[i]=<span class="number">-1</span>;</span><br><span class="line">    dis[s]=<span class="number">0</span>;vis[s]=<span class="number">1</span>;</span><br><span class="line">    q.<span class="built_in">push</span>(s);</span><br><span class="line">    <span class="keyword">while</span>(!q.<span class="built_in">empty</span>())&#123;</span><br><span class="line">        <span class="type">int</span> u=q.<span class="built_in">front</span>();q.<span class="built_in">pop</span>();vis[u]=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(i=head[u];i;i=e[i].nxt)<span class="keyword">if</span>(e[i].w&gt;<span class="number">0</span> &amp;&amp; dis[e[i].to]&gt;dis[u]+e[i].c)&#123;</span><br><span class="line">                dis[e[i].to]=dis[u]+e[i].c;ep[e[i].to]=i;</span><br><span class="line">                pre[e[i].to]=u;<span class="keyword">if</span>(!vis[e[i].to])q.<span class="built_in">push</span>(e[i].to);vis[e[i].to]=<span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> dis[t]&lt;(<span class="number">1</span>&lt;&lt;<span class="number">30</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">EK</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="type">int</span> i;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">spfa</span>())&#123;</span><br><span class="line">        <span class="type">int</span> f=<span class="number">1</span>&lt;&lt;<span class="number">30</span>;</span><br><span class="line">        <span class="keyword">for</span>(i=t;i!=s;i=pre[i])</span><br><span class="line">            f=<span class="built_in">min</span>(f,e[ep[i]].w);</span><br><span class="line">        flow+=f;cst+=f*dis[t];</span><br><span class="line">        <span class="keyword">for</span>(i=t;i!=s;i=pre[i])e[ep[i]].w-=f,e[ep[i]^<span class="number">1</span>].w+=f;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> n,m,a[N][N],A[N],B[N];</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">eg</span><span class="params">(<span class="type">int</span> u,<span class="type">int</span> v,<span class="type">int</span> w,<span class="type">int</span> c)</span></span>&#123;</span><br><span class="line">    <span class="built_in">add</span>(u,v,w,c);<span class="built_in">add</span>(v,u,<span class="number">0</span>,-c);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;<span class="comment">//freopen(&quot;in.txt&quot;,&quot;r&quot;,stdin);</span></span><br><span class="line">    ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">    cin&gt;&gt;n&gt;&gt;m;<span class="type">int</span> i,j;</span><br><span class="line">    <span class="built_in">rep</span>(i,<span class="number">1</span>,n)<span class="built_in">rep</span>(j,<span class="number">1</span>,m)cin&gt;&gt;a[i][j];</span><br><span class="line">    <span class="built_in">rep</span>(i,<span class="number">1</span>,n)cin&gt;&gt;A[i];<span class="built_in">rep</span>(i,<span class="number">1</span>,m)cin&gt;&gt;B[i];</span><br><span class="line">    <span class="type">int</span> ps=n*m+n+m;pos=<span class="number">1</span>;</span><br><span class="line">    s=++ps;t=++ps;</span><br><span class="line">    <span class="type">int</span> con=<span class="number">0</span>,slc[<span class="number">2</span>]=&#123;<span class="number">1</span>,<span class="number">-1</span>&#125;;</span><br><span class="line">    <span class="built_in">rep</span>(i,<span class="number">1</span>,n)<span class="built_in">rep</span>(j,<span class="number">1</span>,m)&#123;</span><br><span class="line">        <span class="built_in">eg</span>(n*m+i,(i<span class="number">-1</span>)*m+j,<span class="number">1</span>,slc[a[i][j]]);</span><br><span class="line">        <span class="built_in">eg</span>((i<span class="number">-1</span>)*m+j,n*m+n+j,<span class="number">1</span>,<span class="number">0</span>);</span><br><span class="line">        con+=a[i][j];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">rep</span>(i,<span class="number">1</span>,n)&#123;</span><br><span class="line">        <span class="built_in">eg</span>(s,n*m+i,A[i],<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">rep</span>(j,<span class="number">1</span>,m)<span class="built_in">eg</span>(n*m+n+j,t,B[j],<span class="number">0</span>);</span><br><span class="line">    <span class="type">int</span> sa,sb;sa=sb=<span class="number">0</span>;</span><br><span class="line">    <span class="built_in">rep</span>(i,<span class="number">1</span>,n)sa+=A[i];<span class="built_in">rep</span>(j,<span class="number">1</span>,m)sb+=B[j];</span><br><span class="line">    <span class="built_in">EK</span>();</span><br><span class="line">    <span class="keyword">if</span>(sa==sb &amp;&amp; sa==flow)cout&lt;&lt;cst+con;<span class="keyword">else</span> cout&lt;&lt;<span class="number">-1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <p><a target="_blank" rel="noopener" href="https://codeforces.com/problemset/problem/1913/E">题目链接</a> #
+题意</p>
+<p>给出一个 <span class="math inline">\(n\times m\)</span> 的 0/1
+矩阵，可以反转若干个位置，再给出 <span class="math inline">\(A_n,B_m\)</span>，要求最终第 <span class="math inline">\(i\)</span> 行恰有 <span class="math inline">\(A_i\)</span> 个 <span class="math inline">\(1\)</span>，第 <span class="math inline">\(j\)</span> 列恰有 <span class="math inline">\(B_j\)</span> 个 <span class="math inline">\(1\)</span>，问最少需要反转多少个位置，无解输出
+<code>-1</code>。<span class="math inline">\(n,m\le 50\)</span>。</p>
+<h1 id="分析">分析</h1>
+<p>很自然可以想到网络流来模拟是否对矩阵反转，我的方法如下：</p>
+<p>每行，每列都加一个哨兵节点，源点向每个行哨兵节点连边，流量限制为
+<span class="math inline">\(A_i\)</span>,行哨兵节点再向矩阵的每个点连边，流量限制为<span class="math inline">\(1\)</span>，矩阵的每个点再向列哨兵节点连边，流量为<span class="math inline">\(1\)</span>,每个列哨兵节点再向汇点连边，流量为<span class="math inline">\(B_j\)</span>。</p>
+<p>现在考虑如何衡量操作次数，在行哨兵向矩阵节点连边时，如果 <span class="math inline">\(a_{i,j}=1\)</span>,那么设定费用为 <span class="math inline">\(-1\)</span>,反之设定为<span class="math inline">\(1\)</span>,最后只要判断最大流是否等于 <span class="math inline">\(\sum A_i\)</span>,<span class="math inline">\(\sum
+A_i=\sum B_j\)</span>,答案为<span class="math inline">\(cst+\sum
+a_{i,j}\)</span></p>
+<h1 id="代码">代码</h1>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="meta">#<span class="keyword">define</span> rep(i,j,k) for(i=j;i&lt;=k;++i)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> dow(i,j,k) for(i=j;i&gt;=k;--i)</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N=<span class="number">70</span>;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">edge</span>&#123;</span><br><span class="line">    <span class="type">int</span> nxt,to,w,c;</span><br><span class="line">&#125;e[(N*N)*<span class="number">3</span>];</span><br><span class="line"><span class="type">int</span> head[N*N],pos,s,t,dis[N*N],pre[N*N],ep[N*N],flow,cst;</span><br><span class="line"><span class="type">bool</span> vis[N*N];</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">add</span><span class="params">(<span class="type">int</span> u,<span class="type">int</span> v,<span class="type">int</span> w,<span class="type">int</span> c)</span></span>&#123;</span><br><span class="line">    e[++pos]=(edge)&#123;head[u],v,w,c&#125;;head[u]=pos;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">spfa</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="type">int</span> i;<span class="built_in">rep</span>(i,<span class="number">1</span>,t)dis[i]=<span class="number">1</span>&lt;&lt;<span class="number">30</span>;</span><br><span class="line">    queue&lt;<span class="type">int</span>&gt;q;</span><br><span class="line">    <span class="built_in">memset</span>(vis,<span class="number">0</span>,<span class="built_in">sizeof</span>(vis));</span><br><span class="line">    <span class="built_in">rep</span>(i,<span class="number">1</span>,t)pre[i]=<span class="number">-1</span>;</span><br><span class="line">    dis[s]=<span class="number">0</span>;vis[s]=<span class="number">1</span>;</span><br><span class="line">    q.<span class="built_in">push</span>(s);</span><br><span class="line">    <span class="keyword">while</span>(!q.<span class="built_in">empty</span>())&#123;</span><br><span class="line">        <span class="type">int</span> u=q.<span class="built_in">front</span>();q.<span class="built_in">pop</span>();vis[u]=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(i=head[u];i;i=e[i].nxt)<span class="keyword">if</span>(e[i].w&gt;<span class="number">0</span> &amp;&amp; dis[e[i].to]&gt;dis[u]+e[i].c)&#123;</span><br><span class="line">                dis[e[i].to]=dis[u]+e[i].c;ep[e[i].to]=i;</span><br><span class="line">                pre[e[i].to]=u;<span class="keyword">if</span>(!vis[e[i].to])q.<span class="built_in">push</span>(e[i].to);vis[e[i].to]=<span class="number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> dis[t]&lt;(<span class="number">1</span>&lt;&lt;<span class="number">30</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">EK</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="type">int</span> i;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">spfa</span>())&#123;</span><br><span class="line">        <span class="type">int</span> f=<span class="number">1</span>&lt;&lt;<span class="number">30</span>;</span><br><span class="line">        <span class="keyword">for</span>(i=t;i!=s;i=pre[i])</span><br><span class="line">            f=<span class="built_in">min</span>(f,e[ep[i]].w);</span><br><span class="line">        flow+=f;cst+=f*dis[t];</span><br><span class="line">        <span class="keyword">for</span>(i=t;i!=s;i=pre[i])e[ep[i]].w-=f,e[ep[i]^<span class="number">1</span>].w+=f;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> n,m,a[N][N],A[N],B[N];</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">eg</span><span class="params">(<span class="type">int</span> u,<span class="type">int</span> v,<span class="type">int</span> w,<span class="type">int</span> c)</span></span>&#123;</span><br><span class="line">    <span class="built_in">add</span>(u,v,w,c);<span class="built_in">add</span>(v,u,<span class="number">0</span>,-c);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;<span class="comment">//freopen(&quot;in.txt&quot;,&quot;r&quot;,stdin);</span></span><br><span class="line">    ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">    cin&gt;&gt;n&gt;&gt;m;<span class="type">int</span> i,j;</span><br><span class="line">    <span class="built_in">rep</span>(i,<span class="number">1</span>,n)<span class="built_in">rep</span>(j,<span class="number">1</span>,m)cin&gt;&gt;a[i][j];</span><br><span class="line">    <span class="built_in">rep</span>(i,<span class="number">1</span>,n)cin&gt;&gt;A[i];<span class="built_in">rep</span>(i,<span class="number">1</span>,m)cin&gt;&gt;B[i];</span><br><span class="line">    <span class="type">int</span> ps=n*m+n+m;pos=<span class="number">1</span>;</span><br><span class="line">    s=++ps;t=++ps;</span><br><span class="line">    <span class="type">int</span> con=<span class="number">0</span>,slc[<span class="number">2</span>]=&#123;<span class="number">1</span>,<span class="number">-1</span>&#125;;</span><br><span class="line">    <span class="built_in">rep</span>(i,<span class="number">1</span>,n)<span class="built_in">rep</span>(j,<span class="number">1</span>,m)&#123;</span><br><span class="line">        <span class="built_in">eg</span>(n*m+i,(i<span class="number">-1</span>)*m+j,<span class="number">1</span>,slc[a[i][j]]);</span><br><span class="line">        <span class="built_in">eg</span>((i<span class="number">-1</span>)*m+j,n*m+n+j,<span class="number">1</span>,<span class="number">0</span>);</span><br><span class="line">        con+=a[i][j];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">rep</span>(i,<span class="number">1</span>,n)&#123;</span><br><span class="line">        <span class="built_in">eg</span>(s,n*m+i,A[i],<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">rep</span>(j,<span class="number">1</span>,m)<span class="built_in">eg</span>(n*m+n+j,t,B[j],<span class="number">0</span>);</span><br><span class="line">    <span class="type">int</span> sa,sb;sa=sb=<span class="number">0</span>;</span><br><span class="line">    <span class="built_in">rep</span>(i,<span class="number">1</span>,n)sa+=A[i];<span class="built_in">rep</span>(j,<span class="number">1</span>,m)sb+=B[j];</span><br><span class="line">    <span class="built_in">EK</span>();</span><br><span class="line">    <span class="keyword">if</span>(sa==sb &amp;&amp; sa==flow)cout&lt;&lt;cst+con;<span class="keyword">else</span> cout&lt;&lt;<span class="number">-1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
       
     </div>
 

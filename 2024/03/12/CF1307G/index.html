@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="题目链接 题意： 给出一个 \(n\) 个点 \(m\) 条边的有向图，每条边有边权 \(w_i\) 。 有 \(Q\) 次询问，每次询问给出一个 \(x\) 。你可以把一条边修改成 \(w_i+a_i\) （\(a_i\) 不一定是整数），不过需要保证 \(a_i \geq 0\) 且 \(\sum a_i \leq x\) 。 你要通过修改边权使得从 \(1\) 到 \(n\)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CF1307G">
+<meta property="og:url" content="http://example.com/2024/03/12/CF1307G/index.html">
+<meta property="og:site_name" content="Meiqwq&#39;s blog~">
+<meta property="og:description" content="题目链接 题意： 给出一个 \(n\) 个点 \(m\) 条边的有向图，每条边有边权 \(w_i\) 。 有 \(Q\) 次询问，每次询问给出一个 \(x\) 。你可以把一条边修改成 \(w_i+a_i\) （\(a_i\) 不一定是整数），不过需要保证 \(a_i \geq 0\) 且 \(\sum a_i \leq x\) 。 你要通过修改边权使得从 \(1\) 到 \(n\)">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-03-11T16:19:50.000Z">
+<meta property="article:modified_time" content="2024-03-11T16:44:34.421Z">
+<meta property="article:author" content="Meiqwq">
+<meta property="article:tag" content="算竞">
+<meta property="article:tag" content="费用流">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2024/03/12/CF1307G/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2024/03/12/CF1307G/","path":"2024/03/12/CF1307G/","title":"CF1307G"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>CF1307G | Meiqwq's blog~</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Meiqwq's blog~</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%A2%98%E6%84%8F"><span class="nav-number">1.</span> <span class="nav-text">题意：</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%86%E6%9E%90"><span class="nav-number">2.</span> <span class="nav-text">分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81"><span class="nav-number">3.</span> <span class="nav-text">代码</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Meiqwq</p>
+  <div class="site-description" itemprop="description">A blog correlated with CS</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/03/12/CF1307G/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Meiqwq">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Meiqwq's blog~">
+      <meta itemprop="description" content="A blog correlated with CS">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="CF1307G | Meiqwq's blog~">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          CF1307G
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2024-03-12 00:19:50 / Modified: 00:44:34" itemprop="dateCreated datePublished" datetime="2024-03-12T00:19:50+08:00">2024-03-12</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p><a target="_blank" rel="noopener" href="https://codeforces.com/contest/1307/problem/G">题目链接</a></p>
+<h1 id="题意">题意：</h1>
+<p>给出一个 <span class="math inline">\(n\)</span> 个点 <span class="math inline">\(m\)</span>
+条边的<strong>有向图</strong>，每条边有边权 <span class="math inline">\(w_i\)</span> 。</p>
+<p>有 <span class="math inline">\(Q\)</span> 次询问，每次询问给出一个
+<span class="math inline">\(x\)</span> 。你可以把一条边修改成 <span class="math inline">\(w_i+a_i\)</span> （<span class="math inline">\(a_i\)</span>
+<strong>不一定</strong>是整数），不过需要保证 <span class="math inline">\(a_i \geq 0\)</span> 且 <span class="math inline">\(\sum a_i \leq x\)</span> 。</p>
+<p>你要通过修改边权使得从 <span class="math inline">\(1\)</span> 到
+<span class="math inline">\(n\)</span>
+的最短路径尽可能长，每次询问之间<strong>独立</strong>。</p>
+<p>数据保证至少存在一条从 <span class="math inline">\(1\)</span> 到
+<span class="math inline">\(n\)</span> 的路径，无重边自环。</p>
+<p>输出答案和标准答案的相对误差或绝对误差应不超过 <span class="math inline">\(10^{-6}\)</span> 。(翻译来自luogu)</p>
+<h1 id="分析">分析</h1>
+<p>先观察一下费用流的LP：</p>
+<p><span class="math inline">\(min:z=\sum flow_i \cdot
+cst_i\)</span></p>
+<p>限制:</p>
+$
+<span class="math display">\[\begin{cases} u=1时:\sum\limits_{i \in
+out_u}-flow_i=-F\\ u\in[2,n-1]: \sum\limits_{i \in
+out_u}-flow_i+\sum\limits_{i\in in_u}flow_i=0 \\ u=n时:\sum\limits_{i
+\in in_u}flow_i=F \\ flow_1 \leq cap_1 \\ flow_2 \leq cap_2 \\ ...... \\
+flow_m \leq cap_m \\ \forall i \in [m],flow_i \geq 0
+\end{cases}\]</span>
+<p>$</p>
+<p>转对偶LP：</p>
+<p><span class="math inline">\(max:
+z=F(y_n-y_1)+\sum\limits_{i=1}^{m}y_{n+i}\cdot cap_i\)</span></p>
+<p>限制:</p>
+<p><span class="math inline">\(\begin{cases} \forall (v,u) \in
+E:y_u-y_v+y_{n+i} \leq cst_i \\ \forall i \in [n+1,n+m] ,y_{i}\leq
+0\end{cases}\)</span></p>
+<p>因而令<span class="math inline">\(\forall i \in [n+1,n+m],
+x_{i-n}=-y_i\)</span></p>
+<p>对偶LP为： <span class="math inline">\(max: z&#39;=F(y_n-y_1)-\sum
+x_i\)</span> <span class="math inline">\(\begin{cases} \forall (v,u) \in
+E:y_u-y_v\leq cst_i+x_i \\ \forall i \in [1,m] ,x_{i}\geq
+0\end{cases}\)</span></p>
+<p>很明显，这里的<span class="math inline">\(y_n-y_1\)</span>就是最短路，整个对偶的LP的限制与题目相符。</p>
+<p>令这对LP的最优解的值为<span class="math inline">\(t\)</span>,那么<span class="math display">\[F(y_n-y_1)-\sum x_i \leq t\]</span> <span class="math display">\[y_n-y_1\leq \frac{t+\sum x_i}{F}\]</span></p>
+<p>因此我们只要求<span class="math inline">\(\frac{t+\sum
+x_i}{F}\)</span>的最小值。只要在费用流每次增广的时候几下对应的<span class="math inline">\((flow,cst)\)</span>，每次询问在这些点里算最小值即可.</p>
+<h1 id="代码">代码</h1>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">pragma</span> GCC optimize(3)</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="meta">#<span class="keyword">define</span> rep(i,j,k) for(i=j;i&lt;=k;++i)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> dow(i,j,k) for(i=j;i&gt;=k;--i)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> pr pair</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> mkp make_pair</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> fi first</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> se second</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N=<span class="number">60</span>;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> M=N*N+N;</span><br><span class="line"><span class="keyword">namespace</span> MCMF&#123;</span><br><span class="line">    <span class="keyword">struct</span> <span class="title class_">edge</span>&#123;</span><br><span class="line">        <span class="type">int</span> nxt,to,w,c;</span><br><span class="line">    &#125;e[M&lt;&lt;<span class="number">1</span>];</span><br><span class="line">    <span class="type">int</span> head[N],pos=<span class="number">1</span>,s,t,dis[N],pre[N],ep[N],flow,cst;</span><br><span class="line">    <span class="type">bool</span> vis[N];</span><br><span class="line">    vector&lt;pr&lt;<span class="type">int</span>,<span class="type">int</span>&gt; &gt;rec;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">add</span><span class="params">(<span class="type">int</span> u,<span class="type">int</span> v,<span class="type">int</span> w,<span class="type">int</span> c)</span></span>&#123;</span><br><span class="line">        e[++pos]=(edge)&#123;head[u],v,w,c&#125;;head[u]=pos;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">spfa</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="type">int</span> i;<span class="built_in">rep</span>(i,<span class="number">1</span>,t)dis[i]=<span class="number">1</span>&lt;&lt;<span class="number">30</span>;</span><br><span class="line">        queue&lt;<span class="type">int</span>&gt;q;</span><br><span class="line">        <span class="built_in">memset</span>(vis,<span class="number">0</span>,<span class="built_in">sizeof</span>(vis));</span><br><span class="line">        <span class="built_in">rep</span>(i,<span class="number">1</span>,t)pre[i]=<span class="number">-1</span>;</span><br><span class="line">        dis[s]=<span class="number">0</span>;vis[s]=<span class="number">1</span>;</span><br><span class="line">        q.<span class="built_in">push</span>(s);</span><br><span class="line">        <span class="keyword">while</span>(!q.<span class="built_in">empty</span>())&#123;</span><br><span class="line">            <span class="type">int</span> u=q.<span class="built_in">front</span>();q.<span class="built_in">pop</span>();vis[u]=<span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span>(i=head[u];i;i=e[i].nxt)<span class="keyword">if</span>(e[i].w&gt;<span class="number">0</span> &amp;&amp; dis[e[i].to]&gt;dis[u]+e[i].c)&#123;</span><br><span class="line">                    dis[e[i].to]=dis[u]+e[i].c;ep[e[i].to]=i;</span><br><span class="line">                    pre[e[i].to]=u;<span class="keyword">if</span>(!vis[e[i].to])q.<span class="built_in">push</span>(e[i].to);vis[e[i].to]=<span class="number">1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dis[t]&lt;(<span class="number">1</span>&lt;&lt;<span class="number">30</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">EK</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="type">int</span> i;</span><br><span class="line">        <span class="keyword">while</span>(<span class="built_in">spfa</span>())&#123;</span><br><span class="line">            <span class="type">int</span> f=<span class="number">1</span>&lt;&lt;<span class="number">30</span>;</span><br><span class="line">            <span class="keyword">for</span>(i=t;i!=s;i=pre[i])</span><br><span class="line">                f=<span class="built_in">min</span>(f,e[ep[i]].w);</span><br><span class="line">            flow+=f;cst+=f*dis[t];</span><br><span class="line">            <span class="keyword">for</span>(i=t;i!=s;i=pre[i])e[ep[i]].w-=f,e[ep[i]^<span class="number">1</span>].w+=f;</span><br><span class="line">            rec.<span class="built_in">push_back</span>(<span class="built_in">mkp</span>(flow,cst));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> n,m,u[M],v[M],w[M];</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">solve</span><span class="params">(<span class="type">int</span> F)</span></span>&#123;</span><br><span class="line">    MCMF::pos=<span class="number">1</span>;</span><br><span class="line">    <span class="built_in">memset</span>(MCMF::head,<span class="number">0</span>,<span class="built_in">sizeof</span>(MCMF::head));</span><br><span class="line">    <span class="type">int</span> i,j;</span><br><span class="line">    <span class="built_in">rep</span>(i,<span class="number">1</span>,m)&#123;</span><br><span class="line">        MCMF::<span class="built_in">add</span>(u[i],v[i],<span class="number">1</span>,w[i]);</span><br><span class="line">        MCMF::<span class="built_in">add</span>(v[i],u[i],<span class="number">0</span>,-w[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    MCMF::s=n+<span class="number">1</span>;MCMF::t=n+<span class="number">2</span>;</span><br><span class="line">    MCMF::<span class="built_in">add</span>(n+<span class="number">1</span>,<span class="number">1</span>,F,<span class="number">0</span>);MCMF::<span class="built_in">add</span>(<span class="number">1</span>,n+<span class="number">1</span>,<span class="number">0</span>,<span class="number">0</span>);</span><br><span class="line">    MCMF::<span class="built_in">add</span>(n,n+<span class="number">2</span>,F,<span class="number">0</span>);MCMF::<span class="built_in">add</span>(n+<span class="number">2</span>,n,<span class="number">0</span>,<span class="number">0</span>);</span><br><span class="line">    MCMF::flow=<span class="number">0</span>;MCMF::cst=<span class="number">0</span>;</span><br><span class="line">    MCMF::<span class="built_in">EK</span>();</span><br><span class="line">    <span class="keyword">if</span>(MCMF::flow^F)<span class="keyword">return</span> <span class="number">1000000</span>;<span class="keyword">return</span> MCMF::cst;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;<span class="comment">//freopen(&quot;in.txt&quot;,&quot;r&quot;,stdin);</span></span><br><span class="line">    ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">    <span class="type">int</span> i,j;</span><br><span class="line">    cin&gt;&gt;n&gt;&gt;m;</span><br><span class="line">    <span class="built_in">rep</span>(i,<span class="number">1</span>,m)cin&gt;&gt;u[i]&gt;&gt;v[i]&gt;&gt;w[i];</span><br><span class="line">    <span class="type">int</span> q;</span><br><span class="line">    cin&gt;&gt;q;</span><br><span class="line">    <span class="built_in">solve</span>(m);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(q--)&#123;</span><br><span class="line">        <span class="type">int</span> xx;cin&gt;&gt;xx;</span><br><span class="line">        <span class="type">double</span> ans=<span class="number">1e9</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> v:MCMF::rec)ans=<span class="built_in">min</span>(ans,(<span class="number">1.0</span>*xx+v.se)/v.fi);</span><br><span class="line">        cout&lt;&lt;fixed;cout&lt;&lt;<span class="built_in">setprecision</span>(<span class="number">10</span>)&lt;&lt;ans&lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E7%AE%97%E7%AB%9E/" rel="tag"># 算竞</a>
+              <a href="/tags/%E8%B4%B9%E7%94%A8%E6%B5%81/" rel="tag"># 费用流</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/03/11/lingp/" rel="prev" title="线性规划对偶">
+                  <i class="fa fa-angle-left"></i> 线性规划对偶
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Meiqwq</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>

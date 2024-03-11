@@ -19,12 +19,12 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="尝试了一个寒假的open problem，先放一段时间再想吧。。 先记录一下目前的思路们: 1先用$d_1$视角构造一组allocation $X&#x3D;(X_1,X_2,X_3)$ 满足对 $d_1$ tEFX，不失一般性，令 $X_3 &lt;{3} X_1 &lt;{3} X_2$将 $X_1$中的chores 按照 $d_3$ 升序排序，即 $X_1&#x3D;{c_1,c_2….},">
+    <meta name="description" content="尝试了一个寒假的open problem，先放一段时间再想吧。。 先记录一下目前的思路们: # 1 先用\(d_1\)视角构造一组allocation \(X&#x3D;(X_1,X_2,X_3)\) 满足对 \(d_1\) tEFX，不失一般性，令 \(X_3 &lt;_{3} X_1 &lt;_{3} X_2\) 将 \(X_1\)中的chores 按照 \(d_3\) 升序排序，即 \(X_1&#x3D;{c">
 <meta property="og:type" content="article">
 <meta property="og:title" content="fair division">
 <meta property="og:url" content="http://example.com/2024/02/28/fair-division/index.html">
 <meta property="og:site_name" content="Meiqwq&#39;s blog~">
-<meta property="og:description" content="尝试了一个寒假的open problem，先放一段时间再想吧。。 先记录一下目前的思路们: 1先用$d_1$视角构造一组allocation $X&#x3D;(X_1,X_2,X_3)$ 满足对 $d_1$ tEFX，不失一般性，令 $X_3 &lt;{3} X_1 &lt;{3} X_2$将 $X_1$中的chores 按照 $d_3$ 升序排序，即 $X_1&#x3D;{c_1,c_2….},">
+<meta property="og:description" content="尝试了一个寒假的open problem，先放一段时间再想吧。。 先记录一下目前的思路们: # 1 先用\(d_1\)视角构造一组allocation \(X&#x3D;(X_1,X_2,X_3)\) 满足对 \(d_1\) tEFX，不失一般性，令 \(X_3 &lt;_{3} X_1 &lt;_{3} X_2\) 将 \(X_1\)中的chores 按照 \(d_3\) 升序排序，即 \(X_1&#x3D;{c">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2024-02-28T09:59:11.000Z">
 <meta property="article:modified_time" content="2024-03-02T03:53:10.662Z">
@@ -107,7 +107,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1"><span class="nav-number">1.</span> <span class="nav-text">1</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%BA%E9%99%B7"><span class="nav-number">1.1.</span> <span class="nav-text">缺陷</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2"><span class="nav-number">2.</span> <span class="nav-text">2</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%BA%E9%99%B7%EF%BC%9A"><span class="nav-number">2.1.</span> <span class="nav-text">缺陷：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3"><span class="nav-number">3.</span> <span class="nav-text">3</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#section"><span class="nav-number">1.</span> <span class="nav-text">2</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%BA%E9%99%B7"><span class="nav-number">1.1.</span> <span class="nav-text">缺陷：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#section-1"><span class="nav-number">2.</span> <span class="nav-text">3</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -120,7 +120,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-count">8</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -201,19 +201,30 @@
     
     
     <div class="post-body" itemprop="articleBody"><p>尝试了一个寒假的open problem，先放一段时间再想吧。。</p>
-<p>先记录一下目前的思路们:</p>
-<h1 id="1"><a href="#1" class="headerlink" title="1"></a>1</h1><p>先用$d_1$视角构造一组allocation $X&#x3D;(X_1,X_2,X_3)$ 满足对 $d_1$ tEFX，不失一般性，令 $X_3 &lt;<em>{3} X_1 &lt;</em>{3} X_2$<br>将 $X_1$中的chores 按照 $d_3$ 升序排序，即 $X_1&#x3D;{c_1,c_2….},d_3(c_1)&lt;d_3(c_2)…$<br>然后执行</p>
+<p>先记录一下目前的思路们: # 1 先用<span class="math inline">\(d_1\)</span>视角构造一组allocation <span class="math inline">\(X=(X_1,X_2,X_3)\)</span> 满足对 <span class="math inline">\(d_1\)</span> tEFX，不失一般性，令 <span class="math inline">\(X_3 &lt;_{3} X_1 &lt;_{3} X_2\)</span> 将 <span class="math inline">\(X_1\)</span>中的chores 按照 <span class="math inline">\(d_3\)</span> 升序排序，即 <span class="math inline">\(X_1={c_1,c_2....},d_3(c_1)&lt;d_3(c_2)...\)</span>
+然后执行</p>
 <figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> <span class="attribute">i</span>=1 <span class="keyword">to</span> |X_1|&#123;</span><br><span class="line">    <span class="keyword">if</span>(d_3(X_1-c_i)&lt;d_3(X_3+c_i))break</span><br><span class="line">    X_3.<span class="built_in">add</span>(c_i)</span><br><span class="line">    X_1.delete(c_i)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>此时，必然有 $d_3(X_3)&lt;d_3(X_1)&lt;d_3(X_2)$,且 $X_3,X_1$都对agent3 tEFX-feasible. 同时，$d_1(X_1)&lt;d_1(X_3)$.</p>
-<p>如果 $X_2$ is tEFX feasible for agent1,那么算法结束</p>
-<p>反之，$X_2$ is not tEFX feasible for agent1, 则一定有$d_1(X_2)&gt;d_1(X_1)$，此时以$d_1$为disutility function使用PR算法,再回到算法开始。</p>
-<h2 id="缺陷"><a href="#缺陷" class="headerlink" title="缺陷"></a>缺陷</h2><p>无法保证 $min(d_1(X_1),d_1(X_2))$单调,无法确定算法是否有穷<br>已找到一组反例，在$X_1,X_3$之间来回传递。</p>
+<p>此时，必然有 <span class="math inline">\(d_3(X_3)&lt;d_3(X_1)&lt;d_3(X_2)\)</span>,且 <span class="math inline">\(X_3,X_1\)</span>都对agent3 tEFX-feasible.
+同时，<span class="math inline">\(d_1(X_1)&lt;d_1(X_3)\)</span>.</p>
+<p>如果 <span class="math inline">\(X_2\)</span> is tEFX feasible for
+agent1,那么算法结束</p>
+<p>反之，<span class="math inline">\(X_2\)</span> is not tEFX feasible
+for agent1, 则一定有<span class="math inline">\(d_1(X_2)&gt;d_1(X_1)\)</span>，此时以<span class="math inline">\(d_1\)</span>为disutility
+function使用PR算法,再回到算法开始。 ## 缺陷 无法保证 <span class="math inline">\(min(d_1(X_1),d_1(X_2))\)</span>单调,无法确定算法是否有穷
+已找到一组反例，在<span class="math inline">\(X_1,X_3\)</span>之间来回传递。</p>
 <figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">d</span>[<span class="number">1</span>][<span class="number">1</span>]=<span class="number">12</span>;d[<span class="number">1</span>][<span class="number">2</span>]=<span class="number">8</span>;d[<span class="number">1</span>][<span class="number">3</span>]=<span class="number">6</span>;d[<span class="number">1</span>][<span class="number">4</span>]=<span class="number">1</span>;d[<span class="number">1</span>][<span class="number">5</span>]=<span class="number">17</span>;</span><br><span class="line"><span class="attribute">d</span>[<span class="number">2</span>][<span class="number">1</span>]=<span class="number">7</span>;d[<span class="number">2</span>][<span class="number">2</span>]=<span class="number">1</span>;d[<span class="number">2</span>][<span class="number">3</span>]=<span class="number">11</span>;d[<span class="number">2</span>][<span class="number">4</span>]=<span class="number">2</span>;d[<span class="number">2</span>][<span class="number">5</span>]=<span class="number">1</span>;</span><br><span class="line"><span class="attribute">d</span>[<span class="number">3</span>][<span class="number">1</span>]=<span class="number">17</span>;d[<span class="number">3</span>][<span class="number">2</span>]=<span class="number">6</span>;d[<span class="number">3</span>][<span class="number">3</span>]=<span class="number">14</span>;d[<span class="number">3</span>][<span class="number">4</span>]=<span class="number">4</span>;d[<span class="number">3</span>][<span class="number">5</span>]=<span class="number">7</span>;</span><br></pre></td></tr></table></figure>
-
-<h1 id="2"><a href="#2" class="headerlink" title="2"></a>2</h1><p>先用$d_1$视角构造一组allocation $X&#x3D;(X_1,X_2,X_3)$ 满足对 $d_1$ tEFX，不失一般性，令 $X_3 &lt;<em>{3} X_1 &lt;</em>{3} X_2$<br>将 $X_1$中的chores 按照 $d_3$ 升序排序，即 $X_1&#x3D;{c_1,c_2….},d_3(c_1)&lt;d_3(c_2)…$</p>
-<p>如果出现 $X_1,X_2$都对agent2，3 不 tEFX feasible, 那么 此时直接对agent2或agent3的disutilities function使用PR算法,在开局就重构</p>
-<h2 id="缺陷："><a href="#缺陷：" class="headerlink" title="缺陷："></a>缺陷：</h2><p>也是没有单调性</p>
-<h1 id="3"><a href="#3" class="headerlink" title="3"></a>3</h1><p>直接摈弃原来的思路，直接对disutilities function的值域归纳。<br>也即，假设一组disutilities function可以做出tEFX，只要证明将其中任意一个值增加1仍然可以做出tEFX分配。</p>
+<h1 id="section">2</h1>
+<p>先用<span class="math inline">\(d_1\)</span>视角构造一组allocation
+<span class="math inline">\(X=(X_1,X_2,X_3)\)</span> 满足对 <span class="math inline">\(d_1\)</span> tEFX，不失一般性，令 <span class="math inline">\(X_3 &lt;_{3} X_1 &lt;_{3} X_2\)</span> 将 <span class="math inline">\(X_1\)</span>中的chores 按照 <span class="math inline">\(d_3\)</span> 升序排序，即 <span class="math inline">\(X_1={c_1,c_2....},d_3(c_1)&lt;d_3(c_2)...\)</span></p>
+<p>如果出现 <span class="math inline">\(X_1,X_2\)</span>都对agent2，3 不
+tEFX feasible, 那么 此时直接对agent2或agent3的disutilities
+function使用PR算法,在开局就重构</p>
+<h2 id="缺陷">缺陷：</h2>
+<p>也是没有单调性</p>
+<h1 id="section-1">3</h1>
+<p>直接摈弃原来的思路，直接对disutilities function的值域归纳。
+也即，假设一组disutilities
+function可以做出tEFX，只要证明将其中任意一个值增加1仍然可以做出tEFX分配。</p>
 <p>正在讨论。。也是一堆问题</p>
 <p>upd:讨论不动了，研究值域是没有未来的</p>
 
