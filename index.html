@@ -114,12 +114,12 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-count">7</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-count">10</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>
@@ -136,6 +136,102 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/03/11/lingp/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Meiqwq">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Meiqwq's blog~">
+      <meta itemprop="description" content="A blog correlated with CS">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Meiqwq's blog~">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/03/11/lingp/" class="post-title-link" itemprop="url">线性规划对偶</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2024-03-11 19:49:36 / Modified: 20:46:19" itemprop="dateCreated datePublished" datetime="2024-03-11T19:49:36+08:00">2024-03-11</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="对偶问题"><a href="#对偶问题" class="headerlink" title="对偶问题"></a>对偶问题</h1><p>考虑一个标准的线性规划问题：</p>
+<p>$max:z&#x3D;\sum\limits_{i&#x3D;1}^{n}c_i\cdot x_i$</p>
+<p>限制如下:<br>$$\begin{cases} \sum\limits_{i&#x3D;1}^{n}a_{1,i}\cdot x_i \leq b_1 \ \sum\limits_{i&#x3D;1}^{n}a_{2,i}\cdot x_i \leq b_2 \ …..\\sum\limits_{i&#x3D;1}^{n}a_{m,i}\cdot x_i \leq b_m\end{cases}$$</p>
+<p>$\forall i \in [n] ,x_i \geq0$</p>
+<p>它的对偶形式是：</p>
+<p>$min:z’&#x3D;\sum\limits_{j&#x3D;1}^m b_j\cdot y_j$</p>
+<p>限制：</p>
+<p>$$\begin{cases} \sum\limits_{j&#x3D;1}^{m}a_{j,1}\cdot y_j \geq c_1 \ \sum\limits_{j&#x3D;1}^{m}a_{j,2}\cdot y_j \geq c_2 \ …..\ \sum\limits_{j&#x3D;1}^{m}a_{j,n}\cdot y_j \geq c_n\end{cases}$$</p>
+<p>$\forall j \in [m],y_j \geq 0$</p>
+<p>用矩阵的语言就是：</p>
+<p>prime LP:</p>
+<p>$max:z&#x3D;\vec{c}^T\cdot \vec{x}$</p>
+<p>$A\cdot \vec{x} \preceq \vec{b}$</p>
+<p>$\vec{x} \succeq 0$</p>
+<p>dual LP:<br>$min:z’&#x3D;\vec{b}^T\cdot \vec{y}$</p>
+<p>$A^T\vec{y} \succeq \vec{c}$</p>
+<p>$\vec{y} \succeq$</p>
+<h1 id="weak-duality"><a href="#weak-duality" class="headerlink" title="weak duality"></a>weak duality</h1><p>上述两个LP,的任意一组feasible solution $\hat{x},\hat{y}$,有$\vec{c}^T\cdot \hat{x} \leq \vec{b}^T \cdot \vec{y}$,i.e.最大化一定小于等于最小化.</p>
+<p>证:</p>
+<p>由于:$A^T \cdot \hat{y} \succeq \vec{c}$并且$\hat{x} \succeq 0$,因而:$\vec{c}^T\cdot \vec{x} \leq (A^T\cdot \hat{y})^T \hat{x}&#x3D;\hat{y}^T\cdot A \cdot \hat{x}$</p>
+<p>同样地：因为 $A\cdot \hat{x} \preceq \vec{b}$,$\hat{y} \succeq 0$,因而 $\vec{b}^T\cdot \hat{y} \geq (A \cdot \hat{x})^T \cdot (\hat{y}^T)^T&#x3D;(\hat{y}^T\cdot A \cdot \hat{x})^T$,注意到 $\hat{y}^T\cdot A \cdot \hat{x}$是一个实数，所以 $(\hat{y}^T\cdot A \cdot \hat{x})^T&#x3D;\hat{y}^T\cdot A \cdot \hat{x}$</p>
+<p>因而：$\vec{c}^T \cdot \hat{x} \leq \hat{y}^T\cdot A \cdot \hat{x} \leq \vec{b}^T \cdot \hat{y} $</p>
+<h1 id="互补松弛"><a href="#互补松弛" class="headerlink" title="互补松弛"></a>互补松弛</h1><p>假设 $\hat{x},\hat{y}$是两个LP的最优解，有$$\vec{c}^T \cdot \hat{x} &#x3D; \hat{y}^T\cdot A \cdot \hat{x} &#x3D; \vec{b}^T \cdot \hat{y}$$</p>
+<p>我们对其变形：<br>$$\hat{y}^T\cdot A \cdot \hat{x}-\vec{c}^T \cdot \hat{x} &#x3D; 0$$<br>$$(\hat{y}^T\cdot A-\vec{c}^T)\cdot \vec{x} &#x3D; 0$$</p>
+<p>由于 $\hat{y}^T\cdot A-\vec{c}^T&#x3D;(A^T\cdot \hat{y}-\vec{c})^T$,i.e. $(A^T\cdot \hat{y}-\vec{c})^T \cdot \hat{x} &#x3D;0$</p>
+<p>写成代数形式：$\sum\limits_{i&#x3D;1}^n[({\sum\limits_{j&#x3D;1}^ma_{j,i}\cdot \hat{y}_j})-c_i]\cdot \hat{x}_i &#x3D; 0$</p>
+<p>这说明了：如果$x_i非0，那么对偶问题中它对应的不等式一定取<code>=</code>，如果一个不等式不取<code>=</code>,那么对偶问题中这个不等式对应的变量一定为<code>0</code></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
