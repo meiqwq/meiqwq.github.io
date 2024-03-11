@@ -47,11 +47,13 @@ $\vec{y} \succeq$
 
 证:
 
-由于:$A^T \cdot \hat{y} \succeq \vec{c}$并且$\hat{x} \succeq 0$,因而:$\vec{c}^T\cdot \vec{x} \leq (A^T\cdot \hat{y})^T \hat{x}=\hat{y}^T\cdot A \cdot \hat{x}$
+由于: $A^T \cdot \hat{y} \succeq \vec{c}$并且$\hat{x} \succeq 0$,因而:$\vec{c}^T\cdot \vec{x} \leq (A^T\cdot \hat{y})^T \hat{x}=\hat{y}^T\cdot A \cdot \hat{x}$
 
 同样地：因为 $A\cdot \hat{x} \preceq \vec{b}$,$\hat{y} \succeq 0$,因而 $\vec{b}^T\cdot \hat{y} \geq (A \cdot \hat{x})^T \cdot (\hat{y}^T)^T=(\hat{y}^T\cdot A \cdot \hat{x})^T$,注意到 $\hat{y}^T\cdot A \cdot \hat{x}$是一个实数，所以 $(\hat{y}^T\cdot A \cdot \hat{x})^T=\hat{y}^T\cdot A \cdot \hat{x}$
 
-因而：$\vec{c}^T \cdot \hat{x} \leq \hat{y}^T\cdot A \cdot \hat{x} \leq \vec{b}^T \cdot \hat{y} $
+因而：
+
+${\vec{c}}^{T} \cdot \hat{x} \leq {\hat{y}}^{T} \cdot A \cdot \hat{x} \leq {\vec{b}}^{T} \cdot \hat{y} $
 
 # 互补松弛
 假设 $\hat{x},\hat{y}$是两个LP的最优解，有$$\vec{c}^T \cdot \hat{x} = \hat{y}^T\cdot A \cdot \hat{x} = \vec{b}^T \cdot \hat{y}$$
@@ -65,5 +67,5 @@ $$(\hat{y}^T\cdot A-\vec{c}^T)\cdot \vec{x} = 0$$
 
 写成代数形式：$\sum\limits_{i=1}^n[({\sum\limits_{j=1}^ma_{j,i}\cdot \hat{y}_j})-c_i]\cdot \hat{x}_i = 0$
 
-这说明了：如果$x_i非0，那么对偶问题中它对应的不等式一定取```=```，如果一个不等式不取```=```,那么对偶问题中这个不等式对应的变量一定为```0```
+这说明了：如果$x_i$非0，那么对偶问题中它对应的不等式一定取```=```，如果一个不等式不取```=```,那么对偶问题中这个不等式对应的变量一定为```0```
 
