@@ -19,29 +19,28 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="对偶问题 考虑一个标准的线性规划问题： \(max:z&#x3D;\sum\limits_{i&#x3D;1}^{n}c_i\cdot x_i\) 限制如下: \[\begin{cases} \sum\limits_{i&#x3D;1}^{n}a_{1,i}\cdot x_i \leq b_1 \\ \sum\limits_{i&#x3D;1}^{n}a_{2,i}\cdot x_i \leq b_2 \\ .....\\">
+    <meta name="description" content="1.2 问题：对于Steiner Tree 问题，证明，存在一个常数\(c\),使得对于Steiner Tree 问题，没有\(c\log |T|\)-approximation算法，除非\(P&#x3D;NP\) 证： 先证NPC： 1. NP-HARD：考虑从un-weighted set cover归约，对于一个set cover，将根节点向每个集合连一条边权为1的有向边，每个集合再向自己的元">
 <meta property="og:type" content="article">
-<meta property="og:title" content="线性规划对偶">
-<meta property="og:url" content="http://example.com/2024/03/11/lingp/index.html">
+<meta property="og:title" content="复杂度理论作业2">
+<meta property="og:url" content="http://example.com/2024/03/13/%E5%A4%8D%E6%9D%82%E5%BA%A6%E7%90%86%E8%AE%BA%E4%BD%9C%E4%B8%9A2/index.html">
 <meta property="og:site_name" content="Meiqwq&#39;s blog~">
-<meta property="og:description" content="对偶问题 考虑一个标准的线性规划问题： \(max:z&#x3D;\sum\limits_{i&#x3D;1}^{n}c_i\cdot x_i\) 限制如下: \[\begin{cases} \sum\limits_{i&#x3D;1}^{n}a_{1,i}\cdot x_i \leq b_1 \\ \sum\limits_{i&#x3D;1}^{n}a_{2,i}\cdot x_i \leq b_2 \\ .....\\">
+<meta property="og:description" content="1.2 问题：对于Steiner Tree 问题，证明，存在一个常数\(c\),使得对于Steiner Tree 问题，没有\(c\log |T|\)-approximation算法，除非\(P&#x3D;NP\) 证： 先证NPC： 1. NP-HARD：考虑从un-weighted set cover归约，对于一个set cover，将根节点向每个集合连一条边权为1的有向边，每个集合再向自己的元">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2024-03-11T11:49:36.000Z">
-<meta property="article:modified_time" content="2024-03-11T16:16:25.306Z">
+<meta property="article:published_time" content="2024-03-13T12:32:59.000Z">
+<meta property="article:modified_time" content="2024-03-13T16:45:35.299Z">
 <meta property="article:author" content="Meiqwq">
 <meta property="article:tag" content="计算理论">
-<meta property="article:tag" content="线性规划">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="http://example.com/2024/03/11/lingp/">
+<link rel="canonical" href="http://example.com/2024/03/13/%E5%A4%8D%E6%9D%82%E5%BA%A6%E7%90%86%E8%AE%BA%E4%BD%9C%E4%B8%9A2/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2024/03/11/lingp/","path":"2024/03/11/lingp/","title":"线性规划对偶"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2024/03/13/%E5%A4%8D%E6%9D%82%E5%BA%A6%E7%90%86%E8%AE%BA%E4%BD%9C%E4%B8%9A2/","path":"2024/03/13/复杂度理论作业2/","title":"复杂度理论作业2"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>线性规划对偶 | Meiqwq's blog~</title>
+<title>复杂度理论作业2 | Meiqwq's blog~</title>
   
 
 
@@ -106,7 +105,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AF%B9%E5%81%B6%E9%97%AE%E9%A2%98"><span class="nav-number">1.</span> <span class="nav-text">对偶问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#weak-duality"><span class="nav-number">2.</span> <span class="nav-text">weak duality</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%92%E8%A1%A5%E6%9D%BE%E5%BC%9B"><span class="nav-number">3.</span> <span class="nav-text">互补松弛</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#section"><span class="nav-number">1.</span> <span class="nav-text">1.2</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#section-1"><span class="nav-number">2.</span> <span class="nav-text">1.5</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -151,7 +150,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/03/11/lingp/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/03/13/%E5%A4%8D%E6%9D%82%E5%BA%A6%E7%90%86%E8%AE%BA%E4%BD%9C%E4%B8%9A2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -164,12 +163,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="线性规划对偶 | Meiqwq's blog~">
+      <meta itemprop="name" content="复杂度理论作业2 | Meiqwq's blog~">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          线性规划对偶
+          复杂度理论作业2
         </h1>
 
         <div class="post-meta-container">
@@ -180,14 +179,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2024-03-11 19:49:36" itemprop="dateCreated datePublished" datetime="2024-03-11T19:49:36+08:00">2024-03-11</time>
+      <time title="Created: 2024-03-13 20:32:59" itemprop="dateCreated datePublished" datetime="2024-03-13T20:32:59+08:00">2024-03-13</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-03-12 00:16:25" itemprop="dateModified" datetime="2024-03-12T00:16:25+08:00">2024-03-12</time>
+      <time title="Modified: 2024-03-14 00:45:35" itemprop="dateModified" datetime="2024-03-14T00:45:35+08:00">2024-03-14</time>
     </span>
 
   
@@ -199,64 +198,42 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><h1 id="对偶问题">对偶问题</h1>
-<p>考虑一个标准的线性规划问题：</p>
-<p><span class="math inline">\(max:z=\sum\limits_{i=1}^{n}c_i\cdot
-x_i\)</span></p>
-<p>限制如下: <span class="math display">\[\begin{cases}
-\sum\limits_{i=1}^{n}a_{1,i}\cdot x_i \leq b_1 \\
-\sum\limits_{i=1}^{n}a_{2,i}\cdot x_i \leq b_2 \\
-.....\\\sum\limits_{i=1}^{n}a_{m,i}\cdot x_i \leq
-b_m\end{cases}\]</span></p>
-<p><span class="math inline">\(\forall i \in [n] ,x_i \geq0\)</span></p>
-<p>它的对偶形式是：</p>
-<p><span class="math inline">\(min:z&#39;=\sum\limits_{j=1}^m b_j\cdot
-y_j\)</span></p>
-<p>限制：</p>
-<p><span class="math display">\[\begin{cases}
-\sum\limits_{j=1}^{m}a_{j,1}\cdot y_j \geq c_1 \\
-\sum\limits_{j=1}^{m}a_{j,2}\cdot y_j \geq c_2 \\ .....\\
-\sum\limits_{j=1}^{m}a_{j,n}\cdot y_j \geq c_n\end{cases}\]</span></p>
-<p><span class="math inline">\(\forall j \in [m],y_j \geq 0\)</span></p>
-<p>用矩阵的语言就是：</p>
-<p>prime LP:</p>
-<p><span class="math inline">\(max:z=\vec{c}^T\cdot \vec{x}\)</span></p>
-<p><span class="math inline">\(A\cdot \vec{x} \preceq
-\vec{b}\)</span></p>
-<p><span class="math inline">\(\vec{x} \succeq 0\)</span></p>
-<p>dual LP: <span class="math inline">\(min:z&#39;=\vec{b}^T\cdot
-\vec{y}\)</span></p>
-<p><span class="math inline">\(A^T\vec{y} \succeq \vec{c}\)</span></p>
-<p><span class="math inline">\(\vec{y} \succeq\)</span></p>
-<h1 id="weak-duality">weak duality</h1>
-<p>上述两个LP,的任意一组feasible solution <span class="math inline">\(\hat{x},\hat{y}\)</span>,有<span class="math inline">\(\vec{c}^T\cdot \hat{x} \leq \vec{b}^T \cdot
-\vec{y}\)</span>,i.e.最大化一定小于等于最小化.</p>
-<p>证:</p>
-<p>由于: <span class="math inline">\(A^T \cdot \hat{y} \succeq
-\vec{c}\)</span>并且<span class="math inline">\(\hat{x} \succeq
-0\)</span>,因而:<span class="math inline">\(\vec{c}^T\cdot \vec{x} \leq
-(A^T\cdot \hat{y})^T \hat{x}=\hat{y}^T\cdot A \cdot \hat{x}\)</span></p>
-<p>同样地：因为 <span class="math inline">\(A\cdot \hat{x} \preceq
-\vec{b}\)</span>,<span class="math inline">\(\hat{y} \succeq
-0\)</span>,因而 <span class="math inline">\(\vec{b}^T\cdot \hat{y} \geq
-(A \cdot \hat{x})^T \cdot (\hat{y}^T)^T=(\hat{y}^T\cdot A \cdot
-\hat{x})^T\)</span>,注意到 <span class="math inline">\(\hat{y}^T\cdot A
-\cdot \hat{x}\)</span>是一个实数，所以 <span class="math inline">\((\hat{y}^T\cdot A \cdot \hat{x})^T=\hat{y}^T\cdot
-A \cdot \hat{x}\)</span></p>
-<p>因而：</p>
-<p>${}^{T} ^{T} A ^{T} $</p>
-<h1 id="互补松弛">互补松弛</h1>
-<p>假设 <span class="math inline">\(\hat{x},\hat{y}\)</span>是两个LP的最优解，有<span class="math display">\[\vec{c}^T \cdot \hat{x} = \hat{y}^T\cdot A \cdot
-\hat{x} = \vec{b}^T \cdot \hat{y}\]</span></p>
-<p>我们对其变形： <span class="math display">\[\hat{y}^T\cdot A \cdot
-\hat{x}-\vec{c}^T \cdot \hat{x} = 0\]</span> <span class="math display">\[(\hat{y}^T\cdot A-\vec{c}^T)\cdot \vec{x} =
-0\]</span></p>
-<p>由于 <span class="math inline">\(\hat{y}^T\cdot A-\vec{c}^T=(A^T\cdot
-\hat{y}-\vec{c})^T\)</span>,i.e. <span class="math inline">\((A^T\cdot
-\hat{y}-\vec{c})^T \cdot \hat{x} =0\)</span></p>
-<p>写成代数形式：<span class="math inline">\(\sum\limits_{i=1}^n[({\sum\limits_{j=1}^ma_{j,i}\cdot
-\hat{y}_j})-c_i]\cdot \hat{x}_i = 0\)</span></p>
-<p>这说明了：如果<span class="math inline">\(x_i\)</span>非0，那么对偶问题中它对应的不等式一定取<code>=</code>，如果一个不等式不取<code>=</code>,那么对偶问题中这个不等式对应的变量一定为<code>0</code></p>
+    <div class="post-body" itemprop="articleBody"><h1 id="section">1.2</h1>
+<p>问题：对于Steiner Tree 问题，证明，存在一个常数<span class="math inline">\(c\)</span>,使得对于Steiner Tree 问题，没有<span class="math inline">\(c\log |T|\)</span>-approximation算法，除非<span class="math inline">\(P=NP\)</span></p>
+<p>证： 先证NPC： 1. NP-HARD：考虑从un-weighted set
+cover归约，对于一个set
+cover，将根节点向每个集合连一条边权为1的有向边，每个集合再向自己的元素连0权有向边，目标集合设定为所有元素节点。
+2. NPC:显然这是NP的</p>
+<p>按照课本<code>定理1.14</code>(如果存在一个<span class="math inline">\(c\)</span>,使得如果存在一个set cover的<span class="math inline">\(c\ln n\)</span>算法，那么<span class="math inline">\(P=NP\)</span>)得证</p>
+<h1 id="section-1">1.5</h1>
+<p>对于无向图带权set cover问题</p>
+<ol type="1">
+<li>列出下列LP:</li>
+</ol>
+<p>目标：<span class="math inline">\(min:z=\sum\limits_{i=1}^{n}w_i
+\cdot x_i\)</span></p>
+<p>subject to:</p>
+<p><span class="math inline">\(\forall (u,v) \in E:x_u+x_v
+\geq1\)</span> <span class="math inline">\(x_i \geq 0\)</span>
+证明，对于该问题的extreme point <span class="math inline">\(x*\)</span>,<span class="math inline">\(x*_i \in
+\{0,\frac{1}{2},1 \}\)</span> 证： 用反证，如果存在一个extreme
+point,其中有不在<span class="math inline">\(\{0,1,\frac{1}{2}\}\)</span>中的<span class="math inline">\(x\)</span>,我们直接对所有小于<span class="math inline">\(\frac{1}{2}\)</span>且不是0的值减去<span class="math inline">\(\epsilon\)</span>,对所有大于<span class="math inline">\(\frac{1}{2}\)</span>且不是1的值加上<span class="math inline">\(\epsilon\)</span>,构造出一个新的<span class="math inline">\(y_1\)</span>,然后再对其中有不在<span class="math inline">\(\{0,1,\frac{1}{2}\}\)</span>中的<span class="math inline">\(x\)</span>,我们直接对所有小于<span class="math inline">\(\frac{1}{2}\)</span>且不是0的值+<span class="math inline">\(\epsilon\)</span>,对所有大于<span class="math inline">\(\frac{1}{2}\)</span>且不是1的值-<span class="math inline">\(\epsilon\)</span>，得到<span class="math inline">\(y_2\)</span>,可以发现<span class="math inline">\(\frac{y_1+y_2}{2}=x^*\)</span>,与<span class="math inline">\(x*\)</span>是extreme point矛盾</p>
+<ol start="2" type="1">
+<li>构造一个<span class="math inline">\(\frac{3}{2}\)</span>-approximation
+算法求解平面图set-cover</li>
+</ol>
+<p>首先多项式时间跑一遍上面的线性规划，如果一个点的赋值是0或1，那就选或不选，剩下的点都是<span class="math inline">\(\frac{1}{2}\)</span>的点，它们连的点一定是<span class="math inline">\(\frac{1}{2}\)</span>或者<span class="math inline">\(1\)</span>的点，因此，我们考虑所有<span class="math inline">\(\frac{1}{2}\)</span>的点的导出子图<span class="math inline">\(G&#39;\)</span>(显然<span class="math inline">\(G&#39;\)</span>也是平面图),我们的目标是把<span class="math inline">\(G&#39;\)</span>里的所有点都改成0或1，并且只要满足在<span class="math inline">\(G&#39;\)</span>里没有0和0共边即可。</p>
+<p>对<span class="math inline">\(G&#39;\)</span>跑四染色(可以多项式)，设四个部分颜色的和分别为<span class="math inline">\(a,b,c,d\)</span>,WLOG. 设<span class="math inline">\(a\leq b\leq c\leq d\)</span>,让<span class="math inline">\(a,b,c\)</span>里面的点取1，<span class="math inline">\(d\)</span>的取0。这样我们就得到了<span class="math inline">\(\frac{3}{2}-approximation\)</span></p>
+<p>正确性：首先肯定没有00共边。</p>
+<p>其次，我们设线性规划的最优解是<span class="math inline">\(x^*\)</span>,rounding后的解是<span class="math inline">\(\hat{x}\)</span>,<span class="math inline">\(G&#39;\)</span>的点集为<span class="math inline">\(V&#39;\)</span>,那么rounding后的答案为<span class="math display">\[\sum\limits_{v \notin V&#39;}\hat{x}_v \cdot
+w_v+\sum\limits_{v\in V&#39;}\hat{x}_v\cdot w_v=\sum\limits_{v\notin
+V&#39;}x^*_v\cdot w_v+(a+b+c)\]</span>,而我们可以发现，<span class="math inline">\(a+b+c\leq 3d\)</span>,因此<span class="math display">\[a+b+c= (a+b+c+d)\frac{a+b+c}{a+b+c+d}\leq
+(a+b+c+d)\frac{1}{1+\frac{d}{a+b+c}}\leq
+(a+b+c+d)\frac{1}{1+\frac{1}{3}}=\frac{3}{4}(a+b+c+d)\]</span></p>
+<p>故<span class="math inline">\(\sum\limits_{v\notin V&#39;}x^*_v\cdot
+w_v+(a+b+c) \leq \sum\limits_{v\notin V&#39;}x^*_v\cdot w_v+\frac{3}{2}
+\sum\limits_{v\in V&#39;}x^*_v\cdot w_v \leq \frac{3}{2}LP \leq
+\frac{3}{2}OPT\)</span></p>
 
     </div>
 
@@ -267,21 +244,17 @@ A \cdot \hat{x}\)</span></p>
     <footer class="post-footer">
           <div class="post-tags">
               <a href="/tags/%E8%AE%A1%E7%AE%97%E7%90%86%E8%AE%BA/" rel="tag"># 计算理论</a>
-              <a href="/tags/%E7%BA%BF%E6%80%A7%E8%A7%84%E5%88%92/" rel="tag"># 线性规划</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2024/03/07/pytorchreview2/" rel="prev" title="Pytorch巩固2 CNN">
-                  <i class="fa fa-angle-left"></i> Pytorch巩固2 CNN
+                <a href="/2024/03/12/pytorchreview3/" rel="prev" title="pytorch巩固3 RNN">
+                  <i class="fa fa-angle-left"></i> pytorch巩固3 RNN
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2024/03/12/CF1307G/" rel="next" title="CF1307G">
-                  CF1307G <i class="fa fa-angle-right"></i>
-                </a>
             </div>
           </div>
     </footer>

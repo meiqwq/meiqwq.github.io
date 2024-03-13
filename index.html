@@ -114,7 +114,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-count">10</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -136,6 +136,117 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/03/13/%E5%A4%8D%E6%9D%82%E5%BA%A6%E7%90%86%E8%AE%BA%E4%BD%9C%E4%B8%9A2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Meiqwq">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Meiqwq's blog~">
+      <meta itemprop="description" content="A blog correlated with CS">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Meiqwq's blog~">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/03/13/%E5%A4%8D%E6%9D%82%E5%BA%A6%E7%90%86%E8%AE%BA%E4%BD%9C%E4%B8%9A2/" class="post-title-link" itemprop="url">复杂度理论作业2</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2024-03-13 20:32:59" itemprop="dateCreated datePublished" datetime="2024-03-13T20:32:59+08:00">2024-03-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-03-14 00:45:35" itemprop="dateModified" datetime="2024-03-14T00:45:35+08:00">2024-03-14</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="section">1.2</h1>
+<p>问题：对于Steiner Tree 问题，证明，存在一个常数<span class="math inline">\(c\)</span>,使得对于Steiner Tree 问题，没有<span class="math inline">\(c\log |T|\)</span>-approximation算法，除非<span class="math inline">\(P=NP\)</span></p>
+<p>证： 先证NPC： 1. NP-HARD：考虑从un-weighted set
+cover归约，对于一个set
+cover，将根节点向每个集合连一条边权为1的有向边，每个集合再向自己的元素连0权有向边，目标集合设定为所有元素节点。
+2. NPC:显然这是NP的</p>
+<p>按照课本<code>定理1.14</code>(如果存在一个<span class="math inline">\(c\)</span>,使得如果存在一个set cover的<span class="math inline">\(c\ln n\)</span>算法，那么<span class="math inline">\(P=NP\)</span>)得证</p>
+<h1 id="section-1">1.5</h1>
+<p>对于无向图带权set cover问题</p>
+<ol type="1">
+<li>列出下列LP:</li>
+</ol>
+<p>目标：<span class="math inline">\(min:z=\sum\limits_{i=1}^{n}w_i
+\cdot x_i\)</span></p>
+<p>subject to:</p>
+<p><span class="math inline">\(\forall (u,v) \in E:x_u+x_v
+\geq1\)</span> <span class="math inline">\(x_i \geq 0\)</span>
+证明，对于该问题的extreme point <span class="math inline">\(x*\)</span>,<span class="math inline">\(x*_i \in
+\{0,\frac{1}{2},1 \}\)</span> 证： 用反证，如果存在一个extreme
+point,其中有不在<span class="math inline">\(\{0,1,\frac{1}{2}\}\)</span>中的<span class="math inline">\(x\)</span>,我们直接对所有小于<span class="math inline">\(\frac{1}{2}\)</span>且不是0的值减去<span class="math inline">\(\epsilon\)</span>,对所有大于<span class="math inline">\(\frac{1}{2}\)</span>且不是1的值加上<span class="math inline">\(\epsilon\)</span>,构造出一个新的<span class="math inline">\(y_1\)</span>,然后再对其中有不在<span class="math inline">\(\{0,1,\frac{1}{2}\}\)</span>中的<span class="math inline">\(x\)</span>,我们直接对所有小于<span class="math inline">\(\frac{1}{2}\)</span>且不是0的值+<span class="math inline">\(\epsilon\)</span>,对所有大于<span class="math inline">\(\frac{1}{2}\)</span>且不是1的值-<span class="math inline">\(\epsilon\)</span>，得到<span class="math inline">\(y_2\)</span>,可以发现<span class="math inline">\(\frac{y_1+y_2}{2}=x^*\)</span>,与<span class="math inline">\(x*\)</span>是extreme point矛盾</p>
+<ol start="2" type="1">
+<li>构造一个<span class="math inline">\(\frac{3}{2}\)</span>-approximation
+算法求解平面图set-cover</li>
+</ol>
+<p>首先多项式时间跑一遍上面的线性规划，如果一个点的赋值是0或1，那就选或不选，剩下的点都是<span class="math inline">\(\frac{1}{2}\)</span>的点，它们连的点一定是<span class="math inline">\(\frac{1}{2}\)</span>或者<span class="math inline">\(1\)</span>的点，因此，我们考虑所有<span class="math inline">\(\frac{1}{2}\)</span>的点的导出子图<span class="math inline">\(G&#39;\)</span>(显然<span class="math inline">\(G&#39;\)</span>也是平面图),我们的目标是把<span class="math inline">\(G&#39;\)</span>里的所有点都改成0或1，并且只要满足在<span class="math inline">\(G&#39;\)</span>里没有0和0共边即可。</p>
+<p>对<span class="math inline">\(G&#39;\)</span>跑四染色(可以多项式)，设四个部分颜色的和分别为<span class="math inline">\(a,b,c,d\)</span>,WLOG. 设<span class="math inline">\(a\leq b\leq c\leq d\)</span>,让<span class="math inline">\(a,b,c\)</span>里面的点取1，<span class="math inline">\(d\)</span>的取0。这样我们就得到了<span class="math inline">\(\frac{3}{2}-approximation\)</span></p>
+<p>正确性：首先肯定没有00共边。</p>
+<p>其次，我们设线性规划的最优解是<span class="math inline">\(x^*\)</span>,rounding后的解是<span class="math inline">\(\hat{x}\)</span>,<span class="math inline">\(G&#39;\)</span>的点集为<span class="math inline">\(V&#39;\)</span>,那么rounding后的答案为<span class="math display">\[\sum\limits_{v \notin V&#39;}\hat{x}_v \cdot
+w_v+\sum\limits_{v\in V&#39;}\hat{x}_v\cdot w_v=\sum\limits_{v\notin
+V&#39;}x^*_v\cdot w_v+(a+b+c)\]</span>,而我们可以发现，<span class="math inline">\(a+b+c\leq 3d\)</span>,因此<span class="math display">\[a+b+c= (a+b+c+d)\frac{a+b+c}{a+b+c+d}\leq
+(a+b+c+d)\frac{1}{1+\frac{d}{a+b+c}}\leq
+(a+b+c+d)\frac{1}{1+\frac{1}{3}}=\frac{3}{4}(a+b+c+d)\]</span></p>
+<p>故<span class="math inline">\(\sum\limits_{v\notin V&#39;}x^*_v\cdot
+w_v+(a+b+c) \leq \sum\limits_{v\notin V&#39;}x^*_v\cdot w_v+\frac{3}{2}
+\sum\limits_{v\in V&#39;}x^*_v\cdot w_v \leq \frac{3}{2}LP \leq
+\frac{3}{2}OPT\)</span></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
