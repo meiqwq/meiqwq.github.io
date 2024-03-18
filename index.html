@@ -181,7 +181,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-03-14 00:45:35" itemprop="dateModified" datetime="2024-03-14T00:45:35+08:00">2024-03-14</time>
+      <time title="Modified: 2024-03-19 00:27:48" itemprop="dateModified" datetime="2024-03-19T00:27:48+08:00">2024-03-19</time>
     </span>
 
   
@@ -201,7 +201,23 @@ cover归约，对于一个set
 cover，将根节点向每个集合连一条边权为1的有向边，每个集合再向自己的元素连0权有向边，目标集合设定为所有元素节点。
 2. NPC:显然这是NP的</p>
 <p>按照课本<code>定理1.14</code>(如果存在一个<span class="math inline">\(c\)</span>,使得如果存在一个set cover的<span class="math inline">\(c\ln n\)</span>算法，那么<span class="math inline">\(P=NP\)</span>)得证</p>
-<h1 id="section-1">1.5</h1>
+<h1 id="section-1">1.3</h1>
+<h2 id="a">a</h2>
+<ol type="1">
+<li>考虑每个环，对每个点的入度和出度都增加1，因此最终所有点的出度和入度都是一样的，因此是欧拉图。</li>
+<li>由于是欧拉图，因此存在一个遍历所有边的环路，故而遍历了所有点，因此图是强连通的。</li>
+</ol>
+<p>综上，得到的子图是一个强连通欧拉图。</p>
+<h2 id="b">b</h2>
+<p>设第 <span class="math inline">\(i\)</span> 轮后，图上还有 <span class="math inline">\(n_i\)</span>个节点。第<span class="math inline">\(i\)</span>轮选择的最小平均值为<span class="math inline">\(w_i\)</span>,令最优解为 <span class="math inline">\(OPT\)</span></p>
+<p>考虑最优解形成的环： <img src="loop.jpg" alt="loop"> 假设第<span class="math inline">\(i\)</span>轮开始前是如图的，蓝色的点是已经被删去的，由三角形不等式，设这个环的和为<span class="math inline">\(OPT&#39;\)</span>,那么一定有<span class="math inline">\(OPT&#39; \leq OPT\)</span> 因此<span class="math inline">\(w_i \leq \frac{OPT&#39;}{n_i} \leq
+\frac{OPT}{n_i}\)</span>,第<span class="math inline">\(i\)</span>轮的贡献为<span class="math inline">\(w_i\cdot (n_i-n_{i+1}+1)\)</span>,因而总贡献<span class="math display">\[\sum (n_i-n_{i+1}+1)\cdot w_i \leq
+\sum\frac{n_i-n_{i+1}+1}{n_i}\cdot OPT\]</span></p>
+<p>注意到<span class="math inline">\(\sum\frac{n_i-n_{i+1}}{n_i} \leq
+H_n\)</span>并且<span class="math inline">\(\sum\frac{1}{n_i} \leq
+H_n\)</span>，因此总贡献小于等于<span class="math inline">\(2H_n\cdot
+OPT\)</span></p>
+<h1 id="section-2">1.5</h1>
 <p>对于无向图带权set cover问题</p>
 <ol type="1">
 <li>列出下列LP:</li>
