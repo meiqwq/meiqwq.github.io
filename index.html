@@ -175,7 +175,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2024-03-21 00:25:07 / Modified: 09:56:46" itemprop="dateCreated datePublished" datetime="2024-03-21T00:25:07+08:00">2024-03-21</time>
+      <time title="Created: 2024-03-21 00:25:07 / Modified: 10:09:17" itemprop="dateCreated datePublished" datetime="2024-03-21T00:25:07+08:00">2024-03-21</time>
     </span>
 
   
@@ -210,9 +210,11 @@
 <h2 id="具体方案">具体方案</h2>
 <ol type="1">
 <li><p>如果面对一个询问<span class="math inline">\(q(x,y)\)</span>,如果<span class="math inline">\((x-1,y+1),(x+1,y-1)\)</span>都在<code>forbidden area</code>，这表明此刻我必须做一个<code>decisive query</code>的回复（不然路径就断了），至于回复哪个方向，我们选择一个方向，使得回复后的可行的路径的条数最多即可。</p></li>
-<li><p>如果反之，一个询问<span class="math inline">\(q(x,y)\)</span>没有被<code>forbidden area</code>包夹，那么表面我们可以进行<code>non-decisve query</code>回复。但是具体回复哪个方向，我们要进行如下的分类讨论</p></li>
+<li><p>如果反之，一个询问<span class="math inline">\(q(x,y)\)</span>没有被<code>forbidden area</code>包夹，那么表明我们可以进行<code>non-decisve query</code>回复。但是具体回复哪个方向，我们要进行如下的分类讨论</p></li>
 </ol>
-<p><img src="fig.png"> ### 如果两侧的forbidden area非常远</p>
+<p><img src="fig.png"></p>
+<h3 id="如果两侧的forbidden-area非常远">如果两侧的forbidden
+area非常远</h3>
 <p>i.e. a,b横坐标差大于<span class="math inline">\(\sqrt{n}\)</span>,那么选择一个方向，使得回复后剩余可行的路径条数最多。（称为<code>non-short query</code>）</p>
 <h3 id="如果两侧-forbidden-area-很近">如果两侧 forbidden area 很近</h3>
 <p>i.e. a,b横坐标差不大于<span class="math inline">\(\sqrt{n}\)</span>，那么我们回复一个与边界(a,b)更远的方向。(称为<code>short query</code>)</p>

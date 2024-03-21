@@ -33,7 +33,7 @@
 <meta property="og:image" content="http://example.com/2024/03/21/tarski-lower-bound/dec.jpg">
 <meta property="og:image" content="http://example.com/2024/03/21/tarski-lower-bound/far.jpg">
 <meta property="article:published_time" content="2024-03-20T16:25:07.000Z">
-<meta property="article:modified_time" content="2024-03-21T01:56:46.848Z">
+<meta property="article:modified_time" content="2024-03-21T02:09:17.850Z">
 <meta property="article:author" content="Meiqwq">
 <meta property="article:tag" content="计算理论">
 <meta property="article:tag" content="离散数学">
@@ -114,7 +114,8 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%8E%E4%B8%BB%E9%A2%98%E6%97%A0%E5%85%B3%E7%9A%84%E5%B0%8F%E5%91%BD%E9%A2%98"><span class="nav-number">1.</span> <span class="nav-text">与主题无关的小命题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#tarski-%E4%B8%8D%E5%8A%A8%E7%82%B9%E5%AD%98%E5%9C%A8%E6%80%A7"><span class="nav-number">1.1.</span> <span class="nav-text">Tarski 不动点存在性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%BB%E6%89%BE%E4%B8%8D%E5%8A%A8%E7%82%B9%E4%B8%8A%E4%B8%8B%E7%A1%AE%E7%95%8C%E6%98%AFnpc"><span class="nav-number">1.2.</span> <span class="nav-text">寻找不动点上&#x2F;下确界是NPC</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E8%AF%81%E6%98%8E%E4%B8%80%E4%B8%AA%E9%97%AE%E9%A2%98%E7%9A%84%E4%B8%8B%E7%95%8C"><span class="nav-number">2.</span> <span class="nav-text">如何证明一个问题的下界</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9E%84%E9%80%A0"><span class="nav-number">2.1.</span> <span class="nav-text">构造</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B7%E4%BD%93%E6%96%B9%E6%A1%88"><span class="nav-number">2.2.</span> <span class="nav-text">具体方案</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E6%9E%9C%E4%B8%A4%E4%BE%A7-forbidden-area-%E5%BE%88%E8%BF%91"><span class="nav-number">2.2.1.</span> <span class="nav-text">如果两侧 forbidden area 很近</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#section"><span class="nav-number">2.2.2.</span> <span class="nav-text">1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#section-1"><span class="nav-number">2.2.3.</span> <span class="nav-text">2</span></a></li></ol></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%8E%E4%B8%BB%E9%A2%98%E6%97%A0%E5%85%B3%E7%9A%84%E5%B0%8F%E5%91%BD%E9%A2%98"><span class="nav-number">1.</span> <span class="nav-text">与主题无关的小命题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#tarski-%E4%B8%8D%E5%8A%A8%E7%82%B9%E5%AD%98%E5%9C%A8%E6%80%A7"><span class="nav-number">1.1.</span> <span class="nav-text">Tarski 不动点存在性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%BB%E6%89%BE%E4%B8%8D%E5%8A%A8%E7%82%B9%E4%B8%8A%E4%B8%8B%E7%A1%AE%E7%95%8C%E6%98%AFnpc"><span class="nav-number">1.2.</span> <span class="nav-text">寻找不动点上&#x2F;下确界是NPC</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E8%AF%81%E6%98%8E%E4%B8%80%E4%B8%AA%E9%97%AE%E9%A2%98%E7%9A%84%E4%B8%8B%E7%95%8C"><span class="nav-number">2.</span> <span class="nav-text">如何证明一个问题的下界</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9E%84%E9%80%A0"><span class="nav-number">2.1.</span> <span class="nav-text">构造</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B7%E4%BD%93%E6%96%B9%E6%A1%88"><span class="nav-number">2.2.</span> <span class="nav-text">具体方案</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E6%9E%9C%E4%B8%A4%E4%BE%A7%E7%9A%84forbidden-area%E9%9D%9E%E5%B8%B8%E8%BF%9C"><span class="nav-number">2.2.1.</span> <span class="nav-text">如果两侧的forbidden
+area非常远</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E6%9E%9C%E4%B8%A4%E4%BE%A7-forbidden-area-%E5%BE%88%E8%BF%91"><span class="nav-number">2.2.2.</span> <span class="nav-text">如果两侧 forbidden area 很近</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#section"><span class="nav-number">2.2.3.</span> <span class="nav-text">1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#section-1"><span class="nav-number">2.2.4.</span> <span class="nav-text">2</span></a></li></ol></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -189,7 +190,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2024-03-21 00:25:07 / Modified: 09:56:46" itemprop="dateCreated datePublished" datetime="2024-03-21T00:25:07+08:00">2024-03-21</time>
+      <time title="Created: 2024-03-21 00:25:07 / Modified: 10:09:17" itemprop="dateCreated datePublished" datetime="2024-03-21T00:25:07+08:00">2024-03-21</time>
     </span>
 
   
@@ -223,9 +224,11 @@
 <h2 id="具体方案">具体方案</h2>
 <ol type="1">
 <li><p>如果面对一个询问<span class="math inline">\(q(x,y)\)</span>,如果<span class="math inline">\((x-1,y+1),(x+1,y-1)\)</span>都在<code>forbidden area</code>，这表明此刻我必须做一个<code>decisive query</code>的回复（不然路径就断了），至于回复哪个方向，我们选择一个方向，使得回复后的可行的路径的条数最多即可。</p></li>
-<li><p>如果反之，一个询问<span class="math inline">\(q(x,y)\)</span>没有被<code>forbidden area</code>包夹，那么表面我们可以进行<code>non-decisve query</code>回复。但是具体回复哪个方向，我们要进行如下的分类讨论</p></li>
+<li><p>如果反之，一个询问<span class="math inline">\(q(x,y)\)</span>没有被<code>forbidden area</code>包夹，那么表明我们可以进行<code>non-decisve query</code>回复。但是具体回复哪个方向，我们要进行如下的分类讨论</p></li>
 </ol>
-<p><img src="fig.png"> ### 如果两侧的forbidden area非常远</p>
+<p><img src="fig.png"></p>
+<h3 id="如果两侧的forbidden-area非常远">如果两侧的forbidden
+area非常远</h3>
 <p>i.e. a,b横坐标差大于<span class="math inline">\(\sqrt{n}\)</span>,那么选择一个方向，使得回复后剩余可行的路径条数最多。（称为<code>non-short query</code>）</p>
 <h3 id="如果两侧-forbidden-area-很近">如果两侧 forbidden area 很近</h3>
 <p>i.e. a,b横坐标差不大于<span class="math inline">\(\sqrt{n}\)</span>，那么我们回复一个与边界(a,b)更远的方向。(称为<code>short query</code>)</p>
