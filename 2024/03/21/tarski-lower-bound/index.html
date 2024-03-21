@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="与主题无关的小命题 Tarski 不动点存在性 考虑\(f(1),f(f(1)),f(f(f(1)))....\)一直单增，直到一个不动的 寻找不动点上&#x2F;下确界是NPC 感觉文章的证明有点问题，还得再想想。 如何证明一个问题的下界 这里以寻找单增序列上的某个值举例，我们来证明这个问题的复杂度下界是 \(O(\log n)\) 现在假设有人向我提问，每次询问这个序列的某个元素，但实际">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Tarski 复杂度下界">
+<meta property="og:url" content="http://example.com/2024/03/21/tarski-lower-bound/index.html">
+<meta property="og:site_name" content="Meiqwq&#39;s blog~">
+<meta property="og:description" content="与主题无关的小命题 Tarski 不动点存在性 考虑\(f(1),f(f(1)),f(f(f(1)))....\)一直单增，直到一个不动的 寻找不动点上&#x2F;下确界是NPC 感觉文章的证明有点问题，还得再想想。 如何证明一个问题的下界 这里以寻找单增序列上的某个值举例，我们来证明这个问题的复杂度下界是 \(O(\log n)\) 现在假设有人向我提问，每次询问这个序列的某个元素，但实际">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/2024/03/21/tarski-lower-bound/construct.png">
+<meta property="og:image" content="http://example.com/2024/03/21/tarski-lower-bound/del.jpg">
+<meta property="og:image" content="http://example.com/2024/03/21/tarski-lower-bound/fig.png">
+<meta property="og:image" content="http://example.com/2024/03/21/tarski-lower-bound/q.jpg">
+<meta property="og:image" content="http://example.com/2024/03/21/tarski-lower-bound/dec.jpg">
+<meta property="og:image" content="http://example.com/2024/03/21/tarski-lower-bound/far.jpg">
+<meta property="article:published_time" content="2024-03-20T16:25:07.000Z">
+<meta property="article:modified_time" content="2024-03-21T01:56:46.848Z">
+<meta property="article:author" content="Meiqwq">
+<meta property="article:tag" content="计算理论">
+<meta property="article:tag" content="离散数学">
+<meta property="article:tag" content="论文导读">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2024/03/21/tarski-lower-bound/construct.png">
+
+
+<link rel="canonical" href="http://example.com/2024/03/21/tarski-lower-bound/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2024/03/21/tarski-lower-bound/","path":"2024/03/21/tarski-lower-bound/","title":"Tarski 复杂度下界"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Tarski 复杂度下界 | Meiqwq's blog~</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Meiqwq's blog~</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%8E%E4%B8%BB%E9%A2%98%E6%97%A0%E5%85%B3%E7%9A%84%E5%B0%8F%E5%91%BD%E9%A2%98"><span class="nav-number">1.</span> <span class="nav-text">与主题无关的小命题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#tarski-%E4%B8%8D%E5%8A%A8%E7%82%B9%E5%AD%98%E5%9C%A8%E6%80%A7"><span class="nav-number">1.1.</span> <span class="nav-text">Tarski 不动点存在性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%BB%E6%89%BE%E4%B8%8D%E5%8A%A8%E7%82%B9%E4%B8%8A%E4%B8%8B%E7%A1%AE%E7%95%8C%E6%98%AFnpc"><span class="nav-number">1.2.</span> <span class="nav-text">寻找不动点上&#x2F;下确界是NPC</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E8%AF%81%E6%98%8E%E4%B8%80%E4%B8%AA%E9%97%AE%E9%A2%98%E7%9A%84%E4%B8%8B%E7%95%8C"><span class="nav-number">2.</span> <span class="nav-text">如何证明一个问题的下界</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9E%84%E9%80%A0"><span class="nav-number">2.1.</span> <span class="nav-text">构造</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B7%E4%BD%93%E6%96%B9%E6%A1%88"><span class="nav-number">2.2.</span> <span class="nav-text">具体方案</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E6%9E%9C%E4%B8%A4%E4%BE%A7-forbidden-area-%E5%BE%88%E8%BF%91"><span class="nav-number">2.2.1.</span> <span class="nav-text">如果两侧 forbidden area 很近</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#section"><span class="nav-number">2.2.2.</span> <span class="nav-text">1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#section-1"><span class="nav-number">2.2.3.</span> <span class="nav-text">2</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Meiqwq</p>
+  <div class="site-description" itemprop="description">A blog correlated with CS</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/03/21/tarski-lower-bound/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Meiqwq">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Meiqwq's blog~">
+      <meta itemprop="description" content="A blog correlated with CS">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Tarski 复杂度下界 | Meiqwq's blog~">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Tarski 复杂度下界
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2024-03-21 00:25:07 / Modified: 09:56:46" itemprop="dateCreated datePublished" datetime="2024-03-21T00:25:07+08:00">2024-03-21</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="与主题无关的小命题">与主题无关的小命题</h1>
+<h2 id="tarski-不动点存在性">Tarski 不动点存在性</h2>
+<p>考虑<span class="math inline">\(f(1),f(f(1)),f(f(f(1)))....\)</span>一直单增，直到一个不动的</p>
+<h2 id="寻找不动点上下确界是npc">寻找不动点上/下确界是NPC</h2>
+<p>感觉文章的证明有点问题，还得再想想。</p>
+<h1 id="如何证明一个问题的下界">如何证明一个问题的下界</h1>
+<p>这里以寻找单增序列上的某个值举例，我们来证明这个问题的复杂度下界是
+<span class="math inline">\(O(\log n)\)</span></p>
+<p>现在假设有人向我提问，每次询问这个序列的某个元素，但实际上这个序列并不存在，可以是我实时构造来使得对方要消耗最多的询问次数，并且要满足序列单调增的限制，因此如果我每次都返回一个使可行区间更大的数，那么可行解范围最多除以2，因此我可以控制他至少问<span class="math inline">\(\Omega(\log n)\)</span></p>
+<p>也就是说，我们以被提问者的角度，找到一个方案，使得无论询问者如何询问，在符合问题条件限制下，我们都能回答超过<span class="math inline">\(\Omega\)</span>次，所以这本质也是个构造问题. #
+二维Tarski问题下界</p>
+<h2 id="构造">构造</h2>
+<p>我们的函数最后都张这个样子： <img src="construct.png">
+（也就是有一条从最小元到最大元的路径）其它点指向它即可。
+这样的函数一定是单调的，并且只有一个不动点。</p>
+<p>这样，对于每次询问，如果我们回复左上或者右下，那么，我们就相当于排除了一块区域（后文将被排除的区域叫<code>forbidden area</code>）：
+<img src="del.jpg"></p>
+<p>如果对于某个询问点，我们回复了左上或右下，那么这个询问我们把它叫做<code>non-decisive query</code>,如果反之（即它在路径上）它将被叫做<code>decisive query</code>。</p>
+<p>接下来，我们先呈现一个方案——具体如何回复，然后再验证这个方案的正确性（即会保证询问次数大于<span class="math inline">\(\Omega(\log^2 n)\)</span>）</p>
+<h2 id="具体方案">具体方案</h2>
+<ol type="1">
+<li><p>如果面对一个询问<span class="math inline">\(q(x,y)\)</span>,如果<span class="math inline">\((x-1,y+1),(x+1,y-1)\)</span>都在<code>forbidden area</code>，这表明此刻我必须做一个<code>decisive query</code>的回复（不然路径就断了），至于回复哪个方向，我们选择一个方向，使得回复后的可行的路径的条数最多即可。</p></li>
+<li><p>如果反之，一个询问<span class="math inline">\(q(x,y)\)</span>没有被<code>forbidden area</code>包夹，那么表面我们可以进行<code>non-decisve query</code>回复。但是具体回复哪个方向，我们要进行如下的分类讨论</p></li>
+</ol>
+<p><img src="fig.png"> ### 如果两侧的forbidden area非常远</p>
+<p>i.e. a,b横坐标差大于<span class="math inline">\(\sqrt{n}\)</span>,那么选择一个方向，使得回复后剩余可行的路径条数最多。（称为<code>non-short query</code>）</p>
+<h3 id="如果两侧-forbidden-area-很近">如果两侧 forbidden area 很近</h3>
+<p>i.e. a,b横坐标差不大于<span class="math inline">\(\sqrt{n}\)</span>，那么我们回复一个与边界(a,b)更远的方向。(称为<code>short query</code>)</p>
+<p><img src="q.jpg"> ## 方案正确性证明 首先我们定义一个势函数<span class="math inline">\(L(t)\)</span>表示第<span class="math inline">\(t\)</span>次询问时，可行路径方案数的对数。因此<span class="math display">\[L(1)=\log(\binom{2n}{n})=\log((2n)!)-2\log(n!)\]</span>
+由斯特林公式：<span class="math display">\[\log(n!) \sim
+\frac{1}{2}\cdot \log n+n(\log n-1)\]</span></p>
+<p>因此<span class="math display">\[L(1) \sim \frac{1}{2}\cdot \log
+2n+2n(\log 2n-1)-\log n -2n(\log n-1)\]</span></p>
+<p><span class="math display">\[=\log2 \cdot n + o(n)\sim
+\Theta(n)\]</span></p>
+<p>( 好像利用二项式展开再夹逼更简单</p>
+<p>如果，我们遇到迫不得已回复<code>decisive query</code></p>
+<p><img src="dec.jpg">,我们选择<code>a,b,c,d</code>中的某一个回复，先选<span class="math inline">\(a+b\)</span>,<span class="math inline">\(c+d\)</span>的较大者，再选里面的更大的，那么<span class="math inline">\(L(t+1)\geq \frac{1}{2}L(t)-1\)</span></p>
+<p>如果可以回复一个<code>non decisve query</code>：</p>
+<ol type="1">
+<li><code>non-short query</code></li>
+</ol>
+<p><img src="far.jpg"> 方案数变为原来的<span class="math inline">\(\frac{1}{2}(1-\frac{1}{\sqrt{n}})\geq
+\frac{1}{4}\)</span>,因此<span class="math inline">\(L(t+1)\geq
+L(t)-2\)</span></p>
+<ol start="2" type="1">
+<li><code>short query</code></li>
+</ol>
+<p>假设两侧距离是<span class="math inline">\(d\)</span>,那么方案书变为原来的<span class="math inline">\(\frac{1}{2}(1-\frac{1}{d})\)</span>那么<span class="math display">\[L(t+1)\geq
+\log(\frac{1}{2}(1-\frac{1}{d}))+L(t)\sim L(t)-\frac{1}{d-1}\geq
+L(t)-d\]</span></p>
+<p>因此<span class="math inline">\(L(t+1)\geq L(t)-\sqrt{n}\log
+n\)</span></p>
+<p>综上，我们发现，<span class="math inline">\(L\)</span>每次要么砍半，要么少一个<span class="math inline">\(o(n)\)</span>阶的常数，因此下界至少是<span class="math inline">\(\Omega(\log n)\)</span> 但是我们的目标是<span class="math inline">\(\Omega(\log^2
+n)\)</span>,于是，接下来我们证明两件事：</p>
+<ol type="1">
+<li>如果对于一个<code>decisve query</code>,如果其它<code>decisve query</code>和他距离都超过<span class="math inline">\(\sqrt{n}\)</span>,那么这个query被称为<code>effective query</code>。</li>
+</ol>
+<p>如果总询问次数是<span class="math inline">\(O(\log^2
+n)\)</span>,那么至少有<span class="math inline">\(\Omega(\log
+n)\)</span>个<code>effective query</code></p>
+<ol start="2" type="1">
+<li>每个<code>effective query</code>都能对应<span class="math inline">\(\Omega(\log
+n)\)</span>个<code>non-decisve query</code></li>
+</ol>
+<h3 id="section">1</h3>
+<p>注意到<span class="math inline">\(L\)</span>一开始是<span class="math inline">\(n\)</span>,然后要么砍半，要么<span class="math inline">\(-\sqrt{n}\log n\)</span>,而且在<span class="math inline">\(\log^2(n)\)</span>以内就衰减到1了，假设这<span class="math inline">\(\log^2 n\)</span>次操作中有<span class="math inline">\(x\)</span>次砍半，那么<span class="math inline">\(\log(n-x\sqrt{n}\log n)\leq
+x\)</span>可以发现这个不等式的一个必要的解是<span class="math inline">\(x\geq \log(n)\)</span></p>
+<h3 id="section-1">2</h3>
+<p>原文是归纳的，这里先感性理解一下，左上右下的边界最多是一半一半砍的，砍出一个<code>decisve query</code>肯定要<span class="math inline">\(\log(n)\)</span>次</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E8%AE%A1%E7%AE%97%E7%90%86%E8%AE%BA/" rel="tag"># 计算理论</a>
+              <a href="/tags/%E7%A6%BB%E6%95%A3%E6%95%B0%E5%AD%A6/" rel="tag"># 离散数学</a>
+              <a href="/tags/%E8%AE%BA%E6%96%87%E5%AF%BC%E8%AF%BB/" rel="tag"># 论文导读</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/03/13/%E5%A4%8D%E6%9D%82%E5%BA%A6%E7%90%86%E8%AE%BA%E4%BD%9C%E4%B8%9A2/" rel="prev" title="复杂度理论作业2">
+                  <i class="fa fa-angle-left"></i> 复杂度理论作业2
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Meiqwq</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>
