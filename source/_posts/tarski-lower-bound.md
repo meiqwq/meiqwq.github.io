@@ -37,9 +37,10 @@ mathjax: true
 
 1. 如果面对一个询问$q(x,y)$,如果$(x-1,y+1),(x+1,y-1)$都在```forbidden area```，这表明此刻我必须做一个```decisive query```的回复（不然路径就断了），至于回复哪个方向，我们选择一个方向，使得回复后的可行的路径的条数最多即可。
 
-2. 如果反之，一个询问$q(x,y)$没有被```forbidden area```包夹，那么表面我们可以进行```non-decisve query```回复。但是具体回复哪个方向，我们要进行如下的分类讨论
+2. 如果反之，一个询问$q(x,y)$没有被```forbidden area```包夹，那么表明我们可以进行```non-decisve query```回复。但是具体回复哪个方向，我们要进行如下的分类讨论
 
 ![](fig.png)
+
 ### 如果两侧的forbidden area非常远
 
 i.e. a,b横坐标差大于$\sqrt{n}$,那么选择一个方向，使得回复后剩余可行的路径条数最多。（称为```non-short query```）
