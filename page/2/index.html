@@ -114,7 +114,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-count">12</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -136,6 +136,108 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/02/28/fair-division/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Meiqwq">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Meiqwq's blog~">
+      <meta itemprop="description" content="A blog correlated with CS">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Meiqwq's blog~">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/02/28/fair-division/" class="post-title-link" itemprop="url">fair division</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2024-02-28 17:59:11" itemprop="dateCreated datePublished" datetime="2024-02-28T17:59:11+08:00">2024-02-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-03-02 11:53:10" itemprop="dateModified" datetime="2024-03-02T11:53:10+08:00">2024-03-02</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>尝试了一个寒假的open problem，先放一段时间再想吧。。</p>
+<p>先记录一下目前的思路们: # 1 先用<span class="math inline">\(d_1\)</span>视角构造一组allocation <span class="math inline">\(X=(X_1,X_2,X_3)\)</span> 满足对 <span class="math inline">\(d_1\)</span> tEFX，不失一般性，令 <span class="math inline">\(X_3 &lt;_{3} X_1 &lt;_{3} X_2\)</span> 将 <span class="math inline">\(X_1\)</span>中的chores 按照 <span class="math inline">\(d_3\)</span> 升序排序，即 <span class="math inline">\(X_1={c_1,c_2....},d_3(c_1)&lt;d_3(c_2)...\)</span>
+然后执行</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> <span class="attribute">i</span>=1 <span class="keyword">to</span> |X_1|&#123;</span><br><span class="line">    <span class="keyword">if</span>(d_3(X_1-c_i)&lt;d_3(X_3+c_i))break</span><br><span class="line">    X_3.<span class="built_in">add</span>(c_i)</span><br><span class="line">    X_1.delete(c_i)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>此时，必然有 <span class="math inline">\(d_3(X_3)&lt;d_3(X_1)&lt;d_3(X_2)\)</span>,且 <span class="math inline">\(X_3,X_1\)</span>都对agent3 tEFX-feasible.
+同时，<span class="math inline">\(d_1(X_1)&lt;d_1(X_3)\)</span>.</p>
+<p>如果 <span class="math inline">\(X_2\)</span> is tEFX feasible for
+agent1,那么算法结束</p>
+<p>反之，<span class="math inline">\(X_2\)</span> is not tEFX feasible
+for agent1, 则一定有<span class="math inline">\(d_1(X_2)&gt;d_1(X_1)\)</span>，此时以<span class="math inline">\(d_1\)</span>为disutility
+function使用PR算法,再回到算法开始。 ## 缺陷 无法保证 <span class="math inline">\(min(d_1(X_1),d_1(X_2))\)</span>单调,无法确定算法是否有穷
+已找到一组反例，在<span class="math inline">\(X_1,X_3\)</span>之间来回传递。</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">d</span>[<span class="number">1</span>][<span class="number">1</span>]=<span class="number">12</span>;d[<span class="number">1</span>][<span class="number">2</span>]=<span class="number">8</span>;d[<span class="number">1</span>][<span class="number">3</span>]=<span class="number">6</span>;d[<span class="number">1</span>][<span class="number">4</span>]=<span class="number">1</span>;d[<span class="number">1</span>][<span class="number">5</span>]=<span class="number">17</span>;</span><br><span class="line"><span class="attribute">d</span>[<span class="number">2</span>][<span class="number">1</span>]=<span class="number">7</span>;d[<span class="number">2</span>][<span class="number">2</span>]=<span class="number">1</span>;d[<span class="number">2</span>][<span class="number">3</span>]=<span class="number">11</span>;d[<span class="number">2</span>][<span class="number">4</span>]=<span class="number">2</span>;d[<span class="number">2</span>][<span class="number">5</span>]=<span class="number">1</span>;</span><br><span class="line"><span class="attribute">d</span>[<span class="number">3</span>][<span class="number">1</span>]=<span class="number">17</span>;d[<span class="number">3</span>][<span class="number">2</span>]=<span class="number">6</span>;d[<span class="number">3</span>][<span class="number">3</span>]=<span class="number">14</span>;d[<span class="number">3</span>][<span class="number">4</span>]=<span class="number">4</span>;d[<span class="number">3</span>][<span class="number">5</span>]=<span class="number">7</span>;</span><br></pre></td></tr></table></figure>
+<h1 id="section">2</h1>
+<p>先用<span class="math inline">\(d_1\)</span>视角构造一组allocation
+<span class="math inline">\(X=(X_1,X_2,X_3)\)</span> 满足对 <span class="math inline">\(d_1\)</span> tEFX，不失一般性，令 <span class="math inline">\(X_3 &lt;_{3} X_1 &lt;_{3} X_2\)</span> 将 <span class="math inline">\(X_1\)</span>中的chores 按照 <span class="math inline">\(d_3\)</span> 升序排序，即 <span class="math inline">\(X_1={c_1,c_2....},d_3(c_1)&lt;d_3(c_2)...\)</span></p>
+<p>如果出现 <span class="math inline">\(X_1,X_2\)</span>都对agent2，3 不
+tEFX feasible, 那么 此时直接对agent2或agent3的disutilities
+function使用PR算法,在开局就重构</p>
+<h2 id="缺陷">缺陷：</h2>
+<p>也是没有单调性</p>
+<h1 id="section-1">3</h1>
+<p>直接摈弃原来的思路，直接对disutilities function的值域归纳。
+也即，假设一组disutilities
+function可以做出tEFX，只要证明将其中任意一个值增加1仍然可以做出tEFX分配。</p>
+<p>正在讨论。。也是一堆问题</p>
+<p>upd:讨论不动了，研究值域是没有未来的</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 

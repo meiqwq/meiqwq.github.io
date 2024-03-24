@@ -114,7 +114,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-count">12</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -136,6 +136,102 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/03/23/pytorch-base/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Meiqwq">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Meiqwq's blog~">
+      <meta itemprop="description" content="A blog correlated with CS">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Meiqwq's blog~">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/03/23/pytorch-base/" class="post-title-link" itemprop="url">Pytorch 大杂烩</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2024-03-23 20:39:01" itemprop="dateCreated datePublished" datetime="2024-03-23T20:39:01+08:00">2024-03-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-03-25 00:42:22" itemprop="dateModified" datetime="2024-03-25T00:42:22+08:00">2024-03-25</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="tensor">tensor</h1>
+<h2 id="flip">flip</h2>
+<p>对某一个维度进行反转: <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">torch.flip(<span class="built_in">input</span>,dims)</span><br></pre></td></tr></table></figure> 返回反转完的tensor</p>
+<p>dims是一个list or tuple</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">t=torch.LongTensor([[<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>],[<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>],[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]])</span><br><span class="line"><span class="built_in">print</span>(t)</span><br></pre></td></tr></table></figure>
+<p>输出 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tensor(<span class="string">[[2, 3, 4],</span></span><br><span class="line"><span class="string">        [5, 6, 7],</span></span><br><span class="line"><span class="string">        [1, 2, 3]]</span>)</span><br></pre></td></tr></table></figure> 再执行 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">t=torch.flip(t,dims=(<span class="number">1</span>,))</span><br><span class="line"><span class="built_in">print</span>(t)</span><br></pre></td></tr></table></figure> 输出 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tensor(<span class="string">[[4, 3, 2],</span></span><br><span class="line"><span class="string">        [7, 6, 5],</span></span><br><span class="line"><span class="string">        [3, 2, 1]]</span>)</span><br></pre></td></tr></table></figure> ## sum
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">t.<span class="built_in">sum</span>()</span><br></pre></td></tr></table></figure> 可以直接返回t所有元素的和（以tensor的形式）。</p>
+<p>当然还有别的用法 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">t=torch.LongTensor([[<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>],[<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>],[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]])</span><br><span class="line"><span class="built_in">print</span>(torch.<span class="built_in">sum</span>(t,<span class="number">0</span>))</span><br></pre></td></tr></table></figure> 输出 <figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">tensor</span>([ <span class="number">8</span>, <span class="number">11</span>, <span class="number">14</span>])</span><br></pre></td></tr></table></figure>
+对第dim维求和，返回tensor（少了第dim维）</p>
+<h2 id="cat">cat</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">torch.cat(tensors, dim=<span class="number">0</span>, *, out=<span class="literal">None</span>) → Tensor</span><br></pre></td></tr></table></figure>
+<p>其中 tensors是tuple或者list
+在dim维度拼接（也就是说第dim维度的东西会增多）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">t1=torch.LongTensor([[<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>],[<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>],[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]])</span><br><span class="line">t2=torch.LongTensor([[<span class="number">1</span>,<span class="number">1</span>,<span class="number">4</span>],[<span class="number">5</span>,<span class="number">1</span>,<span class="number">4</span>],[<span class="number">1</span>,<span class="number">9</span>,<span class="number">1</span>]])</span><br><span class="line"><span class="built_in">print</span>(torch.cat([t1,t2],dim=<span class="number">1</span>))</span><br></pre></td></tr></table></figure>
+<p>输出 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tensor(<span class="string">[[2, 3, 4, 1, 1, 4],</span></span><br><span class="line"><span class="string">        [5, 6, 7, 5, 1, 4],</span></span><br><span class="line"><span class="string">        [1, 2, 3, 1, 9, 1]]</span>)</span><br></pre></td></tr></table></figure> 归纳，俩shape分别为<span class="math inline">\((a_1,a_2,...x_d,...a_n),(a_1,a_2,...y_d,...a_n)\)</span>的tensor在<code>torch.cat(dim=d)</code>后将会得到shape为<span class="math inline">\((a_1,a_2,...x_d+y_d,...a_n)\)</span></p>
+<h2 id="stack">stack</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">torch.stack(tensors, dim=<span class="number">0</span>, *, out=<span class="literal">None</span>) → Tensor</span><br></pre></td></tr></table></figure>
+<p>其中tensors是列表或元组，在第dim维度堆叠 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">t1=torch.LongTensor([[<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>],[<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>],[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]])</span><br><span class="line">t2=torch.LongTensor([[<span class="number">1</span>,<span class="number">1</span>,<span class="number">4</span>],[<span class="number">5</span>,<span class="number">1</span>,<span class="number">4</span>],[<span class="number">1</span>,<span class="number">9</span>,<span class="number">1</span>]])</span><br><span class="line"><span class="built_in">print</span>(torch.stack([t1,t2],dim=<span class="number">1</span>))</span><br></pre></td></tr></table></figure> 输出
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">tensor(<span class="string">[[[2, 3, 4],</span></span><br><span class="line"><span class="string">         [1, 1, 4]]</span>,</span><br><span class="line"></span><br><span class="line">        <span class="string">[[5, 6, 7],</span></span><br><span class="line"><span class="string">         [5, 1, 4]]</span>,</span><br><span class="line"></span><br><span class="line">        <span class="string">[[1, 2, 3],</span></span><br><span class="line"><span class="string">         [1, 9, 1]]</span>])</span><br></pre></td></tr></table></figure></p>
+<p>堆叠的所有tensor的shape一定要一致</p>
+<p>归纳：将<span class="math inline">\(k\)</span>个tensor堆叠后，他们的shape将会在dim维多出一个<span class="math inline">\(k\)</span>.</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1172,108 +1268,6 @@ Tarski*的作用),前<span class="math inline">\(a\)</span>维肯定非负或非
 <p>在这里，每次询问<span class="math inline">\(q_i\)</span>时，我们都会找到之前的询问记录，保证下界要比以前的大，上界要比以前的小，这样的回复一定是可以满足<code>Definition2</code>的（因为<span class="math inline">\((q_i,0)+g(p^{(l,i)},q_i)\)</span>关于<span class="math inline">\(q_i\)</span>单调）。因此，假设<span class="math inline">\(Tarski*(n,a)\)</span>复杂度是<span class="math inline">\(q(n,a)\)</span>,<span class="math inline">\(Tarski*(n,b)\)</span>复杂度是<span class="math inline">\(q(n,b)\)</span>，那么我们在<span class="math inline">\(O((b+1)q(n,a)q(n,b))\)</span>内完成了<span class="math inline">\(Tarski*(n,a+b)\)</span></p>
 <h1 id="最后">最后</h1>
 <p>由于<span class="math inline">\(Tarski*(n,2)\)</span>可以在<span class="math inline">\(O(\log n)\)</span>内完成，因此<span class="math inline">\(Tarski*(n,k)\)</span>可以在<span class="math inline">\(O(\log^{k/2}n)\)</span>完成,进而证明了Tarski(n,k)的复杂度</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/02/28/fair-division/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Meiqwq">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Meiqwq's blog~">
-      <meta itemprop="description" content="A blog correlated with CS">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Meiqwq's blog~">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/02/28/fair-division/" class="post-title-link" itemprop="url">fair division</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2024-02-28 17:59:11" itemprop="dateCreated datePublished" datetime="2024-02-28T17:59:11+08:00">2024-02-28</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-03-02 11:53:10" itemprop="dateModified" datetime="2024-03-02T11:53:10+08:00">2024-03-02</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>尝试了一个寒假的open problem，先放一段时间再想吧。。</p>
-<p>先记录一下目前的思路们: # 1 先用<span class="math inline">\(d_1\)</span>视角构造一组allocation <span class="math inline">\(X=(X_1,X_2,X_3)\)</span> 满足对 <span class="math inline">\(d_1\)</span> tEFX，不失一般性，令 <span class="math inline">\(X_3 &lt;_{3} X_1 &lt;_{3} X_2\)</span> 将 <span class="math inline">\(X_1\)</span>中的chores 按照 <span class="math inline">\(d_3\)</span> 升序排序，即 <span class="math inline">\(X_1={c_1,c_2....},d_3(c_1)&lt;d_3(c_2)...\)</span>
-然后执行</p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> <span class="attribute">i</span>=1 <span class="keyword">to</span> |X_1|&#123;</span><br><span class="line">    <span class="keyword">if</span>(d_3(X_1-c_i)&lt;d_3(X_3+c_i))break</span><br><span class="line">    X_3.<span class="built_in">add</span>(c_i)</span><br><span class="line">    X_1.delete(c_i)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>此时，必然有 <span class="math inline">\(d_3(X_3)&lt;d_3(X_1)&lt;d_3(X_2)\)</span>,且 <span class="math inline">\(X_3,X_1\)</span>都对agent3 tEFX-feasible.
-同时，<span class="math inline">\(d_1(X_1)&lt;d_1(X_3)\)</span>.</p>
-<p>如果 <span class="math inline">\(X_2\)</span> is tEFX feasible for
-agent1,那么算法结束</p>
-<p>反之，<span class="math inline">\(X_2\)</span> is not tEFX feasible
-for agent1, 则一定有<span class="math inline">\(d_1(X_2)&gt;d_1(X_1)\)</span>，此时以<span class="math inline">\(d_1\)</span>为disutility
-function使用PR算法,再回到算法开始。 ## 缺陷 无法保证 <span class="math inline">\(min(d_1(X_1),d_1(X_2))\)</span>单调,无法确定算法是否有穷
-已找到一组反例，在<span class="math inline">\(X_1,X_3\)</span>之间来回传递。</p>
-<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">d</span>[<span class="number">1</span>][<span class="number">1</span>]=<span class="number">12</span>;d[<span class="number">1</span>][<span class="number">2</span>]=<span class="number">8</span>;d[<span class="number">1</span>][<span class="number">3</span>]=<span class="number">6</span>;d[<span class="number">1</span>][<span class="number">4</span>]=<span class="number">1</span>;d[<span class="number">1</span>][<span class="number">5</span>]=<span class="number">17</span>;</span><br><span class="line"><span class="attribute">d</span>[<span class="number">2</span>][<span class="number">1</span>]=<span class="number">7</span>;d[<span class="number">2</span>][<span class="number">2</span>]=<span class="number">1</span>;d[<span class="number">2</span>][<span class="number">3</span>]=<span class="number">11</span>;d[<span class="number">2</span>][<span class="number">4</span>]=<span class="number">2</span>;d[<span class="number">2</span>][<span class="number">5</span>]=<span class="number">1</span>;</span><br><span class="line"><span class="attribute">d</span>[<span class="number">3</span>][<span class="number">1</span>]=<span class="number">17</span>;d[<span class="number">3</span>][<span class="number">2</span>]=<span class="number">6</span>;d[<span class="number">3</span>][<span class="number">3</span>]=<span class="number">14</span>;d[<span class="number">3</span>][<span class="number">4</span>]=<span class="number">4</span>;d[<span class="number">3</span>][<span class="number">5</span>]=<span class="number">7</span>;</span><br></pre></td></tr></table></figure>
-<h1 id="section">2</h1>
-<p>先用<span class="math inline">\(d_1\)</span>视角构造一组allocation
-<span class="math inline">\(X=(X_1,X_2,X_3)\)</span> 满足对 <span class="math inline">\(d_1\)</span> tEFX，不失一般性，令 <span class="math inline">\(X_3 &lt;_{3} X_1 &lt;_{3} X_2\)</span> 将 <span class="math inline">\(X_1\)</span>中的chores 按照 <span class="math inline">\(d_3\)</span> 升序排序，即 <span class="math inline">\(X_1={c_1,c_2....},d_3(c_1)&lt;d_3(c_2)...\)</span></p>
-<p>如果出现 <span class="math inline">\(X_1,X_2\)</span>都对agent2，3 不
-tEFX feasible, 那么 此时直接对agent2或agent3的disutilities
-function使用PR算法,在开局就重构</p>
-<h2 id="缺陷">缺陷：</h2>
-<p>也是没有单调性</p>
-<h1 id="section-1">3</h1>
-<p>直接摈弃原来的思路，直接对disutilities function的值域归纳。
-也即，假设一组disutilities
-function可以做出tEFX，只要证明将其中任意一个值增加1仍然可以做出tEFX分配。</p>
-<p>正在讨论。。也是一堆问题</p>
-<p>upd:讨论不动了，研究值域是没有未来的</p>
 
       
     </div>

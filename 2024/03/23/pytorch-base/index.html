@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="tensor flip 对某一个维度进行反转: 1torch.flip(input,dims) 返回反转完的tensor dims是一个list or tuple 12t&#x3D;torch.LongTensor([[2,3,4],[5,6,7],[1,2,3]])print(t) 输出 123tensor([[2, 3, 4],        [5, 6, 7],        [1, 2,">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Pytorch 大杂烩">
+<meta property="og:url" content="http://example.com/2024/03/23/pytorch-base/index.html">
+<meta property="og:site_name" content="Meiqwq&#39;s blog~">
+<meta property="og:description" content="tensor flip 对某一个维度进行反转: 1torch.flip(input,dims) 返回反转完的tensor dims是一个list or tuple 12t&#x3D;torch.LongTensor([[2,3,4],[5,6,7],[1,2,3]])print(t) 输出 123tensor([[2, 3, 4],        [5, 6, 7],        [1, 2,">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-03-23T12:39:01.000Z">
+<meta property="article:modified_time" content="2024-03-24T16:42:22.610Z">
+<meta property="article:author" content="Meiqwq">
+<meta property="article:tag" content="nlp">
+<meta property="article:tag" content="pytorch">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2024/03/23/pytorch-base/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2024/03/23/pytorch-base/","path":"2024/03/23/pytorch-base/","title":"Pytorch 大杂烩"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Pytorch 大杂烩 | Meiqwq's blog~</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Meiqwq's blog~</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#tensor"><span class="nav-number">1.</span> <span class="nav-text">tensor</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#flip"><span class="nav-number">1.1.</span> <span class="nav-text">flip</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cat"><span class="nav-number">1.2.</span> <span class="nav-text">cat</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#stack"><span class="nav-number">1.3.</span> <span class="nav-text">stack</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Meiqwq</p>
+  <div class="site-description" itemprop="description">A blog correlated with CS</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/03/23/pytorch-base/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Meiqwq">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Meiqwq's blog~">
+      <meta itemprop="description" content="A blog correlated with CS">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Pytorch 大杂烩 | Meiqwq's blog~">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Pytorch 大杂烩
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2024-03-23 20:39:01" itemprop="dateCreated datePublished" datetime="2024-03-23T20:39:01+08:00">2024-03-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-03-25 00:42:22" itemprop="dateModified" datetime="2024-03-25T00:42:22+08:00">2024-03-25</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="tensor">tensor</h1>
+<h2 id="flip">flip</h2>
+<p>对某一个维度进行反转: <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">torch.flip(<span class="built_in">input</span>,dims)</span><br></pre></td></tr></table></figure> 返回反转完的tensor</p>
+<p>dims是一个list or tuple</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">t=torch.LongTensor([[<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>],[<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>],[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]])</span><br><span class="line"><span class="built_in">print</span>(t)</span><br></pre></td></tr></table></figure>
+<p>输出 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tensor(<span class="string">[[2, 3, 4],</span></span><br><span class="line"><span class="string">        [5, 6, 7],</span></span><br><span class="line"><span class="string">        [1, 2, 3]]</span>)</span><br></pre></td></tr></table></figure> 再执行 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">t=torch.flip(t,dims=(<span class="number">1</span>,))</span><br><span class="line"><span class="built_in">print</span>(t)</span><br></pre></td></tr></table></figure> 输出 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tensor(<span class="string">[[4, 3, 2],</span></span><br><span class="line"><span class="string">        [7, 6, 5],</span></span><br><span class="line"><span class="string">        [3, 2, 1]]</span>)</span><br></pre></td></tr></table></figure> ## sum
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">t.<span class="built_in">sum</span>()</span><br></pre></td></tr></table></figure> 可以直接返回t所有元素的和（以tensor的形式）。</p>
+<p>当然还有别的用法 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">t=torch.LongTensor([[<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>],[<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>],[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]])</span><br><span class="line"><span class="built_in">print</span>(torch.<span class="built_in">sum</span>(t,<span class="number">0</span>))</span><br></pre></td></tr></table></figure> 输出 <figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">tensor</span>([ <span class="number">8</span>, <span class="number">11</span>, <span class="number">14</span>])</span><br></pre></td></tr></table></figure>
+对第dim维求和，返回tensor（少了第dim维）</p>
+<h2 id="cat">cat</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">torch.cat(tensors, dim=<span class="number">0</span>, *, out=<span class="literal">None</span>) → Tensor</span><br></pre></td></tr></table></figure>
+<p>其中 tensors是tuple或者list
+在dim维度拼接（也就是说第dim维度的东西会增多）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">t1=torch.LongTensor([[<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>],[<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>],[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]])</span><br><span class="line">t2=torch.LongTensor([[<span class="number">1</span>,<span class="number">1</span>,<span class="number">4</span>],[<span class="number">5</span>,<span class="number">1</span>,<span class="number">4</span>],[<span class="number">1</span>,<span class="number">9</span>,<span class="number">1</span>]])</span><br><span class="line"><span class="built_in">print</span>(torch.cat([t1,t2],dim=<span class="number">1</span>))</span><br></pre></td></tr></table></figure>
+<p>输出 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tensor(<span class="string">[[2, 3, 4, 1, 1, 4],</span></span><br><span class="line"><span class="string">        [5, 6, 7, 5, 1, 4],</span></span><br><span class="line"><span class="string">        [1, 2, 3, 1, 9, 1]]</span>)</span><br></pre></td></tr></table></figure> 归纳，俩shape分别为<span class="math inline">\((a_1,a_2,...x_d,...a_n),(a_1,a_2,...y_d,...a_n)\)</span>的tensor在<code>torch.cat(dim=d)</code>后将会得到shape为<span class="math inline">\((a_1,a_2,...x_d+y_d,...a_n)\)</span></p>
+<h2 id="stack">stack</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">torch.stack(tensors, dim=<span class="number">0</span>, *, out=<span class="literal">None</span>) → Tensor</span><br></pre></td></tr></table></figure>
+<p>其中tensors是列表或元组，在第dim维度堆叠 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">t1=torch.LongTensor([[<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>],[<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>],[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]])</span><br><span class="line">t2=torch.LongTensor([[<span class="number">1</span>,<span class="number">1</span>,<span class="number">4</span>],[<span class="number">5</span>,<span class="number">1</span>,<span class="number">4</span>],[<span class="number">1</span>,<span class="number">9</span>,<span class="number">1</span>]])</span><br><span class="line"><span class="built_in">print</span>(torch.stack([t1,t2],dim=<span class="number">1</span>))</span><br></pre></td></tr></table></figure> 输出
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">tensor(<span class="string">[[[2, 3, 4],</span></span><br><span class="line"><span class="string">         [1, 1, 4]]</span>,</span><br><span class="line"></span><br><span class="line">        <span class="string">[[5, 6, 7],</span></span><br><span class="line"><span class="string">         [5, 1, 4]]</span>,</span><br><span class="line"></span><br><span class="line">        <span class="string">[[1, 2, 3],</span></span><br><span class="line"><span class="string">         [1, 9, 1]]</span>])</span><br></pre></td></tr></table></figure></p>
+<p>堆叠的所有tensor的shape一定要一致</p>
+<p>归纳：将<span class="math inline">\(k\)</span>个tensor堆叠后，他们的shape将会在dim维多出一个<span class="math inline">\(k\)</span>.</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/nlp/" rel="tag"># nlp</a>
+              <a href="/tags/pytorch/" rel="tag"># pytorch</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/03/21/tarski-lower-bound/" rel="prev" title="Tarski 复杂度下界">
+                  <i class="fa fa-angle-left"></i> Tarski 复杂度下界
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Meiqwq</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>
