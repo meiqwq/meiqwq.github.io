@@ -98,3 +98,9 @@ tensor([[[2, 3, 4],
 堆叠的所有tensor的shape一定要一致
 
 归纳：将$k$个tensor堆叠后，他们的shape将会在dim维多出一个$k$.
+
+## Parameter
+```python
+torch.nn.Parameter(input_tensor)
+```
+可以将input_tensor嵌入在模型中，成为模型的参数.
