@@ -114,7 +114,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-count">13</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -136,6 +136,119 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/03/28/%E5%A4%8D%E6%9D%82%E5%BA%A6%E7%90%86%E8%AE%BA%E4%BD%9C%E4%B8%9A3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Meiqwq">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Meiqwq's blog~">
+      <meta itemprop="description" content="A blog correlated with CS">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Meiqwq's blog~">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/03/28/%E5%A4%8D%E6%9D%82%E5%BA%A6%E7%90%86%E8%AE%BA%E4%BD%9C%E4%B8%9A3/" class="post-title-link" itemprop="url">复杂度理论作业3</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2024-03-28 23:35:29" itemprop="dateCreated datePublished" datetime="2024-03-28T23:35:29+08:00">2024-03-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-03-29 00:21:35" itemprop="dateModified" datetime="2024-03-29T00:21:35+08:00">2024-03-29</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="section">2.1</h1>
+<h2 id="a">a</h2>
+<p>对于每个节点 <span class="math inline">\(d_i \in D\)</span>,令 <span class="math inline">\(c(d_i)\)</span>为 <span class="math inline">\(F\)</span> 中离<span class="math inline">\(d_i\)</span>最近的点。令这个问题最优解为<span class="math inline">\(OPT\)</span>,可以注意到 <span class="math inline">\(dis(d_i,c(d_i)) \leq  OPT\)</span></p>
+<p>如果</p>
+<ol type="1">
+<li><p><span class="math inline">\(|D| \leq k\)</span>,那么取 <span class="math inline">\(S=\{c(d_i)\}\)</span>,注意到这样的解显然是不劣于
+<span class="math inline">\(OPT\)</span></p></li>
+<li><p><span class="math inline">\(|D| &gt; k\)</span>,那么对 <span class="math inline">\(D\)</span>执行
+k-center的2近似算法，设最终结果为<span class="math inline">\(\{d&#39;_1,d&#39;_2,...d&#39;_k\}\)</span>。取<span class="math inline">\(S=\{c(d&#39;_i)\}\)</span></p></li>
+</ol>
+<p>对于任何一个<span class="math inline">\(v \in F\)</span>,如果<span class="math inline">\(dis(v,D) \geq
+2OPT\)</span>，根据k-center的2近似算法表明，<span class="math inline">\(\forall i,j \in [k],dis(d&#39;_i,d&#39;_j)\geq
+2OPT\)</span>但是考虑最优解的局面，每个最优解必然以<span class="math inline">\(OPT\)</span>为半径覆盖了所有点，由于<span class="math inline">\(|D|&gt;k\)</span>,根据抽屉原理，一定有两个cunstomers
+处于同一个覆盖圆里面，那么他们的距离将会小于 <span class="math inline">\(2OPT\)</span>,矛盾。</p>
+<p>因此 <span class="math inline">\(\forall v\in F,dis(v,S) \leq
+2OPT\)</span>,又因为 <span class="math inline">\(\forall i \in
+[k],dis(d&#39;_i,c(d&#39;_i)) \leq OPT\)</span>,由三角不等式，<span class="math inline">\(dis(v,S)\leq 3OPT\)</span>,得证</p>
+<h2 id="b">b</h2>
+<p>如果存在小于3的常比近似</p>
+<p>考虑解决k-dominant 问题，对于给定的无向图 <span class="math inline">\(G=(V,E)\)</span>，用下述方法构造新图：对于原图中每个节点
+<span class="math inline">\(v_i\)</span>,创建俩节点<span class="math inline">\(f_i,d_i\)</span>分别为supplier和customer，所有supplier内部两两连边权为2的边，对于每个<span class="math inline">\(v_i\)</span>，设在<span class="math inline">\(G\)</span>中它连了<span class="math inline">\(S_i\)</span>的点，那么<span class="math inline">\(f_i\)</span>向<span class="math inline">\(\{d_j|
+j\in S_i
+\}\)</span>都连一个边权为1的边，其它没连的边都连边权为3的边。</p>
+<p>在这个新图上跑<span class="math inline">\(\alpha-app(\alpha &lt;3
+)\)</span>的k-supplier算法，如果OPT是1，那么表明原图存在k-dominant，近似算法会给出<span class="math inline">\(\alpha\)</span>的解，但是这样的解一定只能是1，因此这就完美解决了k-domiant这个NPC。</p>
+<h1 id="section-1">2.2</h1>
+<p>显然要把jobs两两配对</p>
+<p>将<span class="math inline">\(2m\)</span>个jobs降序排序:</p>
+<p><img src="22.jpg"></p>
+<p>这样构造出的最优解是<span class="math inline">\(C_{max}=p_i+p_{2m+1-i}\)</span>,假设有另一种分组方式使得最大值<span class="math inline">\(C&#39;_{max} &lt; C_{max}\)</span>,那么<span class="math inline">\(p_i\)</span>的另一半<span class="math inline">\(p_k\)</span>一定有 <span class="math inline">\(p_k&lt;p_{2m+1-i}\)</span>,这说明<span class="math inline">\([i-1]\)</span>中一定有货物无法匹配到<span class="math inline">\([2m+2-i]\)</span>中的job（图中蓝色那一对），那么这一对的和显然大于
+<span class="math inline">\(p_i+p_{2m+1-i}\)</span>也就是大于<span class="math inline">\(C_{max}\)</span>, 矛盾!</p>
+<h1 id="section-2">2.3</h1>
+<p>将解分为两部分，一部分是没有机器idle的时间们，设这一段总时长为<span class="math inline">\(a\)</span>,显然<span class="math inline">\(a \leq
+\frac{\sum p_i}{m}\leq OPT\)</span></p>
+<p>第二段是有机器空闲的时间段，为什么机器会空闲呢，因为在有向图上，每个待加入的节点都在被之前的点牵制，因此这些空闲时刻一定有一串jobs满足<span class="math inline">\(j_1 \prec j_2 \prec ... \prec
+j_k\)</span>,显然这个和不超过<span class="math inline">\(OPT\)</span></p>
+<p>最后总和<span class="math inline">\(=a+b\leq OPT\)</span></p>
+<h1 id="section-3">2.5</h1>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -181,7 +294,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-03-25 00:42:22" itemprop="dateModified" datetime="2024-03-25T00:42:22+08:00">2024-03-25</time>
+      <time title="Modified: 2024-03-25 21:49:23" itemprop="dateModified" datetime="2024-03-25T21:49:23+08:00">2024-03-25</time>
     </span>
 
   
@@ -215,6 +328,9 @@
 <figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">tensor(<span class="string">[[[2, 3, 4],</span></span><br><span class="line"><span class="string">         [1, 1, 4]]</span>,</span><br><span class="line"></span><br><span class="line">        <span class="string">[[5, 6, 7],</span></span><br><span class="line"><span class="string">         [5, 1, 4]]</span>,</span><br><span class="line"></span><br><span class="line">        <span class="string">[[1, 2, 3],</span></span><br><span class="line"><span class="string">         [1, 9, 1]]</span>])</span><br></pre></td></tr></table></figure></p>
 <p>堆叠的所有tensor的shape一定要一致</p>
 <p>归纳：将<span class="math inline">\(k\)</span>个tensor堆叠后，他们的shape将会在dim维多出一个<span class="math inline">\(k\)</span>.</p>
+<h2 id="parameter">Parameter</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">torch.nn.Parameter(input_tensor)</span><br></pre></td></tr></table></figure>
+<p>可以将input_tensor嵌入在模型中，成为模型的参数.</p>
 
       
     </div>
@@ -1148,126 +1264,6 @@ A_2...)\wedge (B_1 \vee B_2 \vee...)...\)</span> 先限制所有字母为<span c
 <h1 id="maxcut-is-npc">14.Maxcut is NPC</h1>
 <p>考虑从NAE-3-SAT归约。对于给定的CNF，每个从句的每个字母都看成一个点，从句之间互相连边，形成许多二元环和三元环，考虑赋值不同的节点之间cut,这样三元环最多贡献是2，二元环是1。</p>
 <p>但注意到同一变量在不同的从句之间的约束，因此，我们在一对相反的变量之间添加很多(比m多一个级别？比如<span class="math inline">\(m^2\)</span>)边，相当于惩罚，如果这俩点一样就少cut了这么多条边。最后把边都加上，看看是不是<span class="math inline">\(2 \cdot 三元环+重边\)</span></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/02/28/lattice-fix/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Meiqwq">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Meiqwq's blog~">
-      <meta itemprop="description" content="A blog correlated with CS">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Meiqwq's blog~">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/02/28/lattice-fix/" class="post-title-link" itemprop="url">Tarski upper bound 导读</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2024-02-28 20:52:50" itemprop="dateCreated datePublished" datetime="2024-02-28T20:52:50+08:00">2024-02-28</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-03-06 23:44:45" itemprop="dateModified" datetime="2024-03-06T23:44:45+08:00">2024-03-06</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>作者应该是俩中国人</p>
-<h1 id="tarski定理">Tarski定理</h1>
-<p>对于完全格 <span class="math inline">\(&lt;L,\preceq&gt;\)</span>,以及<span class="math inline">\(L \to L\)</span>的单调增函数<span class="math inline">\(f\)</span>，<span class="math inline">\(f\)</span>一定存在不动点</p>
-<p>有点像格上的介值定理 # 文章贡献 对于n阶k维格点格(grid
-lattice),以及定义在其上的单调不降函数<span class="math inline">\(f\)</span>,构造出了一个<span class="math inline">\(O(\log^{\lceil \frac{k+1}{2}
-\rceil}n)\)</span>算法找到一个不动点。</p>
-<p>后文假设我们的目标是解决<span class="math inline">\(Tarski(n,k+1)\)</span> # Step1 Reduce to <span class="math inline">\(Tarski*(n,k)\)</span> <img src="exp.jpg" alt="图片">
-我们可以单独考虑某一个维度，先固定这个维度的值（也就是说取在这个格中取出一个切片）我们尝试在这个切面上找到一个prefix或者suffix。(前驱或者后继是一定存在的，因为只考虑这个切面(<span class="math inline">\(k\)</span>维)上，一定存在不动点，这个点肯定是一个前驱或后继),很显然哉suffix到<span class="math inline">\([n]^{k+1}\)</span>之间（或<span class="math inline">\([1]^{k+1}\)</span>到prefix之间）一定有不动点，于是第<span class="math inline">\(k+1\)</span>维减半。</p>
-<p>prefix: 指一个点<span class="math inline">\(x\)</span>满足<span class="math inline">\(f(x) \preceq x\)</span></p>
-<p>suffix:指一个点<span class="math inline">\(x\)</span>满足<span class="math inline">\(x \preceq f(x)\)</span> ## <span class="math inline">\(Tarski*(n,k)\)</span> <img src="tarskis.png" alt="图片"></p>
-<h2 id="reduction">Reduction</h2>
-<figure>
-<img src="red.png" alt="图片">
-<figcaption aria-hidden="true">图片</figcaption>
-</figure>
-<p>问题转变为求解<span class="math inline">\(Tarski*(n,k)\)</span>,假设求解<span class="math inline">\(Tarski*(n,k)\)</span>的复杂度是<span class="math inline">\(q(n,k)\)</span>，那么，求解<span class="math inline">\(Tarski(n,k)\)</span>的复杂度是<span class="math inline">\(O(2^k+k\log n\cdot q(n,k))\)</span></p>
-<h1 id="refined-tarskink"><span class="math inline">\(Refined
-Tarski*(n,k)\)</span></h1>
-<figure>
-<img src="ref.png" alt="图片">
-<figcaption aria-hidden="true">图片</figcaption>
-</figure>
-<h2 id="求解">求解</h2>
-<figure>
-<img src="note.jpg" alt="图片">
-<figcaption aria-hidden="true">图片</figcaption>
-</figure>
-<h1 id="求解-tarskinab">求解 <span class="math inline">\(Tarski*(n,a+b)\)</span></h1>
-<p>现在的目标是，假设我们能求解<span class="math inline">\(Tarski*(n,a),Tarski*(n,b)\)</span>如何求解<span class="math inline">\(Tarski*(n,a+b)\)</span></p>
-<p>一个很自然的想法是，对于<span class="math inline">\([a+1,a+b]\)</span>维，我们直接枚举它们的值（假设枚举了<span class="math inline">\(q_i\)</span>）然后我们执行如下算法:</p>
-<figure>
-<img src="part.png" alt="图片">
-<figcaption aria-hidden="true">图片</figcaption>
-</figure>
-<p>此时我们会发现，在前<span class="math inline">\(a\)</span>维的切面上，<span class="math inline">\(p^{(l,i)},p^{(r,i)}\)</span>之间的点，这些点的<span class="math inline">\(g(x)\)</span>在<span class="math inline">\(a+1\)</span>维之后都相等(由于Refined
-Tarski*的作用),前<span class="math inline">\(a\)</span>维肯定非负或非正，因此，如果我们能保证<span class="math inline">\([a+1,a+b+1]\)</span>维也非负/非正，那么就做完了。</p>
-<p>如何保证呢，我们发现实际上这可以转化成一个求解<span class="math inline">\(Tarski(n,b)\)</span>的过程,如果我们可以保证对<span class="math inline">\(q_i\)</span>的回复满足
-<code>Definition2</code>，那么最终就能找到一组非正或非负的回复。</p>
-<figure>
-<img src="ker.png" alt="图片">
-<figcaption aria-hidden="true">图片</figcaption>
-</figure>
-<p>在这里，每次询问<span class="math inline">\(q_i\)</span>时，我们都会找到之前的询问记录，保证下界要比以前的大，上界要比以前的小，这样的回复一定是可以满足<code>Definition2</code>的（因为<span class="math inline">\((q_i,0)+g(p^{(l,i)},q_i)\)</span>关于<span class="math inline">\(q_i\)</span>单调）。因此，假设<span class="math inline">\(Tarski*(n,a)\)</span>复杂度是<span class="math inline">\(q(n,a)\)</span>,<span class="math inline">\(Tarski*(n,b)\)</span>复杂度是<span class="math inline">\(q(n,b)\)</span>，那么我们在<span class="math inline">\(O((b+1)q(n,a)q(n,b))\)</span>内完成了<span class="math inline">\(Tarski*(n,a+b)\)</span></p>
-<h1 id="最后">最后</h1>
-<p>由于<span class="math inline">\(Tarski*(n,2)\)</span>可以在<span class="math inline">\(O(\log n)\)</span>内完成，因此<span class="math inline">\(Tarski*(n,k)\)</span>可以在<span class="math inline">\(O(\log^{k/2}n)\)</span>完成,进而证明了Tarski(n,k)的复杂度</p>
 
       
     </div>

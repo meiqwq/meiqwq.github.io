@@ -114,7 +114,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-count">13</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -136,6 +136,126 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/02/28/lattice-fix/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Meiqwq">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Meiqwq's blog~">
+      <meta itemprop="description" content="A blog correlated with CS">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Meiqwq's blog~">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/02/28/lattice-fix/" class="post-title-link" itemprop="url">Tarski upper bound 导读</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2024-02-28 20:52:50" itemprop="dateCreated datePublished" datetime="2024-02-28T20:52:50+08:00">2024-02-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-03-06 23:44:45" itemprop="dateModified" datetime="2024-03-06T23:44:45+08:00">2024-03-06</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>作者应该是俩中国人</p>
+<h1 id="tarski定理">Tarski定理</h1>
+<p>对于完全格 <span class="math inline">\(&lt;L,\preceq&gt;\)</span>,以及<span class="math inline">\(L \to L\)</span>的单调增函数<span class="math inline">\(f\)</span>，<span class="math inline">\(f\)</span>一定存在不动点</p>
+<p>有点像格上的介值定理 # 文章贡献 对于n阶k维格点格(grid
+lattice),以及定义在其上的单调不降函数<span class="math inline">\(f\)</span>,构造出了一个<span class="math inline">\(O(\log^{\lceil \frac{k+1}{2}
+\rceil}n)\)</span>算法找到一个不动点。</p>
+<p>后文假设我们的目标是解决<span class="math inline">\(Tarski(n,k+1)\)</span> # Step1 Reduce to <span class="math inline">\(Tarski*(n,k)\)</span> <img src="exp.jpg" alt="图片">
+我们可以单独考虑某一个维度，先固定这个维度的值（也就是说取在这个格中取出一个切片）我们尝试在这个切面上找到一个prefix或者suffix。(前驱或者后继是一定存在的，因为只考虑这个切面(<span class="math inline">\(k\)</span>维)上，一定存在不动点，这个点肯定是一个前驱或后继),很显然哉suffix到<span class="math inline">\([n]^{k+1}\)</span>之间（或<span class="math inline">\([1]^{k+1}\)</span>到prefix之间）一定有不动点，于是第<span class="math inline">\(k+1\)</span>维减半。</p>
+<p>prefix: 指一个点<span class="math inline">\(x\)</span>满足<span class="math inline">\(f(x) \preceq x\)</span></p>
+<p>suffix:指一个点<span class="math inline">\(x\)</span>满足<span class="math inline">\(x \preceq f(x)\)</span> ## <span class="math inline">\(Tarski*(n,k)\)</span> <img src="tarskis.png" alt="图片"></p>
+<h2 id="reduction">Reduction</h2>
+<figure>
+<img src="red.png" alt="图片">
+<figcaption aria-hidden="true">图片</figcaption>
+</figure>
+<p>问题转变为求解<span class="math inline">\(Tarski*(n,k)\)</span>,假设求解<span class="math inline">\(Tarski*(n,k)\)</span>的复杂度是<span class="math inline">\(q(n,k)\)</span>，那么，求解<span class="math inline">\(Tarski(n,k)\)</span>的复杂度是<span class="math inline">\(O(2^k+k\log n\cdot q(n,k))\)</span></p>
+<h1 id="refined-tarskink"><span class="math inline">\(Refined
+Tarski*(n,k)\)</span></h1>
+<figure>
+<img src="ref.png" alt="图片">
+<figcaption aria-hidden="true">图片</figcaption>
+</figure>
+<h2 id="求解">求解</h2>
+<figure>
+<img src="note.jpg" alt="图片">
+<figcaption aria-hidden="true">图片</figcaption>
+</figure>
+<h1 id="求解-tarskinab">求解 <span class="math inline">\(Tarski*(n,a+b)\)</span></h1>
+<p>现在的目标是，假设我们能求解<span class="math inline">\(Tarski*(n,a),Tarski*(n,b)\)</span>如何求解<span class="math inline">\(Tarski*(n,a+b)\)</span></p>
+<p>一个很自然的想法是，对于<span class="math inline">\([a+1,a+b]\)</span>维，我们直接枚举它们的值（假设枚举了<span class="math inline">\(q_i\)</span>）然后我们执行如下算法:</p>
+<figure>
+<img src="part.png" alt="图片">
+<figcaption aria-hidden="true">图片</figcaption>
+</figure>
+<p>此时我们会发现，在前<span class="math inline">\(a\)</span>维的切面上，<span class="math inline">\(p^{(l,i)},p^{(r,i)}\)</span>之间的点，这些点的<span class="math inline">\(g(x)\)</span>在<span class="math inline">\(a+1\)</span>维之后都相等(由于Refined
+Tarski*的作用),前<span class="math inline">\(a\)</span>维肯定非负或非正，因此，如果我们能保证<span class="math inline">\([a+1,a+b+1]\)</span>维也非负/非正，那么就做完了。</p>
+<p>如何保证呢，我们发现实际上这可以转化成一个求解<span class="math inline">\(Tarski(n,b)\)</span>的过程,如果我们可以保证对<span class="math inline">\(q_i\)</span>的回复满足
+<code>Definition2</code>，那么最终就能找到一组非正或非负的回复。</p>
+<figure>
+<img src="ker.png" alt="图片">
+<figcaption aria-hidden="true">图片</figcaption>
+</figure>
+<p>在这里，每次询问<span class="math inline">\(q_i\)</span>时，我们都会找到之前的询问记录，保证下界要比以前的大，上界要比以前的小，这样的回复一定是可以满足<code>Definition2</code>的（因为<span class="math inline">\((q_i,0)+g(p^{(l,i)},q_i)\)</span>关于<span class="math inline">\(q_i\)</span>单调）。因此，假设<span class="math inline">\(Tarski*(n,a)\)</span>复杂度是<span class="math inline">\(q(n,a)\)</span>,<span class="math inline">\(Tarski*(n,b)\)</span>复杂度是<span class="math inline">\(q(n,b)\)</span>，那么我们在<span class="math inline">\(O((b+1)q(n,a)q(n,b))\)</span>内完成了<span class="math inline">\(Tarski*(n,a+b)\)</span></p>
+<h1 id="最后">最后</h1>
+<p>由于<span class="math inline">\(Tarski*(n,2)\)</span>可以在<span class="math inline">\(O(\log n)\)</span>内完成，因此<span class="math inline">\(Tarski*(n,k)\)</span>可以在<span class="math inline">\(O(\log^{k/2}n)\)</span>完成,进而证明了Tarski(n,k)的复杂度</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
