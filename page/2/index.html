@@ -114,7 +114,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-count">14</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -136,6 +136,164 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/03/03/%E5%A4%8D%E6%9D%82%E5%BA%A6%E7%90%86%E8%AE%BA%E4%BD%9C%E4%B8%9A/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Meiqwq">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Meiqwq's blog~">
+      <meta itemprop="description" content="A blog correlated with CS">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Meiqwq's blog~">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/03/03/%E5%A4%8D%E6%9D%82%E5%BA%A6%E7%90%86%E8%AE%BA%E4%BD%9C%E4%B8%9A/" class="post-title-link" itemprop="url">复杂度理论作业（第一次）</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2024-03-03 10:02:54" itemprop="dateCreated datePublished" datetime="2024-03-03T10:02:54+08:00">2024-03-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-03-06 11:49:15" itemprop="dateModified" datetime="2024-03-06T11:49:15+08:00">2024-03-06</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>后续大多只简写了证明是NP-H,NP毕竟都比较显然就不写了。。。 # 1.Proof
+sat is npc ## 先证 sat <span class="math inline">\(\in\)</span>
+np-hard:</p>
+<p>我们的目标是证明:sat难于任何np问题。考虑任何一个np问题<span class="math inline">\(L\)</span>，存在一个图灵机<span class="math inline">\(M\)</span>,<span class="math inline">\(x \in L
+\Leftrightarrow \exist u \in \{0,1\}^{p(x)}
+s.t.M(x,u)=1\)</span>,现在我们的目标是，将<span class="math inline">\(x\in L\)</span>这个条件多项式地转化为一个CNF。</p>
+<p>对于上述TM，我们可以不依赖input纸带地找到它所有的configuration(详见zaq的ppt),对于一个<span class="math inline">\(x\)</span>,我们再设定<span class="math inline">\(p(x)\)</span>个布尔变量<span class="math inline">\(y_1,y_2....y_{p(x)}\)</span>,要判断<span class="math inline">\(M(x,\{y\})\)</span>是否会输出1，我们只需要判断以下条件：
+1. 存在一个configuration sequence satisfying
+每个configuration经过转移函数后都会到达下一个configuration（TM的定义）
+2. 最后一个configuration 将会使TM halt and output <code>1</code>.
+这可以在多项式复杂度内表示为两个CNF,因此我们成功将<span class="math inline">\(x\in L\)</span>转化为了一个CNF。</p>
+<h2 id="再证-sat-in-npc">再证 sat <span class="math inline">\(\in\)</span> NPC</h2>
+<p>只要证sat <span class="math inline">\(\in\)</span> NP,显然的。</p>
+<h1 id="proof-sat-leq_p-3-sat">2. Proof <span class="math inline">\(SAT
+\leq_{p} 3-SAT\)</span></h1>
+<p>考虑一个<span class="math inline">\(k\)</span>元简单析取式<span class="math inline">\(A_1 \vee A_2 \vee A_3\vee...
+A_k\)</span>加入一个新的变量<span class="math inline">\(z\)</span>,可以作如下化简</p>
+<p><span class="math inline">\(A_1 \vee A_2 \vee A_3\vee... A_k = (A_1
+\vee A_2 \vee...A_{k-2} \vee z)\wedge (A_{k-1} \vee A_k \vee
+\bar{z})\)</span>,重复上述过程即可，可以发现重复次数显然是线性的，因此是合法的卡普规约.</p>
+<h1 id="最大团是-npc">3. 最大团是 NPC</h1>
+<p>我们已经证明了3-sat是NPC，因此我们只要证明 <span class="math inline">\(3-SAT \leq_{p}最大团问题\)</span>.</p>
+<p>考虑任何一个CNF，我们建如下图：</p>
+<p>对于m-clauses
+CNF,我们建立一个m部图，对于每一个从句，我们将所有成真的赋值拉出来，看成一个顶点，可以发现最多会拉出<span class="math inline">\(2^3=7\)</span>个点，没有出现的变量用*代替。</p>
+<p>然后，对于不矛盾的点，我们连一条边，最后只要判断最大团是否等于<span class="math inline">\(m\)</span>即可。</p>
+<h1 id="整数规划是npc">4. 整数规划是NPC</h1>
+<p>考虑证明：<span class="math inline">\(SAT \leq_{p}
+整数规划\)</span></p>
+<p>对于任意mclauses-CNF:<span class="math inline">\((A_1 \vee
+A_2...)\wedge (B_1 \vee B_2 \vee...)...\)</span> 先限制所有字母为<span class="math inline">\(0 \leq x \leq 1\)</span>,一共<span class="math inline">\(m\)</span>个方程，再对每个析取式，写出<span class="math inline">\(\sum A_i \geq 1\)</span></p>
+<p>显然，整数规划是NP的，因此得证。</p>
+<h1 id="有向图哈密顿路是npc">5. 有向图哈密顿路是NPC</h1>
+<p>考虑将问题规约到SAT。我们换一种视角来看待SAT问题，对于每个变量<span class="math inline">\(u\)</span>,如果<span class="math inline">\(u\)</span>取 <code>1</code>那么所有包含<span class="math inline">\(u\)</span>的从句都会被满足，如果<span class="math inline">\(u\)</span>取<code>0</code>那么所有包含<span class="math inline">\(\bar{u}\)</span>的从句将会被满足。</p>
+<p>这次，我们按照变量来建图：</p>
+<p>对于一个变量，我们单独对它建一层点：</p>
+<figure>
+<img src="lk.jpg" alt="图片">
+<figcaption aria-hidden="true">图片</figcaption>
+</figure>
+<p>对于所有的从句<span class="math inline">\(c_1,c_2,c_3...c_m\)</span>,让他们相邻之间用双向边连接，规定从左往右是<code>True</code>,反之是<code>False</code>,如果取<code>True</code>时能让<span class="math inline">\(c_2\)</span>满足，那么就向点<span class="math inline">\(c_2\)</span>连边。</p>
+<p>现在我们已经处理好了一个变量，要处理所有<span class="math inline">\(n\)</span>个变量，我们只需要建立起点st和终点ed，按如下方式把所有变量连起来:</p>
+<figure>
+<img src="tot.jpg" alt="图片">
+<figcaption aria-hidden="true">图片</figcaption>
+</figure>
+<p>每一层的端点处向下一层两个端点都连边。很显然这个图如果存在哈密顿路径那么每一层走的方向就是SAT问题的答案。</p>
+<h1 id="无向图哈密顿路径是npc">6.无向图哈密顿路径是NPC</h1>
+<p>肯定是证明 <span class="math inline">\(有向图哈密顿路径 \leq_{p}
+无向图哈密顿路径\)</span>.</p>
+<p>那么给定一个有向图，我们要将它转化成一个无向图，使得哈密顿路存在性相同。对于一个节点，我们作如下转化：
+<img src="conv.jpg" alt="图片">
+将一个点拆成三个点，可以发现如果要经过中间那个点，一定是要走一个入边和一个出边.</p>
+<h1 id="哈密顿回路是npc">7.哈密顿回路是NPC</h1>
+<p>考虑将它规约到无向图哈密顿路径</p>
+<p>对于原来的无向图，直接加一个点，连接其它所有点即可。</p>
+<h1 id="tsp判定版本是否存在小于k的路径是npc">8.TSP判定版本(是否存在小于<span class="math inline">\(k\)</span>的路径)是NPC</h1>
+<p>考虑归约到无向图哈密顿路径。</p>
+<p>对于一个无向图，给它每条边赋权值<span class="math inline">\(\frac{k}{n-1}\)</span>即可</p>
+<h1 id="section">9.</h1>
+<p>证明下述语言是NPC:</p>
+<p><span class="math inline">\(\{(\phi,1^n): 在ZF公理系统中，命题\phi
+有长度至多为n 的证明\}\)</span></p>
+<p>感觉就是规约到SAT？把一个CNF看成一个math statement?</p>
+<p>(存疑) # 10.求证二次整数01规划(模2下)是NPC</p>
+<p>考虑从3-SAT问题归约</p>
+<p>对于任意3-CNF，某个变量会出现<span class="math inline">\(u\)</span>或<span class="math inline">\(\bar{u}\)</span>的形式。我们构造二次01规划问题，对于CNF中的每个变量,构造二次约束：<span class="math inline">\(u^2+\bar{u}^2=1\)</span>,容易验证这个等式就约束了<span class="math inline">\(u,\bar{u}\)</span>不同.</p>
+<p>这样，我们生成了变量个数个二次约束，接下来，我们要解决每个从句的约束.</p>
+<p>考虑到每个从句是一个简单析取式，考虑下列3种情况： 1.
+从句只有一个变量<span class="math inline">\(A\)</span>,构造方程<span class="math inline">\(A^2=1\)</span>即可 2. 从句有两个变量<span class="math inline">\(A \vee B\)</span>,构造方程<span class="math inline">\(A^2+B^2+AB=1\)</span>即可 3. 从句有三个变量<span class="math inline">\(A \vee B \vee C\)</span>,构造新变量<span class="math inline">\(t_i\)</span>,增加方程</p>
+<p><span class="math inline">\(\bar{A}\cdot
+\bar{B}+{t_i}^2=0\)</span></p>
+<p><span class="math inline">\(t_i \cdot \bar{C}=0\)</span></p>
+<p>容易验证这些方程的解会是合法的3-SAT解。</p>
+<h1 id="exact-one-3-sat">11.Exact one 3-sat</h1>
+<p>从3-sat归约，对于原来的3-sat问题，先把表达式中出现在<span class="math inline">\(j\)</span>号从句的字母换成<span class="math inline">\(A_{i,j}\)</span>,然后再在末尾增加析取式<span class="math inline">\((\bar{A_i}\vee A_{i,j} \vee t_i)\)</span>
+同样的，还可以证明NAE-3-SAT是NPC # 12. Subsetsum(问题的规模是<span class="math inline">\(\log值域\)</span>) 从Exact-one
+3-sat归约，考虑一个exact-one 3-sat 问题，对于每个变量<span class="math inline">\(u\)</span>,如果它为真，那么将会满足某些从句，如果它为假，则会满足另一些从句，因此，对于每个变量，我们创建两个数，一个数在每个从句2倍二进制位设为1，这样可以阻止进位的发生，在从句个数+2*变量编号处也设为1（保证二择），要求的和就是<span class="math inline">\(\sum (2i)^2\)</span></p>
+<h1 id="点覆盖独立集">13.点覆盖，独立集</h1>
+<p>它们和最大团完全是一个东西，略</p>
+<h1 id="maxcut-is-npc">14.Maxcut is NPC</h1>
+<p>考虑从NAE-3-SAT归约。对于给定的CNF，每个从句的每个字母都看成一个点，从句之间互相连边，形成许多二元环和三元环，考虑赋值不同的节点之间cut,这样三元环最多贡献是2，二元环是1。</p>
+<p>但注意到同一变量在不同的从句之间的约束，因此，我们在一对相反的变量之间添加很多(比m多一个级别？比如<span class="math inline">\(m^2\)</span>)边，相当于惩罚，如果这俩点一样就少cut了这么多条边。最后把边都加上，看看是不是<span class="math inline">\(2 \cdot 三元环+重边\)</span></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 

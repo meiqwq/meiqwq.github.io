@@ -19,29 +19,28 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="对偶问题 考虑一个标准的线性规划问题： \(max:z&#x3D;\sum\limits_{i&#x3D;1}^{n}c_i\cdot x_i\) 限制如下: \[\begin{cases} \sum\limits_{i&#x3D;1}^{n}a_{1,i}\cdot x_i \leq b_1 \\ \sum\limits_{i&#x3D;1}^{n}a_{2,i}\cdot x_i \leq b_2 \\ .....\\">
+    <meta name="description" content="3.1 Lema: $_{i&#x3D;1}^{k+1}v_iOPT $ Proof:考虑fractional背包问题的解\(OPT&#39;\),显然\(OPT&#39; \geq OPT\),同时，由于分数背包贪心算法，\(OPT&#39; \leq \sum\limits_{i&#x3D;1}^{k+1}v_i\)，引理得证. 因此 \((\sum\limits_{i&#x3D;1}^{k}v_i)+v_{k+">
 <meta property="og:type" content="article">
-<meta property="og:title" content="线性规划对偶">
-<meta property="og:url" content="http://example.com/2024/03/11/lingp/index.html">
+<meta property="og:title" content="复杂度理论4">
+<meta property="og:url" content="http://example.com/2024/04/02/%E5%A4%8D%E6%9D%82%E5%BA%A6%E7%90%86%E8%AE%BA4/index.html">
 <meta property="og:site_name" content="Meiqwq&#39;s blog~">
-<meta property="og:description" content="对偶问题 考虑一个标准的线性规划问题： \(max:z&#x3D;\sum\limits_{i&#x3D;1}^{n}c_i\cdot x_i\) 限制如下: \[\begin{cases} \sum\limits_{i&#x3D;1}^{n}a_{1,i}\cdot x_i \leq b_1 \\ \sum\limits_{i&#x3D;1}^{n}a_{2,i}\cdot x_i \leq b_2 \\ .....\\">
+<meta property="og:description" content="3.1 Lema: $_{i&#x3D;1}^{k+1}v_iOPT $ Proof:考虑fractional背包问题的解\(OPT&#39;\),显然\(OPT&#39; \geq OPT\),同时，由于分数背包贪心算法，\(OPT&#39; \leq \sum\limits_{i&#x3D;1}^{k+1}v_i\)，引理得证. 因此 \((\sum\limits_{i&#x3D;1}^{k}v_i)+v_{k+">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2024-03-11T11:49:36.000Z">
-<meta property="article:modified_time" content="2024-03-11T16:16:25.306Z">
+<meta property="article:published_time" content="2024-04-02T02:06:45.000Z">
+<meta property="article:modified_time" content="2024-04-02T08:50:46.990Z">
 <meta property="article:author" content="Meiqwq">
 <meta property="article:tag" content="计算理论">
-<meta property="article:tag" content="线性规划">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="http://example.com/2024/03/11/lingp/">
+<link rel="canonical" href="http://example.com/2024/04/02/%E5%A4%8D%E6%9D%82%E5%BA%A6%E7%90%86%E8%AE%BA4/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2024/03/11/lingp/","path":"2024/03/11/lingp/","title":"线性规划对偶"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2024/04/02/%E5%A4%8D%E6%9D%82%E5%BA%A6%E7%90%86%E8%AE%BA4/","path":"2024/04/02/复杂度理论4/","title":"复杂度理论4"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>线性规划对偶 | Meiqwq's blog~</title>
+<title>复杂度理论4 | Meiqwq's blog~</title>
   
 
 
@@ -106,7 +105,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AF%B9%E5%81%B6%E9%97%AE%E9%A2%98"><span class="nav-number">1.</span> <span class="nav-text">对偶问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#weak-duality"><span class="nav-number">2.</span> <span class="nav-text">weak duality</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%92%E8%A1%A5%E6%9D%BE%E5%BC%9B"><span class="nav-number">3.</span> <span class="nav-text">互补松弛</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#section"><span class="nav-number">1.</span> <span class="nav-text">3.1</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#section-1"><span class="nav-number">2.</span> <span class="nav-text">3.3</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#fpta%E8%BF%91%E4%BC%BC%E7%AE%97%E6%B3%95"><span class="nav-number">2.1.</span> <span class="nav-text">FPTA近似算法：</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -151,7 +150,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/03/11/lingp/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/04/02/%E5%A4%8D%E6%9D%82%E5%BA%A6%E7%90%86%E8%AE%BA4/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -164,12 +163,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="线性规划对偶 | Meiqwq's blog~">
+      <meta itemprop="name" content="复杂度理论4 | Meiqwq's blog~">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          线性规划对偶
+          复杂度理论4
         </h1>
 
         <div class="post-meta-container">
@@ -179,15 +178,9 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
+      
 
-      <time title="Created: 2024-03-11 19:49:36" itemprop="dateCreated datePublished" datetime="2024-03-11T19:49:36+08:00">2024-03-11</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-03-12 00:16:25" itemprop="dateModified" datetime="2024-03-12T00:16:25+08:00">2024-03-12</time>
+      <time title="Created: 2024-04-02 10:06:45 / Modified: 16:50:46" itemprop="dateCreated datePublished" datetime="2024-04-02T10:06:45+08:00">2024-04-02</time>
     </span>
 
   
@@ -199,64 +192,29 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><h1 id="对偶问题">对偶问题</h1>
-<p>考虑一个标准的线性规划问题：</p>
-<p><span class="math inline">\(max:z=\sum\limits_{i=1}^{n}c_i\cdot
-x_i\)</span></p>
-<p>限制如下: <span class="math display">\[\begin{cases}
-\sum\limits_{i=1}^{n}a_{1,i}\cdot x_i \leq b_1 \\
-\sum\limits_{i=1}^{n}a_{2,i}\cdot x_i \leq b_2 \\
-.....\\\sum\limits_{i=1}^{n}a_{m,i}\cdot x_i \leq
-b_m\end{cases}\]</span></p>
-<p><span class="math inline">\(\forall i \in [n] ,x_i \geq0\)</span></p>
-<p>它的对偶形式是：</p>
-<p><span class="math inline">\(min:z&#39;=\sum\limits_{j=1}^m b_j\cdot
-y_j\)</span></p>
-<p>限制：</p>
-<p><span class="math display">\[\begin{cases}
-\sum\limits_{j=1}^{m}a_{j,1}\cdot y_j \geq c_1 \\
-\sum\limits_{j=1}^{m}a_{j,2}\cdot y_j \geq c_2 \\ .....\\
-\sum\limits_{j=1}^{m}a_{j,n}\cdot y_j \geq c_n\end{cases}\]</span></p>
-<p><span class="math inline">\(\forall j \in [m],y_j \geq 0\)</span></p>
-<p>用矩阵的语言就是：</p>
-<p>prime LP:</p>
-<p><span class="math inline">\(max:z=\vec{c}^T\cdot \vec{x}\)</span></p>
-<p><span class="math inline">\(A\cdot \vec{x} \preceq
-\vec{b}\)</span></p>
-<p><span class="math inline">\(\vec{x} \succeq 0\)</span></p>
-<p>dual LP: <span class="math inline">\(min:z&#39;=\vec{b}^T\cdot
-\vec{y}\)</span></p>
-<p><span class="math inline">\(A^T\vec{y} \succeq \vec{c}\)</span></p>
-<p><span class="math inline">\(\vec{y} \succeq\)</span></p>
-<h1 id="weak-duality">weak duality</h1>
-<p>上述两个LP,的任意一组feasible solution <span class="math inline">\(\hat{x},\hat{y}\)</span>,有<span class="math inline">\(\vec{c}^T\cdot \hat{x} \leq \vec{b}^T \cdot
-\vec{y}\)</span>,i.e.最大化一定小于等于最小化.</p>
-<p>证:</p>
-<p>由于: <span class="math inline">\(A^T \cdot \hat{y} \succeq
-\vec{c}\)</span>并且<span class="math inline">\(\hat{x} \succeq
-0\)</span>,因而:<span class="math inline">\(\vec{c}^T\cdot \vec{x} \leq
-(A^T\cdot \hat{y})^T \hat{x}=\hat{y}^T\cdot A \cdot \hat{x}\)</span></p>
-<p>同样地：因为 <span class="math inline">\(A\cdot \hat{x} \preceq
-\vec{b}\)</span>,<span class="math inline">\(\hat{y} \succeq
-0\)</span>,因而 <span class="math inline">\(\vec{b}^T\cdot \hat{y} \geq
-(A \cdot \hat{x})^T \cdot (\hat{y}^T)^T=(\hat{y}^T\cdot A \cdot
-\hat{x})^T\)</span>,注意到 <span class="math inline">\(\hat{y}^T\cdot A
-\cdot \hat{x}\)</span>是一个实数，所以 <span class="math inline">\((\hat{y}^T\cdot A \cdot \hat{x})^T=\hat{y}^T\cdot
-A \cdot \hat{x}\)</span></p>
-<p>因而：</p>
-<p>${}^{T} ^{T} A ^{T} $</p>
-<h1 id="互补松弛">互补松弛</h1>
-<p>假设 <span class="math inline">\(\hat{x},\hat{y}\)</span>是两个LP的最优解，有<span class="math display">\[\vec{c}^T \cdot \hat{x} = \hat{y}^T\cdot A \cdot
-\hat{x} = \vec{b}^T \cdot \hat{y}\]</span></p>
-<p>我们对其变形： <span class="math display">\[\hat{y}^T\cdot A \cdot
-\hat{x}-\vec{c}^T \cdot \hat{x} = 0\]</span> <span class="math display">\[(\hat{y}^T\cdot A-\vec{c}^T)\cdot \vec{x} =
-0\]</span></p>
-<p>由于 <span class="math inline">\(\hat{y}^T\cdot A-\vec{c}^T=(A^T\cdot
-\hat{y}-\vec{c})^T\)</span>,i.e. <span class="math inline">\((A^T\cdot
-\hat{y}-\vec{c})^T \cdot \hat{x} =0\)</span></p>
-<p>写成代数形式：<span class="math inline">\(\sum\limits_{i=1}^n[({\sum\limits_{j=1}^ma_{j,i}\cdot
-\hat{y}_j})-c_i]\cdot \hat{x}_i = 0\)</span></p>
-<p>这说明了：如果<span class="math inline">\(x_i\)</span>非0，那么对偶问题中它对应的不等式一定取<code>=</code>，如果一个不等式不取<code>=</code>,那么对偶问题中这个不等式对应的变量一定为<code>0</code></p>
+    <div class="post-body" itemprop="articleBody"><h1 id="section">3.1</h1>
+<p>Lema: $_{i=1}^{k+1}v_iOPT $</p>
+<p>Proof:考虑fractional背包问题的解<span class="math inline">\(OPT&#39;\)</span>,显然<span class="math inline">\(OPT&#39; \geq
+OPT\)</span>,同时，由于分数背包贪心算法，<span class="math inline">\(OPT&#39; \leq
+\sum\limits_{i=1}^{k+1}v_i\)</span>，引理得证.</p>
+<p>因此 <span class="math inline">\((\sum\limits_{i=1}^{k}v_i)+v_{k+1}
+\geq OPT\)</span>,故而 <span class="math inline">\(\sum\limits_{i=1}^{k}v_i\)</span>,<span class="math inline">\(v_{k+1}\)</span>二者必有其一比一半<span class="math inline">\(OPT\)</span>大.</p>
+<h1 id="section-1">3.3</h1>
+<p>首先，如果对于一组解，存在一个无法在due
+time前完成的job出现在一个在due
+time完成的job之前，交换他们使得答案不劣。因此肯定有一个最优解使得所有及时完成的job先被执行</p>
+<p>其次，对于两个及时完成的job:<span class="math inline">\(i,j\)</span>，如果 <span class="math inline">\(d_i
+\geq d_j\)</span> 并且<span class="math inline">\(i\)</span>比<span class="math inline">\(j\)</span>早开始，交换他们使答案不劣，因此最终可以看出他们都是按照截止时间排序的。</p>
+<p>可以给出如下dp：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">sort <span class="built_in">all</span> the jobs according to their due time <span class="keyword">in</span> ascending order</span><br><span class="line">s[<span class="number">0</span>]=&#123;(<span class="number">0</span>,<span class="number">0</span>)&#125;</span><br><span class="line"><span class="keyword">for</span> i=<span class="number">1</span> to n:</span><br><span class="line">    s[i]=s[i-<span class="number">1</span>]</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> s[i-<span class="number">1</span>]:</span><br><span class="line">        <span class="keyword">if</span> j[<span class="number">0</span>]+p[i]&lt;=d[i]:</span><br><span class="line">            s[i].insert((j[<span class="number">0</span>]+p[i],w[i]+j[<span class="number">1</span>]))</span><br><span class="line">    delete <span class="built_in">all</span> the dominant pairs <span class="keyword">in</span> s[i]</span><br></pre></td></tr></table></figure>
+<h2 id="fpta近似算法">FPTA近似算法：</h2>
+<p>令<span class="math inline">\(\mu=\frac{M\epsilon}{n}\)</span>（其中<span class="math inline">\(M=max(w_i)\)</span>） 令 <span class="math inline">\(w&#39;_i=\lfloor\frac{w_i}{\mu}\rfloor\)</span></p>
+<p>设对<span class="math inline">\(\{w&#39;_i\}\)</span>进行dp得到的解为<span class="math inline">\(I\)</span>,原问题中<span class="math inline">\(OPT\)</span>的解为<span class="math inline">\(O\)</span> <span class="math inline">\(\mu
+\sum\limits_{i \in I}w&#39;_i \geq \mu\sum\limits_{i\in O}w&#39;_i \geq
+(\sum\limits_{i \in O}w_i)-n\mu=OPT-M\epsilon \geq
+(1-\epsilon)OPT\)</span></p>
+<p>复杂度为 <span class="math inline">\(O(n\cdot
+n\frac{M}{\mu})=O(\frac{n^3}{\epsilon})\)</span></p>
 
     </div>
 
@@ -267,21 +225,17 @@ A \cdot \hat{x}\)</span></p>
     <footer class="post-footer">
           <div class="post-tags">
               <a href="/tags/%E8%AE%A1%E7%AE%97%E7%90%86%E8%AE%BA/" rel="tag"># 计算理论</a>
-              <a href="/tags/%E7%BA%BF%E6%80%A7%E8%A7%84%E5%88%92/" rel="tag"># 线性规划</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2024/03/07/pytorchreview2/" rel="prev" title="Pytorch巩固2 CNN">
-                  <i class="fa fa-angle-left"></i> Pytorch巩固2 CNN
+                <a href="/2024/03/28/%E5%A4%8D%E6%9D%82%E5%BA%A6%E7%90%86%E8%AE%BA%E4%BD%9C%E4%B8%9A3/" rel="prev" title="复杂度理论作业3">
+                  <i class="fa fa-angle-left"></i> 复杂度理论作业3
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2024/03/12/CF1307G/" rel="next" title="CF1307G">
-                  CF1307G <i class="fa fa-angle-right"></i>
-                </a>
             </div>
           </div>
     </footer>
