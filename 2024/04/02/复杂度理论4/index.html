@@ -27,7 +27,7 @@
 <meta property="og:description" content="3.1 Lema: $_{i&#x3D;1}^{k+1}v_iOPT $ Proof:考虑fractional背包问题的解\(OPT&#39;\),显然\(OPT&#39; \geq OPT\),同时，由于分数背包贪心算法，\(OPT&#39; \leq \sum\limits_{i&#x3D;1}^{k+1}v_i\)，引理得证. 因此 \((\sum\limits_{i&#x3D;1}^{k}v_i)+v_{k+">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2024-04-02T02:06:45.000Z">
-<meta property="article:modified_time" content="2024-04-02T08:50:46.990Z">
+<meta property="article:modified_time" content="2024-04-09T08:42:00.985Z">
 <meta property="article:author" content="Meiqwq">
 <meta property="article:tag" content="计算理论">
 <meta name="twitter:card" content="summary">
@@ -105,7 +105,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#section"><span class="nav-number">1.</span> <span class="nav-text">3.1</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#section-1"><span class="nav-number">2.</span> <span class="nav-text">3.3</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#fpta%E8%BF%91%E4%BC%BC%E7%AE%97%E6%B3%95"><span class="nav-number">2.1.</span> <span class="nav-text">FPTA近似算法：</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#section"><span class="nav-number">1.</span> <span class="nav-text">3.1</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#section-1"><span class="nav-number">2.</span> <span class="nav-text">3.3</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#fpta%E8%BF%91%E4%BC%BC%E7%AE%97%E6%B3%95"><span class="nav-number">2.1.</span> <span class="nav-text">FPTA近似算法：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#section-2"><span class="nav-number">3.</span> <span class="nav-text">3.5</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#section-3"><span class="nav-number">4.</span> <span class="nav-text">3.6</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -118,7 +118,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-count">15</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -178,9 +178,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2024-04-02 10:06:45 / Modified: 16:50:46" itemprop="dateCreated datePublished" datetime="2024-04-02T10:06:45+08:00">2024-04-02</time>
+      <time title="Created: 2024-04-02 10:06:45" itemprop="dateCreated datePublished" datetime="2024-04-02T10:06:45+08:00">2024-04-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-04-09 16:42:00" itemprop="dateModified" datetime="2024-04-09T16:42:00+08:00">2024-04-09</time>
     </span>
 
   
@@ -215,6 +221,21 @@ time完成的job之前，交换他们使得答案不劣。因此肯定有一个�
 (1-\epsilon)OPT\)</span></p>
 <p>复杂度为 <span class="math inline">\(O(n\cdot
 n\frac{M}{\mu})=O(\frac{n^3}{\epsilon})\)</span></p>
+<h1 id="section-2">3.5</h1>
+<h1 id="section-3">3.6</h1>
+<p>先考虑关于值域的dp： <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">seq=topsort(G)</span><br><span class="line"><span class="keyword">for</span> u <span class="keyword">in</span> seq:</span><br><span class="line">    S[u]=&#123;&#125;</span><br><span class="line">    <span class="keyword">for</span> v <span class="keyword">in</span> pre(u):</span><br><span class="line">        <span class="keyword">for</span> (x,y) <span class="keyword">in</span> S[v]:</span><br><span class="line">            <span class="keyword">if</span> x+l(v,u)&lt;=L:</span><br><span class="line">                S[u].add((x+l(v,u),y+c(v,u)))</span><br><span class="line">    eliminate <span class="built_in">all</span> the dominant pairs <span class="keyword">in</span> S[u]</span><br></pre></td></tr></table></figure></p>
+<p>上述算法的时间复杂度是 <span class="math inline">\(O((n+m)C)\)</span>, 考虑rounding</p>
+<p>令 <span class="math inline">\(c&#39;_e=\lceil \frac{c_e}{\mu}
+\rceil\)</span></p>
+<p>在<span class="math inline">\(c&#39;_e\)</span>的图上跑上述dp，假设跑出来的边集是<span class="math inline">\(I\)</span>,原问题最优解边集是 <span class="math inline">\(O\)</span> , <span class="math inline">\(\sum\limits_{e \in O}c_e=OPT\)</span></p>
+<p><span class="math inline">\(\sum\limits_{e \in I}c_e \leq \mu
+\sum\limits_{e \in I}c&#39;_e \leq \mu  \sum\limits_{e \in O}c&#39;_e
+\leq \sum\limits_{e \in O}c_e+\mu |O| \leq OPT+m\mu\)</span></p>
+<p>取 <span class="math inline">\(m\mu=C_{min} \cdot
+\epsilon\)</span></p>
+<p><span class="math inline">\(OPT+m\mu \leq OPT+C_{min} \cdot epsilon
+\leq (1+\epsilon)OPT\)</span></p>
+<p>复杂度是<span class="math inline">\(O((n+m)\frac{C}{\mu})=O(\frac{(n+m)m}{\epsilon})\)</span></p>
 
     </div>
 
@@ -236,6 +257,9 @@ n\frac{M}{\mu})=O(\frac{n^3}{\epsilon})\)</span></p>
                 </a>
             </div>
             <div class="post-nav-item">
+                <a href="/2024/04/10/%E8%AE%BA%E6%96%87%E9%80%9F%E8%AF%BB/" rel="next" title="论文速读">
+                  论文速读 <i class="fa fa-angle-right"></i>
+                </a>
             </div>
           </div>
     </footer>

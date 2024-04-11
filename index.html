@@ -114,7 +114,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-count">15</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -136,6 +136,75 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/04/10/%E8%AE%BA%E6%96%87%E9%80%9F%E8%AF%BB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Meiqwq">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Meiqwq's blog~">
+      <meta itemprop="description" content="A blog correlated with CS">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Meiqwq's blog~">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/04/10/%E8%AE%BA%E6%96%87%E9%80%9F%E8%AF%BB/" class="post-title-link" itemprop="url">论文速读</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2024-04-10 10:07:00" itemprop="dateCreated datePublished" datetime="2024-04-10T10:07:00+08:00">2024-04-10</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -173,9 +242,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2024-04-02 10:06:45 / Modified: 16:50:46" itemprop="dateCreated datePublished" datetime="2024-04-02T10:06:45+08:00">2024-04-02</time>
+      <time title="Created: 2024-04-02 10:06:45" itemprop="dateCreated datePublished" datetime="2024-04-02T10:06:45+08:00">2024-04-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-04-09 16:42:00" itemprop="dateModified" datetime="2024-04-09T16:42:00+08:00">2024-04-09</time>
     </span>
 
   
@@ -211,6 +286,21 @@ time完成的job之前，交换他们使得答案不劣。因此肯定有一个�
 (1-\epsilon)OPT\)</span></p>
 <p>复杂度为 <span class="math inline">\(O(n\cdot
 n\frac{M}{\mu})=O(\frac{n^3}{\epsilon})\)</span></p>
+<h1 id="section-2">3.5</h1>
+<h1 id="section-3">3.6</h1>
+<p>先考虑关于值域的dp： <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">seq=topsort(G)</span><br><span class="line"><span class="keyword">for</span> u <span class="keyword">in</span> seq:</span><br><span class="line">    S[u]=&#123;&#125;</span><br><span class="line">    <span class="keyword">for</span> v <span class="keyword">in</span> pre(u):</span><br><span class="line">        <span class="keyword">for</span> (x,y) <span class="keyword">in</span> S[v]:</span><br><span class="line">            <span class="keyword">if</span> x+l(v,u)&lt;=L:</span><br><span class="line">                S[u].add((x+l(v,u),y+c(v,u)))</span><br><span class="line">    eliminate <span class="built_in">all</span> the dominant pairs <span class="keyword">in</span> S[u]</span><br></pre></td></tr></table></figure></p>
+<p>上述算法的时间复杂度是 <span class="math inline">\(O((n+m)C)\)</span>, 考虑rounding</p>
+<p>令 <span class="math inline">\(c&#39;_e=\lceil \frac{c_e}{\mu}
+\rceil\)</span></p>
+<p>在<span class="math inline">\(c&#39;_e\)</span>的图上跑上述dp，假设跑出来的边集是<span class="math inline">\(I\)</span>,原问题最优解边集是 <span class="math inline">\(O\)</span> , <span class="math inline">\(\sum\limits_{e \in O}c_e=OPT\)</span></p>
+<p><span class="math inline">\(\sum\limits_{e \in I}c_e \leq \mu
+\sum\limits_{e \in I}c&#39;_e \leq \mu  \sum\limits_{e \in O}c&#39;_e
+\leq \sum\limits_{e \in O}c_e+\mu |O| \leq OPT+m\mu\)</span></p>
+<p>取 <span class="math inline">\(m\mu=C_{min} \cdot
+\epsilon\)</span></p>
+<p><span class="math inline">\(OPT+m\mu \leq OPT+C_{min} \cdot epsilon
+\leq (1+\epsilon)OPT\)</span></p>
+<p>复杂度是<span class="math inline">\(O((n+m)\frac{C}{\mu})=O(\frac{(n+m)m}{\epsilon})\)</span></p>
 
       
     </div>
@@ -1126,110 +1216,6 @@ A \cdot \hat{x}\)</span></p>
 只贴代码了</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">from</span> torch.utils.data <span class="keyword">import</span> Dataset</span><br><span class="line"><span class="keyword">from</span> torch.utils.data <span class="keyword">import</span> DataLoader</span><br><span class="line"><span class="keyword">from</span> torch <span class="keyword">import</span> nn</span><br><span class="line"><span class="keyword">from</span> os.path <span class="keyword">import</span> exists</span><br><span class="line">batch_size=<span class="number">100</span></span><br><span class="line">word_cnt=<span class="number">29</span></span><br><span class="line"></span><br><span class="line">src=pd.read_csv(<span class="string">&quot;./data/data.csv&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">mydata</span>(<span class="title class_ inherited__">Dataset</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self,typ</span>):</span><br><span class="line">        self.data=src[src.part==typ]</span><br><span class="line">        self.typ=typ</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__getitem__</span>(<span class="params">self, idx</span>):</span><br><span class="line">        sen=[<span class="built_in">int</span>(x) <span class="keyword">for</span> x <span class="keyword">in</span> self.data.iloc[idx][<span class="string">&#x27;x&#x27;</span>].split(<span class="string">&#x27;,&#x27;</span>)]</span><br><span class="line">        oht=np.zeros((<span class="number">15</span>,word_cnt))</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">min</span>(<span class="built_in">len</span>(sen),<span class="number">15</span>)):</span><br><span class="line">            oht[i,sen[i]-<span class="number">1</span>]=<span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> torch.FloatTensor(oht),<span class="built_in">int</span>(self.data.iloc[idx][<span class="string">&#x27;y&#x27;</span>])</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__len__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">len</span>(self.data)</span><br><span class="line">train_set=mydata(<span class="string">&quot;train&quot;</span>)</span><br><span class="line">train_load=DataLoader(dataset=train_set,batch_size=batch_size,shuffle=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">test_set=mydata(<span class="string">&quot;test&quot;</span>)</span><br><span class="line">test_load=DataLoader(dataset=test_set,batch_size=batch_size,shuffle=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">val_set=mydata(<span class="string">&quot;val&quot;</span>)</span><br><span class="line">val_load=DataLoader(dataset=val_set,batch_size=batch_size,shuffle=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Mol</span>(nn.Module):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">super</span>().__init__()</span><br><span class="line">        self.h=<span class="number">50</span></span><br><span class="line">        self.mol=nn.Sequential(</span><br><span class="line">            nn.Conv1d(<span class="number">15</span>,self.h,<span class="number">5</span>,<span class="number">2</span>),nn.ELU(),</span><br><span class="line">            nn.Conv1d(self.h,self.h,<span class="number">5</span>,<span class="number">2</span>),nn.ELU(),</span><br><span class="line">            nn.Conv1d(self.h,self.h,<span class="number">5</span>,<span class="number">1</span>),nn.ELU(),</span><br><span class="line">        )</span><br><span class="line">        self.lin=nn.Linear(self.h,<span class="number">18</span>)</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self,x</span>):</span><br><span class="line">        y1=self.mol(x).squeeze(dim=<span class="number">2</span>)</span><br><span class="line">        <span class="keyword">return</span> self.lin(y1)</span><br><span class="line">mynn=Mol()</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">test_accuracy</span>(<span class="params">data_load</span>):</span><br><span class="line">    <span class="keyword">with</span> torch.no_grad():</span><br><span class="line">        siz=<span class="number">0</span></span><br><span class="line">        ac=<span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> data <span class="keyword">in</span> data_load:</span><br><span class="line">            sen,tag=data</span><br><span class="line">            out=mynn(sen)</span><br><span class="line">            <span class="keyword">for</span> x,y <span class="keyword">in</span> <span class="built_in">zip</span>(out,tag):</span><br><span class="line">                x=x.argmax(dim=<span class="number">0</span>)</span><br><span class="line">                siz+=<span class="number">1</span></span><br><span class="line">                <span class="keyword">if</span> x==y:</span><br><span class="line">                    ac+=<span class="number">1</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;准确率为&#123;:f&#125;&quot;</span>.<span class="built_in">format</span>(ac/siz))</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">train_model</span>():</span><br><span class="line">    epoch=<span class="number">0</span></span><br><span class="line">    train_step=<span class="number">0</span></span><br><span class="line">    loss_fn=nn.CrossEntropyLoss()</span><br><span class="line">    optim=torch.optim.Adam(mynn.parameters(), lr=<span class="number">1e-3</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> epoch <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">30</span>):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;批次:&#123;&#125;&quot;</span>.<span class="built_in">format</span>(epoch))</span><br><span class="line">        <span class="keyword">for</span> data <span class="keyword">in</span> train_load:</span><br><span class="line">            optim.zero_grad()</span><br><span class="line">            sen,tag=data</span><br><span class="line">            output=mynn(sen)</span><br><span class="line">            res_loss=loss_fn(output,tag)</span><br><span class="line">            res_loss.backward()</span><br><span class="line">            optim.step()</span><br><span class="line">            train_step+=<span class="number">1</span></span><br><span class="line">            <span class="keyword">if</span> train_step%<span class="number">10</span>==<span class="number">0</span>:</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">&quot;训练次数:&#123;&#125;,loss:&#123;&#125;&quot;</span>.<span class="built_in">format</span>(train_step,res_loss))</span><br><span class="line">        test_accuracy(test_load)</span><br><span class="line">        torch.save(mynn.state_dict(),<span class="string">&quot;./model/epoch_&#123;&#125;.pth&quot;</span>.<span class="built_in">format</span>(epoch))</span><br><span class="line">    torch.save(mynn.state_dict(),<span class="string">&quot;./model/final.pth&quot;</span>)</span><br><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> exists(<span class="string">&quot;./model/final.pth&quot;</span>):</span><br><span class="line">    train_model()</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    mynn.load_state_dict(torch.load(<span class="string">&quot;./model/final.pth&quot;</span>))</span><br><span class="line">test_accuracy(val_load)</span><br></pre></td></tr></table></figure>
 <p>输出:<code>准确率为0.707317</code></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/03/06/pytorchreview1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Meiqwq">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Meiqwq's blog~">
-      <meta itemprop="description" content="A blog correlated with CS">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Meiqwq's blog~">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/03/06/pytorchreview1/" class="post-title-link" itemprop="url">Pytorch巩固1 one-hot 编码</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-      
-
-      <time title="Created: 2024-03-06 10:22:34 / Modified: 11:15:33" itemprop="dateCreated datePublished" datetime="2024-03-06T10:22:34+08:00">2024-03-06</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>恶补pytorch系列,数据与项目内容来自：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Ky4y1g7Nk/?p=2">链接</a>,代码是自己写的，和up可能不大一样</p>
-<h1 id="one-hot">One-hot</h1>
-<p>将句子分词后，生成一个向量 <span class="math inline">\(\vec{v}\)</span>,向量第 <span class="math inline">\(i\)</span>维为1当且仅当词<span class="math inline">\(i\)</span>出现过。 # 本次任务
-数据集是csv文件，包括了单词转化为编码的形式，每个句子的标签（0，1二分类），train/val/test标注。
-建立一个NN，本次重心不在backbone上，因此骨架只是一个单词数量映射到2的一个线性层。</p>
-<h1 id="训练准备">训练准备</h1>
-<p>由于每次训练的训练集数据都是批量拿取的，因此我们再复习下Dataset类和Dataloader的使用。</p>
-<p>前置条件:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">batch_size=<span class="number">200</span></span><br><span class="line">word_num=<span class="number">8945</span></span><br></pre></td></tr></table></figure>
-<h2 id="dataset-类">Dataset 类</h2>
-<p>先调库: <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> torch.utils.data <span class="keyword">import</span> Dataset</span><br></pre></td></tr></table></figure> 读入数据: <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">src=pd.read_csv(<span class="string">&quot;data/数字化数据.csv&quot;</span>)</span><br></pre></td></tr></table></figure>
-要继承Dataset类，需要写好构造函数<code>__init__()</code>,重写两个函数<code>__getitem__</code>与<code>__len__</code>。</p>
-<p>构造函数可以记录一些基本的数据，记录好表示(比如train/val/test)
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self,typ</span>):</span><br><span class="line">    self.typ=typ</span><br><span class="line">    self.data=src[src.part==typ]</span><br></pre></td></tr></table></figure> 这里存下了数据作用与对应的dataframe ### get_item
-get_item会读入一个参数<code>idx</code>,函数要返回第<code>idx</code>个数据。</p>
-<p>这里同时要对数据完成onehot编码，其中<code>-1</code>表示不认识这个词，忽略
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">__getitem__</span>(<span class="params">self, idx</span>):</span><br><span class="line">    ts=torch.zeros(word_num,dtype=torch.<span class="built_in">float</span>)</span><br><span class="line">    sentence=self.data.iloc[idx][<span class="string">&#x27;x&#x27;</span>]</span><br><span class="line">    seq=[<span class="built_in">int</span>(x) <span class="keyword">for</span> x <span class="keyword">in</span> sentence.split(<span class="string">&#x27;,&#x27;</span>)]</span><br><span class="line">    <span class="keyword">for</span> x <span class="keyword">in</span> seq:</span><br><span class="line">        <span class="keyword">if</span> x!=-<span class="number">1</span>:</span><br><span class="line">            ts[x]=<span class="number">1</span></span><br><span class="line">    tag=<span class="built_in">int</span>(self.data.iloc[idx][<span class="string">&#x27;y&#x27;</span>])</span><br><span class="line">    ts_tar=torch.zeros(<span class="number">2</span>,dtype=torch.<span class="built_in">float</span>)</span><br><span class="line">    ts_tar[tag]=<span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> ts,ts_tar</span><br></pre></td></tr></table></figure> ### len 返回数据集大小即可 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">__len__</span>(<span class="params">self</span>):</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">len</span>(self.data)</span><br></pre></td></tr></table></figure></p>
-<p>最后产生具体对象 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">train_set=mydata(<span class="string">&quot;train&quot;</span>)</span><br></pre></td></tr></table></figure> ## Dataloader 调的库在 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> torch.utils.data <span class="keyword">import</span> DataLoader</span><br></pre></td></tr></table></figure>
-本质是用Dataloader类创建一个对象,几个参数如下: 1. dataset
-就是Dataset类构建出来的 2. batch_size 每次取出的个数 3.
-shuffle最好设为<code>True</code> <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">train_load=DataLoader(dataset=train_set,batch_size=batch_size,shuffle=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
-同样的还要构造好<code>val_load</code>,<code>test_load</code> #
-神经网络骨架 不是这次的重点，只整一个线性层: <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> torch <span class="keyword">import</span> nn</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Mol</span>(nn.Module):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">super</span>().__init__()</span><br><span class="line">        self.mol=nn.Sequential(</span><br><span class="line">            nn.Linear(word_num,<span class="number">2</span>),</span><br><span class="line">        )</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, x</span>):</span><br><span class="line">        y_out = self.mol(x)</span><br><span class="line">        <span class="keyword">return</span> y_out</span><br><span class="line">mynn=Mol()</span><br></pre></td></tr></table></figure>
-模型单个数据最后会输出一个shape为(2)的tensor，分别表示0类和1类的概率。</p>
-<h1 id="测试准确率">测试准确率</h1>
-<p>注意在测试时模型参数不能动，因此要设置 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> torch.no_grad():</span><br></pre></td></tr></table></figure> <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">test_accuracy</span>(<span class="params">data_load</span>):</span><br><span class="line">    <span class="keyword">with</span> torch.no_grad(): </span><br><span class="line">        siz=<span class="number">0</span></span><br><span class="line">        ac=<span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> data <span class="keyword">in</span> data_load:</span><br><span class="line">            sen,tag=data</span><br><span class="line">            out=mynn(sen)</span><br><span class="line">            <span class="keyword">for</span> x,y <span class="keyword">in</span> <span class="built_in">zip</span>(out,tag):</span><br><span class="line">                <span class="keyword">if</span> (x[<span class="number">0</span>]&gt;x[<span class="number">1</span>])==(y[<span class="number">0</span>]&gt;y[<span class="number">1</span>]):</span><br><span class="line">                    ac+=<span class="number">1</span></span><br><span class="line">                siz+=<span class="number">1</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;准确率为&#123;&#125;&quot;</span>.<span class="built_in">format</span>(ac/siz))</span><br></pre></td></tr></table></figure>
-# 训练过程 ## 工具
-损失函数设定为交叉熵，优化器为随机梯度下降，学习速率为<code>0.01</code>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">loss_fn=nn.CrossEntropyLoss()</span><br><span class="line">    optim=torch.optim.SGD(mynn.parameters(),lr=<span class="number">0.01</span>)</span><br></pre></td></tr></table></figure>
-训练分多个批次(epoch),每个批次都会把所有数据训练一遍，每次训练先算当前神经网络输出，再算损失函数，然后反向传播梯度下降。
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> epoch <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>):</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;训练批次数：&#123;&#125;&quot;</span>.<span class="built_in">format</span>(epoch))</span><br><span class="line">    <span class="keyword">for</span> data <span class="keyword">in</span> train_load:</span><br><span class="line">        optim.zero_grad()</span><br><span class="line">        sen,tag=data</span><br><span class="line">        output=mynn(sen)</span><br><span class="line">        res_loss=loss_fn(output,tag)</span><br><span class="line">        res_loss.backward()</span><br><span class="line">        optim.step()</span><br><span class="line">        <span class="keyword">if</span> train_step%<span class="number">10</span>==<span class="number">0</span>:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;训练次数:&#123;&#125;,loss=&#123;&#125;&quot;</span>.<span class="built_in">format</span>(train_step,res_loss.item()))</span><br><span class="line">        train_step+=<span class="number">1</span></span><br><span class="line">    test_accuracy(test_load)</span><br><span class="line">    torch.save(mynn.state_dict(),<span class="string">&quot;./model/epoch&#123;&#125;.pth&quot;</span>.<span class="built_in">format</span>(epoch))</span><br></pre></td></tr></table></figure> ## 模型保存/读取 这次我只保存了模型参数： <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">torch.save(mynn.state_dict(),<span class="string">&quot;./model/final.pth&quot;</span>)</span><br></pre></td></tr></table></figure>
-模型读取(要先创建好骨架)： <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mynn.load_state_dict(torch.load(<span class="string">&quot;./model/final.pth&quot;</span>))</span><br></pre></td></tr></table></figure> ## 训练结果
-<code>准确率为0.8693622448979592</code></p>
-<h1 id="完整代码">完整代码</h1>
-<p>后续放github上</p>
 
       
     </div>
