@@ -19,14 +19,18 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta property="og:type" content="article">
+    <meta name="description" content="62.2022-ACL-NoisyTune 对于预训练好的大模型，我们在将它精调成对于特定任务时，总会出现过拟合。这篇文章加入了一些扰动。 数据集:22,23,24 61.2022-TOIS-Personal or General_A Hybrid Strategy with Multi-factors 一个新闻推荐系统 创新点在于：将用户浏览历史和新闻本身热度进行融合，综合考量进行推">
+<meta property="og:type" content="article">
 <meta property="og:title" content="论文速读">
 <meta property="og:url" content="http://example.com/2024/04/10/%E8%AE%BA%E6%96%87%E9%80%9F%E8%AF%BB/index.html">
 <meta property="og:site_name" content="Meiqwq&#39;s blog~">
+<meta property="og:description" content="62.2022-ACL-NoisyTune 对于预训练好的大模型，我们在将它精调成对于特定任务时，总会出现过拟合。这篇文章加入了一些扰动。 数据集:22,23,24 61.2022-TOIS-Personal or General_A Hybrid Strategy with Multi-factors 一个新闻推荐系统 创新点在于：将用户浏览历史和新闻本身热度进行融合，综合考量进行推">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2024-04-10T02:07:00.000Z">
-<meta property="article:modified_time" content="2024-04-10T02:07:00.418Z">
+<meta property="article:modified_time" content="2024-04-20T17:02:06.464Z">
 <meta property="article:author" content="Meiqwq">
+<meta property="article:tag" content="nlp">
+<meta property="article:tag" content="论文导读">
 <meta name="twitter:card" content="summary">
 
 
@@ -89,7 +93,7 @@
   
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           Table of Contents
@@ -102,6 +106,10 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#acl-noisytune"><span class="nav-number">1.</span> <span class="nav-text">62.2022-ACL-NoisyTune</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tois-personal-or-general_a-hybrid-strategy-with-multi-factors"><span class="nav-number">2.</span> <span class="nav-text">61.2022-TOIS-Personal
+or General_A Hybrid Strategy with Multi-factors</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sigir-fum-fine-grained-and-fast-user-modeling"><span class="nav-number">3.</span> <span class="nav-text">60.2022-SIGIR-FUM
+Fine-grained and Fast User Modeling</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nips-tenrec-a-large-scale-multipurpose-benchmark"><span class="nav-number">4.</span> <span class="nav-text">59.2022-NIPS-Tenrec
+A Large-scale Multipurpose Benchmark</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -114,7 +122,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-count">17</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -177,6 +185,13 @@
 
       <time title="Created: 2024-04-10 10:07:00" itemprop="dateCreated datePublished" datetime="2024-04-10T10:07:00+08:00">2024-04-10</time>
     </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-04-21 01:02:06" itemprop="dateModified" datetime="2024-04-21T01:02:06+08:00">2024-04-21</time>
+    </span>
 
   
 </div>
@@ -187,7 +202,25 @@
     
     
     
-    <div class="post-body" itemprop="articleBody">
+    <div class="post-body" itemprop="articleBody"><h3 id="acl-noisytune">62.2022-ACL-NoisyTune</h3>
+<p>对于预训练好的大模型，我们在将它精调成对于特定任务时，总会出现过拟合。这篇文章加入了一些扰动。</p>
+<p>数据集:22,23,24</p>
+<h3 id="tois-personal-or-general_a-hybrid-strategy-with-multi-factors">61.2022-TOIS-Personal
+or General_A Hybrid Strategy with Multi-factors</h3>
+<p>一个新闻推荐系统
+创新点在于：将用户浏览历史和新闻本身热度进行融合，综合考量进行推荐
+数据集是用户点击的新闻数量（好像和excel的不太像</p>
+<h3 id="sigir-fum-fine-grained-and-fast-user-modeling">60.2022-SIGIR-FUM
+Fine-grained and Fast User Modeling</h3>
+<p>也是个新闻推荐的，对用户画像进行两次encode来和corpus匹配。
+数据集：26</p>
+<h3 id="nips-tenrec-a-large-scale-multipurpose-benchmark">59.2022-NIPS-Tenrec
+A Large-scale Multipurpose Benchmark</h3>
+<p>针对推荐系统的一个数据集基准</p>
+<p>数据集也是每篇文章的访问次数，类型等信息 ###
+58.2022-ICML_Branchformer Parallel MLP-Attention Architectures to
+Capture 由于transformer的复杂度是平方的，这里提出了一个线性的CNN。</p>
+<p>数据集好像是演讲的音频？</p>
 
     </div>
 
@@ -196,6 +229,10 @@
     
 
     <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/nlp/" rel="tag"># nlp</a>
+              <a href="/tags/%E8%AE%BA%E6%96%87%E5%AF%BC%E8%AF%BB/" rel="tag"># 论文导读</a>
+          </div>
 
         
 
@@ -275,7 +312,7 @@
 
   
 
-  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
 <script src="/js/third-party/math/mathjax.js"></script>
 
 

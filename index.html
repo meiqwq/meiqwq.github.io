@@ -114,7 +114,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-count">17</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -136,6 +136,98 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/05/03/%E5%A4%8D%E6%9D%82%E5%BA%A6%E7%90%86%E8%AE%BA%E4%BD%9C%E4%B8%9A6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Meiqwq">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Meiqwq's blog~">
+      <meta itemprop="description" content="A blog correlated with CS">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Meiqwq's blog~">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/05/03/%E5%A4%8D%E6%9D%82%E5%BA%A6%E7%90%86%E8%AE%BA%E4%BD%9C%E4%B8%9A6/" class="post-title-link" itemprop="url">复杂度理论作业6</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2024-05-03 17:48:19 / Modified: 19:57:48" itemprop="dateCreated datePublished" datetime="2024-05-03T17:48:19+08:00">2024-05-03</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="section">5.1</h1>
+<p>每个点在 <span class="math inline">\([k]\)</span>中随机取值，接下来证明这个期望是 <span class="math inline">\(\frac{k-1}{k}\)</span>优秀的。</p>
+<p>对于任何一条边 <span class="math inline">\((u,v)\)</span>,它对weight产生贡献的概率是<span class="math inline">\(\frac{k-1}{k}\)</span>,因此 <span class="math inline">\(E[W]=\sum\limits_{e \in
+E}w_{i,j}\frac{k-1}{k}\)</span>,显然 <span class="math inline">\(OPT
+\leq \sum w_{i,j}\)</span>,因而<span class="math inline">\(E[W]\geq
+\frac{k-1}{k}OPT\)</span></p>
+<h1 id="section-1">5.3</h1>
+<p>对于每个点，等概率的随机它进入<span class="math inline">\(U,W\)</span>,接下来说明这个算法是 <span class="math inline">\(\frac{1}{4}\)</span>近似的。</p>
+<p>对于任何一有向边，它对答案产生贡献的概率是<span class="math inline">\(\frac{1}{4}\)</span>,因而<span class="math inline">\(E[W]=\sum w_{i,j}\frac{1}{4}\geq
+\frac{OPT}{4}\)</span></p>
+<h1 id="section-2">5.6</h1>
+<h2 id="a">a</h2>
+<p><span class="math inline">\(x_i\)</span>是1当且仅当<span class="math inline">\(i\in U\)</span>,<span class="math inline">\(z_{i,j}\)</span>为1当且仅当这条边被选择。</p>
+<h2 id="b">b</h2>
+<p>边 <span class="math inline">\((i,j)\)</span> 被选入贡献的概率是
+<span class="math inline">\((\frac{x_i}{2}+\frac{1}{4})(\frac{3}{4}-\frac{x_j}{2})\)</span></p>
+<p>由于<span class="math inline">\(\hat{x}\)</span>是LP的解，因此 <span class="math inline">\(\frac{x_i}{2}+\frac{1}{4} \geq
+\frac{z_{i,j}}{2}+\frac{1}{4}\)</span>,<span class="math inline">\(\frac{3}{4}-\frac{x_j}{2}\geq
+\frac{1}{4}+\frac{z_{i,j}}{2}\)</span></p>
+<p>故 <span class="math inline">\(E[W]=\sum w_{i,j}
+\cdot(\frac{z_{i,j}}{2}+\frac{1}{4})^2=\sum
+w_{i,j}(\frac{1}{16}+\frac{z^2_{i,j}}{4}+\frac{z_{i,j}}{4})\geq \sum
+w_{i,j}(\frac{z_{i,j}}{2}) \geq 2OPT\)</span></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -271,6 +363,13 @@ p([j])\)</span>故得证。</p>
 
       <time title="Created: 2024-04-10 10:07:00" itemprop="dateCreated datePublished" datetime="2024-04-10T10:07:00+08:00">2024-04-10</time>
     </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-04-21 01:02:06" itemprop="dateModified" datetime="2024-04-21T01:02:06+08:00">2024-04-21</time>
+    </span>
 
   
 </div>
@@ -282,7 +381,25 @@ p([j])\)</span>故得证。</p>
     
     
     <div class="post-body" itemprop="articleBody">
-          
+          <h3 id="acl-noisytune">62.2022-ACL-NoisyTune</h3>
+<p>对于预训练好的大模型，我们在将它精调成对于特定任务时，总会出现过拟合。这篇文章加入了一些扰动。</p>
+<p>数据集:22,23,24</p>
+<h3 id="tois-personal-or-general_a-hybrid-strategy-with-multi-factors">61.2022-TOIS-Personal
+or General_A Hybrid Strategy with Multi-factors</h3>
+<p>一个新闻推荐系统
+创新点在于：将用户浏览历史和新闻本身热度进行融合，综合考量进行推荐
+数据集是用户点击的新闻数量（好像和excel的不太像</p>
+<h3 id="sigir-fum-fine-grained-and-fast-user-modeling">60.2022-SIGIR-FUM
+Fine-grained and Fast User Modeling</h3>
+<p>也是个新闻推荐的，对用户画像进行两次encode来和corpus匹配。
+数据集：26</p>
+<h3 id="nips-tenrec-a-large-scale-multipurpose-benchmark">59.2022-NIPS-Tenrec
+A Large-scale Multipurpose Benchmark</h3>
+<p>针对推荐系统的一个数据集基准</p>
+<p>数据集也是每篇文章的访问次数，类型等信息 ###
+58.2022-ICML_Branchformer Parallel MLP-Attention Architectures to
+Capture 由于transformer的复杂度是平方的，这里提出了一个线性的CNN。</p>
+<p>数据集好像是演讲的音频？</p>
 
       
     </div>
@@ -1104,139 +1221,6 @@ E:y_u-y_v\leq cst_i+x_i \\ \forall i \in [1,m] ,x_{i}\geq
 x_i}{F}\)</span>的最小值。只要在费用流每次增广的时候几下对应的<span class="math inline">\((flow,cst)\)</span>，每次询问在这些点里算最小值即可.</p>
 <h1 id="代码">代码</h1>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">pragma</span> GCC optimize(3)</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="meta">#<span class="keyword">define</span> rep(i,j,k) for(i=j;i&lt;=k;++i)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> dow(i,j,k) for(i=j;i&gt;=k;--i)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> pr pair</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> mkp make_pair</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> fi first</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> se second</span></span><br><span class="line"><span class="type">const</span> <span class="type">int</span> N=<span class="number">60</span>;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> M=N*N+N;</span><br><span class="line"><span class="keyword">namespace</span> MCMF&#123;</span><br><span class="line">    <span class="keyword">struct</span> <span class="title class_">edge</span>&#123;</span><br><span class="line">        <span class="type">int</span> nxt,to,w,c;</span><br><span class="line">    &#125;e[M&lt;&lt;<span class="number">1</span>];</span><br><span class="line">    <span class="type">int</span> head[N],pos=<span class="number">1</span>,s,t,dis[N],pre[N],ep[N],flow,cst;</span><br><span class="line">    <span class="type">bool</span> vis[N];</span><br><span class="line">    vector&lt;pr&lt;<span class="type">int</span>,<span class="type">int</span>&gt; &gt;rec;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">add</span><span class="params">(<span class="type">int</span> u,<span class="type">int</span> v,<span class="type">int</span> w,<span class="type">int</span> c)</span></span>&#123;</span><br><span class="line">        e[++pos]=(edge)&#123;head[u],v,w,c&#125;;head[u]=pos;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">spfa</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="type">int</span> i;<span class="built_in">rep</span>(i,<span class="number">1</span>,t)dis[i]=<span class="number">1</span>&lt;&lt;<span class="number">30</span>;</span><br><span class="line">        queue&lt;<span class="type">int</span>&gt;q;</span><br><span class="line">        <span class="built_in">memset</span>(vis,<span class="number">0</span>,<span class="built_in">sizeof</span>(vis));</span><br><span class="line">        <span class="built_in">rep</span>(i,<span class="number">1</span>,t)pre[i]=<span class="number">-1</span>;</span><br><span class="line">        dis[s]=<span class="number">0</span>;vis[s]=<span class="number">1</span>;</span><br><span class="line">        q.<span class="built_in">push</span>(s);</span><br><span class="line">        <span class="keyword">while</span>(!q.<span class="built_in">empty</span>())&#123;</span><br><span class="line">            <span class="type">int</span> u=q.<span class="built_in">front</span>();q.<span class="built_in">pop</span>();vis[u]=<span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span>(i=head[u];i;i=e[i].nxt)<span class="keyword">if</span>(e[i].w&gt;<span class="number">0</span> &amp;&amp; dis[e[i].to]&gt;dis[u]+e[i].c)&#123;</span><br><span class="line">                    dis[e[i].to]=dis[u]+e[i].c;ep[e[i].to]=i;</span><br><span class="line">                    pre[e[i].to]=u;<span class="keyword">if</span>(!vis[e[i].to])q.<span class="built_in">push</span>(e[i].to);vis[e[i].to]=<span class="number">1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dis[t]&lt;(<span class="number">1</span>&lt;&lt;<span class="number">30</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">EK</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="type">int</span> i;</span><br><span class="line">        <span class="keyword">while</span>(<span class="built_in">spfa</span>())&#123;</span><br><span class="line">            <span class="type">int</span> f=<span class="number">1</span>&lt;&lt;<span class="number">30</span>;</span><br><span class="line">            <span class="keyword">for</span>(i=t;i!=s;i=pre[i])</span><br><span class="line">                f=<span class="built_in">min</span>(f,e[ep[i]].w);</span><br><span class="line">            flow+=f;cst+=f*dis[t];</span><br><span class="line">            <span class="keyword">for</span>(i=t;i!=s;i=pre[i])e[ep[i]].w-=f,e[ep[i]^<span class="number">1</span>].w+=f;</span><br><span class="line">            rec.<span class="built_in">push_back</span>(<span class="built_in">mkp</span>(flow,cst));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">int</span> n,m,u[M],v[M],w[M];</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">solve</span><span class="params">(<span class="type">int</span> F)</span></span>&#123;</span><br><span class="line">    MCMF::pos=<span class="number">1</span>;</span><br><span class="line">    <span class="built_in">memset</span>(MCMF::head,<span class="number">0</span>,<span class="built_in">sizeof</span>(MCMF::head));</span><br><span class="line">    <span class="type">int</span> i,j;</span><br><span class="line">    <span class="built_in">rep</span>(i,<span class="number">1</span>,m)&#123;</span><br><span class="line">        MCMF::<span class="built_in">add</span>(u[i],v[i],<span class="number">1</span>,w[i]);</span><br><span class="line">        MCMF::<span class="built_in">add</span>(v[i],u[i],<span class="number">0</span>,-w[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    MCMF::s=n+<span class="number">1</span>;MCMF::t=n+<span class="number">2</span>;</span><br><span class="line">    MCMF::<span class="built_in">add</span>(n+<span class="number">1</span>,<span class="number">1</span>,F,<span class="number">0</span>);MCMF::<span class="built_in">add</span>(<span class="number">1</span>,n+<span class="number">1</span>,<span class="number">0</span>,<span class="number">0</span>);</span><br><span class="line">    MCMF::<span class="built_in">add</span>(n,n+<span class="number">2</span>,F,<span class="number">0</span>);MCMF::<span class="built_in">add</span>(n+<span class="number">2</span>,n,<span class="number">0</span>,<span class="number">0</span>);</span><br><span class="line">    MCMF::flow=<span class="number">0</span>;MCMF::cst=<span class="number">0</span>;</span><br><span class="line">    MCMF::<span class="built_in">EK</span>();</span><br><span class="line">    <span class="keyword">if</span>(MCMF::flow^F)<span class="keyword">return</span> <span class="number">1000000</span>;<span class="keyword">return</span> MCMF::cst;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;<span class="comment">//freopen(&quot;in.txt&quot;,&quot;r&quot;,stdin);</span></span><br><span class="line">    ios::<span class="built_in">sync_with_stdio</span>(<span class="literal">false</span>);</span><br><span class="line">    <span class="type">int</span> i,j;</span><br><span class="line">    cin&gt;&gt;n&gt;&gt;m;</span><br><span class="line">    <span class="built_in">rep</span>(i,<span class="number">1</span>,m)cin&gt;&gt;u[i]&gt;&gt;v[i]&gt;&gt;w[i];</span><br><span class="line">    <span class="type">int</span> q;</span><br><span class="line">    cin&gt;&gt;q;</span><br><span class="line">    <span class="built_in">solve</span>(m);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(q--)&#123;</span><br><span class="line">        <span class="type">int</span> xx;cin&gt;&gt;xx;</span><br><span class="line">        <span class="type">double</span> ans=<span class="number">1e9</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> v:MCMF::rec)ans=<span class="built_in">min</span>(ans,(<span class="number">1.0</span>*xx+v.se)/v.fi);</span><br><span class="line">        cout&lt;&lt;fixed;cout&lt;&lt;<span class="built_in">setprecision</span>(<span class="number">10</span>)&lt;&lt;ans&lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/03/11/lingp/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Meiqwq">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Meiqwq's blog~">
-      <meta itemprop="description" content="A blog correlated with CS">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Meiqwq's blog~">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/03/11/lingp/" class="post-title-link" itemprop="url">线性规划对偶</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2024-03-11 19:49:36" itemprop="dateCreated datePublished" datetime="2024-03-11T19:49:36+08:00">2024-03-11</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-03-12 00:16:25" itemprop="dateModified" datetime="2024-03-12T00:16:25+08:00">2024-03-12</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="对偶问题">对偶问题</h1>
-<p>考虑一个标准的线性规划问题：</p>
-<p><span class="math inline">\(max:z=\sum\limits_{i=1}^{n}c_i\cdot
-x_i\)</span></p>
-<p>限制如下: <span class="math display">\[\begin{cases}
-\sum\limits_{i=1}^{n}a_{1,i}\cdot x_i \leq b_1 \\
-\sum\limits_{i=1}^{n}a_{2,i}\cdot x_i \leq b_2 \\
-.....\\\sum\limits_{i=1}^{n}a_{m,i}\cdot x_i \leq
-b_m\end{cases}\]</span></p>
-<p><span class="math inline">\(\forall i \in [n] ,x_i \geq0\)</span></p>
-<p>它的对偶形式是：</p>
-<p><span class="math inline">\(min:z&#39;=\sum\limits_{j=1}^m b_j\cdot
-y_j\)</span></p>
-<p>限制：</p>
-<p><span class="math display">\[\begin{cases}
-\sum\limits_{j=1}^{m}a_{j,1}\cdot y_j \geq c_1 \\
-\sum\limits_{j=1}^{m}a_{j,2}\cdot y_j \geq c_2 \\ .....\\
-\sum\limits_{j=1}^{m}a_{j,n}\cdot y_j \geq c_n\end{cases}\]</span></p>
-<p><span class="math inline">\(\forall j \in [m],y_j \geq 0\)</span></p>
-<p>用矩阵的语言就是：</p>
-<p>prime LP:</p>
-<p><span class="math inline">\(max:z=\vec{c}^T\cdot \vec{x}\)</span></p>
-<p><span class="math inline">\(A\cdot \vec{x} \preceq
-\vec{b}\)</span></p>
-<p><span class="math inline">\(\vec{x} \succeq 0\)</span></p>
-<p>dual LP: <span class="math inline">\(min:z&#39;=\vec{b}^T\cdot
-\vec{y}\)</span></p>
-<p><span class="math inline">\(A^T\vec{y} \succeq \vec{c}\)</span></p>
-<p><span class="math inline">\(\vec{y} \succeq\)</span></p>
-<h1 id="weak-duality">weak duality</h1>
-<p>上述两个LP,的任意一组feasible solution <span class="math inline">\(\hat{x},\hat{y}\)</span>,有<span class="math inline">\(\vec{c}^T\cdot \hat{x} \leq \vec{b}^T \cdot
-\vec{y}\)</span>,i.e.最大化一定小于等于最小化.</p>
-<p>证:</p>
-<p>由于: <span class="math inline">\(A^T \cdot \hat{y} \succeq
-\vec{c}\)</span>并且<span class="math inline">\(\hat{x} \succeq
-0\)</span>,因而:<span class="math inline">\(\vec{c}^T\cdot \vec{x} \leq
-(A^T\cdot \hat{y})^T \hat{x}=\hat{y}^T\cdot A \cdot \hat{x}\)</span></p>
-<p>同样地：因为 <span class="math inline">\(A\cdot \hat{x} \preceq
-\vec{b}\)</span>,<span class="math inline">\(\hat{y} \succeq
-0\)</span>,因而 <span class="math inline">\(\vec{b}^T\cdot \hat{y} \geq
-(A \cdot \hat{x})^T \cdot (\hat{y}^T)^T=(\hat{y}^T\cdot A \cdot
-\hat{x})^T\)</span>,注意到 <span class="math inline">\(\hat{y}^T\cdot A
-\cdot \hat{x}\)</span>是一个实数，所以 <span class="math inline">\((\hat{y}^T\cdot A \cdot \hat{x})^T=\hat{y}^T\cdot
-A \cdot \hat{x}\)</span></p>
-<p>因而：</p>
-<p>${}^{T} ^{T} A ^{T} $</p>
-<h1 id="互补松弛">互补松弛</h1>
-<p>假设 <span class="math inline">\(\hat{x},\hat{y}\)</span>是两个LP的最优解，有<span class="math display">\[\vec{c}^T \cdot \hat{x} = \hat{y}^T\cdot A \cdot
-\hat{x} = \vec{b}^T \cdot \hat{y}\]</span></p>
-<p>我们对其变形： <span class="math display">\[\hat{y}^T\cdot A \cdot
-\hat{x}-\vec{c}^T \cdot \hat{x} = 0\]</span> <span class="math display">\[(\hat{y}^T\cdot A-\vec{c}^T)\cdot \vec{x} =
-0\]</span></p>
-<p>由于 <span class="math inline">\(\hat{y}^T\cdot A-\vec{c}^T=(A^T\cdot
-\hat{y}-\vec{c})^T\)</span>,i.e. <span class="math inline">\((A^T\cdot
-\hat{y}-\vec{c})^T \cdot \hat{x} =0\)</span></p>
-<p>写成代数形式：<span class="math inline">\(\sum\limits_{i=1}^n[({\sum\limits_{j=1}^ma_{j,i}\cdot
-\hat{y}_j})-c_i]\cdot \hat{x}_i = 0\)</span></p>
-<p>这说明了：如果<span class="math inline">\(x_i\)</span>非0，那么对偶问题中它对应的不等式一定取<code>=</code>，如果一个不等式不取<code>=</code>,那么对偶问题中这个不等式对应的变量一定为<code>0</code></p>
 
       
     </div>

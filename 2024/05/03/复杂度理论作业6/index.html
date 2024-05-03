@@ -19,28 +19,28 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="4.2 对于某对 \(i,i+1\) 他们的贡献为 \(w_i \cdot(C_{i-1}+p_i)+w_{i+1} \cdot(C_{i-1}+p_i+p_{i+1})\) 考虑交换它们，则贡献变为 \(w_{i+1}\cdot (C_{i-1}+p_{i+1})+w_{i}\cdot (C_{i-1}+p_{i}+p_{i+1})\) 由于是最优解，因此交换不会使得答案更优，因此">
+    <meta name="description" content="5.1 每个点在 \([k]\)中随机取值，接下来证明这个期望是 \(\frac{k-1}{k}\)优秀的。 对于任何一条边 \((u,v)\),它对weight产生贡献的概率是\(\frac{k-1}{k}\),因此 \(E[W]&#x3D;\sum\limits_{e \in E}w_{i,j}\frac{k-1}{k}\),显然 \(OPT \leq \sum w_{i,j}\),因而\(E[">
 <meta property="og:type" content="article">
-<meta property="og:title" content="复杂度理论作业5">
-<meta property="og:url" content="http://example.com/2024/04/18/%E5%A4%8D%E6%9D%82%E5%BA%A6%E7%90%86%E8%AE%BA%E4%BD%9C%E4%B8%9A5/index.html">
+<meta property="og:title" content="复杂度理论作业6">
+<meta property="og:url" content="http://example.com/2024/05/03/%E5%A4%8D%E6%9D%82%E5%BA%A6%E7%90%86%E8%AE%BA%E4%BD%9C%E4%B8%9A6/index.html">
 <meta property="og:site_name" content="Meiqwq&#39;s blog~">
-<meta property="og:description" content="4.2 对于某对 \(i,i+1\) 他们的贡献为 \(w_i \cdot(C_{i-1}+p_i)+w_{i+1} \cdot(C_{i-1}+p_i+p_{i+1})\) 考虑交换它们，则贡献变为 \(w_{i+1}\cdot (C_{i-1}+p_{i+1})+w_{i}\cdot (C_{i-1}+p_{i}+p_{i+1})\) 由于是最优解，因此交换不会使得答案更优，因此">
+<meta property="og:description" content="5.1 每个点在 \([k]\)中随机取值，接下来证明这个期望是 \(\frac{k-1}{k}\)优秀的。 对于任何一条边 \((u,v)\),它对weight产生贡献的概率是\(\frac{k-1}{k}\),因此 \(E[W]&#x3D;\sum\limits_{e \in E}w_{i,j}\frac{k-1}{k}\),显然 \(OPT \leq \sum w_{i,j}\),因而\(E[">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2024-04-18T01:40:35.000Z">
-<meta property="article:modified_time" content="2024-04-18T03:46:57.389Z">
+<meta property="article:published_time" content="2024-05-03T09:48:19.000Z">
+<meta property="article:modified_time" content="2024-05-03T11:57:48.157Z">
 <meta property="article:author" content="Meiqwq">
 <meta property="article:tag" content="计算理论">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="http://example.com/2024/04/18/%E5%A4%8D%E6%9D%82%E5%BA%A6%E7%90%86%E8%AE%BA%E4%BD%9C%E4%B8%9A5/">
+<link rel="canonical" href="http://example.com/2024/05/03/%E5%A4%8D%E6%9D%82%E5%BA%A6%E7%90%86%E8%AE%BA%E4%BD%9C%E4%B8%9A6/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2024/04/18/%E5%A4%8D%E6%9D%82%E5%BA%A6%E7%90%86%E8%AE%BA%E4%BD%9C%E4%B8%9A5/","path":"2024/04/18/复杂度理论作业5/","title":"复杂度理论作业5"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2024/05/03/%E5%A4%8D%E6%9D%82%E5%BA%A6%E7%90%86%E8%AE%BA%E4%BD%9C%E4%B8%9A6/","path":"2024/05/03/复杂度理论作业6/","title":"复杂度理论作业6"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>复杂度理论作业5 | Meiqwq's blog~</title>
+<title>复杂度理论作业6 | Meiqwq's blog~</title>
   
 
 
@@ -105,7 +105,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#section"><span class="nav-number">1.</span> <span class="nav-text">4.2</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#section-1"><span class="nav-number">2.</span> <span class="nav-text">4.3</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#section"><span class="nav-number">1.</span> <span class="nav-text">5.1</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#section-1"><span class="nav-number">2.</span> <span class="nav-text">5.3</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#section-2"><span class="nav-number">3.</span> <span class="nav-text">5.6</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#a"><span class="nav-number">3.1.</span> <span class="nav-text">a</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#b"><span class="nav-number">3.2.</span> <span class="nav-text">b</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -150,7 +150,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/04/18/%E5%A4%8D%E6%9D%82%E5%BA%A6%E7%90%86%E8%AE%BA%E4%BD%9C%E4%B8%9A5/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/05/03/%E5%A4%8D%E6%9D%82%E5%BA%A6%E7%90%86%E8%AE%BA%E4%BD%9C%E4%B8%9A6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -163,12 +163,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="复杂度理论作业5 | Meiqwq's blog~">
+      <meta itemprop="name" content="复杂度理论作业6 | Meiqwq's blog~">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          复杂度理论作业5
+          复杂度理论作业6
         </h1>
 
         <div class="post-meta-container">
@@ -180,7 +180,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2024-04-18 09:40:35 / Modified: 11:46:57" itemprop="dateCreated datePublished" datetime="2024-04-18T09:40:35+08:00">2024-04-18</time>
+      <time title="Created: 2024-05-03 17:48:19 / Modified: 19:57:48" itemprop="dateCreated datePublished" datetime="2024-05-03T17:48:19+08:00">2024-05-03</time>
     </span>
 
   
@@ -192,32 +192,29 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><h1 id="section">4.2</h1>
-<p>对于某对 <span class="math inline">\(i,i+1\)</span> 他们的贡献为
-<span class="math inline">\(w_i \cdot(C_{i-1}+p_i)+w_{i+1}
-\cdot(C_{i-1}+p_i+p_{i+1})\)</span></p>
-<p>考虑交换它们，则贡献变为 <span class="math inline">\(w_{i+1}\cdot
-(C_{i-1}+p_{i+1})+w_{i}\cdot (C_{i-1}+p_{i}+p_{i+1})\)</span>
-由于是最优解，因此交换不会使得答案更优，因此 <span class="math display">\[w_i \cdot(C_{i-1}+p_i)+w_{i+1}
-\cdot(C_{i-1}+p_i+p_{i+1})\leq w_{i+1}\cdot (C_{i-1}+p_{i+1})+w_{i}\cdot
-(C_{i-1}+p_{i}+p_{i+1})\]</span></p>
-<p>化简得 <span class="math inline">\(\frac{w_i}{p_i} \geq
-\frac{w_{i+1}}{p_{i+1}}\)</span></p>
-<h1 id="section-1">4.3</h1>
-<p>构造LP：</p>
-<p>min：<span class="math inline">\(\sum\limits_{j \in [n]}w_j
-C_j\)</span></p>
-<p>subject to: <span class="math inline">\(C_j-p_j \geq C_i\)</span>
-<span class="math inline">\(\forall i \prec j\)</span></p>
-<p><span class="math inline">\(\sum\limits_{j \in S}p_jC_j \geq
-\frac{1}{2}p^2(S)\)</span> <span class="math inline">\(\forall S
-\subseteq N\)</span></p>
-<p>将求出的解从小到大重新排列为<span class="math inline">\(C^*_{j}\)</span>,显然该LP的最优解是小于等于OPT的。</p>
-<p>按照LP给出的解的大小顺序，按次序完成任务，接下来证明 <span class="math inline">\(C^N_j \leq 2C^*_j\)</span>:</p>
-<p>对于第二组LP的限制条件，取 <span class="math inline">\(S=[j]\)</span>,容易得到 <span class="math inline">\(C_j\cdot p([j]) \geq \sum\limits_{i \in
-[j]}C_i\cdot p_i \geq \frac{1}{2}p([j])\cdot C_j\)</span> 故<span class="math inline">\(p([j]) \leq 2C^*_j\)</span></p>
-<p>同时，<span class="math inline">\(C^N_j \leq
-p([j])\)</span>故得证。</p>
+    <div class="post-body" itemprop="articleBody"><h1 id="section">5.1</h1>
+<p>每个点在 <span class="math inline">\([k]\)</span>中随机取值，接下来证明这个期望是 <span class="math inline">\(\frac{k-1}{k}\)</span>优秀的。</p>
+<p>对于任何一条边 <span class="math inline">\((u,v)\)</span>,它对weight产生贡献的概率是<span class="math inline">\(\frac{k-1}{k}\)</span>,因此 <span class="math inline">\(E[W]=\sum\limits_{e \in
+E}w_{i,j}\frac{k-1}{k}\)</span>,显然 <span class="math inline">\(OPT
+\leq \sum w_{i,j}\)</span>,因而<span class="math inline">\(E[W]\geq
+\frac{k-1}{k}OPT\)</span></p>
+<h1 id="section-1">5.3</h1>
+<p>对于每个点，等概率的随机它进入<span class="math inline">\(U,W\)</span>,接下来说明这个算法是 <span class="math inline">\(\frac{1}{4}\)</span>近似的。</p>
+<p>对于任何一有向边，它对答案产生贡献的概率是<span class="math inline">\(\frac{1}{4}\)</span>,因而<span class="math inline">\(E[W]=\sum w_{i,j}\frac{1}{4}\geq
+\frac{OPT}{4}\)</span></p>
+<h1 id="section-2">5.6</h1>
+<h2 id="a">a</h2>
+<p><span class="math inline">\(x_i\)</span>是1当且仅当<span class="math inline">\(i\in U\)</span>,<span class="math inline">\(z_{i,j}\)</span>为1当且仅当这条边被选择。</p>
+<h2 id="b">b</h2>
+<p>边 <span class="math inline">\((i,j)\)</span> 被选入贡献的概率是
+<span class="math inline">\((\frac{x_i}{2}+\frac{1}{4})(\frac{3}{4}-\frac{x_j}{2})\)</span></p>
+<p>由于<span class="math inline">\(\hat{x}\)</span>是LP的解，因此 <span class="math inline">\(\frac{x_i}{2}+\frac{1}{4} \geq
+\frac{z_{i,j}}{2}+\frac{1}{4}\)</span>,<span class="math inline">\(\frac{3}{4}-\frac{x_j}{2}\geq
+\frac{1}{4}+\frac{z_{i,j}}{2}\)</span></p>
+<p>故 <span class="math inline">\(E[W]=\sum w_{i,j}
+\cdot(\frac{z_{i,j}}{2}+\frac{1}{4})^2=\sum
+w_{i,j}(\frac{1}{16}+\frac{z^2_{i,j}}{4}+\frac{z_{i,j}}{4})\geq \sum
+w_{i,j}(\frac{z_{i,j}}{2}) \geq 2OPT\)</span></p>
 
     </div>
 
@@ -234,14 +231,11 @@ p([j])\)</span>故得证。</p>
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2024/04/10/%E8%AE%BA%E6%96%87%E9%80%9F%E8%AF%BB/" rel="prev" title="论文速读">
-                  <i class="fa fa-angle-left"></i> 论文速读
+                <a href="/2024/04/18/%E5%A4%8D%E6%9D%82%E5%BA%A6%E7%90%86%E8%AE%BA%E4%BD%9C%E4%B8%9A5/" rel="prev" title="复杂度理论作业5">
+                  <i class="fa fa-angle-left"></i> 复杂度理论作业5
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2024/05/03/%E5%A4%8D%E6%9D%82%E5%BA%A6%E7%90%86%E8%AE%BA%E4%BD%9C%E4%B8%9A6/" rel="next" title="复杂度理论作业6">
-                  复杂度理论作业6 <i class="fa fa-angle-right"></i>
-                </a>
             </div>
           </div>
     </footer>
